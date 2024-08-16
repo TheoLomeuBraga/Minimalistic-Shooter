@@ -24,6 +24,6 @@ func movement_plugin(delta) -> void:
 	if abs(move_direction.x) + abs(move_direction.y) > 1:
 		move_direction = move_direction.normalized()
 	
-	if Input.is_action_just_pressed("jump") and $floorCheker.is_colliding():
+	if Input.is_action_just_pressed("jump") and in_floor:
 		jump()
 	
