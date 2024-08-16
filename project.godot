@@ -19,6 +19,10 @@ config/icon="res://icon.svg"
 
 Global="*res://generic scripts/global/Global.tscn"
 
+[filesystem]
+
+import/blender/enabled=false
+
 [input]
 
 foward={
