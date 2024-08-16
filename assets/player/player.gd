@@ -16,14 +16,18 @@ func look_around(delta) -> void:
 	$Camera3D.rotation_degrees.x = max(-90,min(90,$Camera3D.rotation_degrees.x))
 
 
+
 func movement_plugin(delta) -> void:
 	look_around(delta)
 	
 	move_direction = (basis.z.normalized() * Input.get_axis("foward","back")) + (basis.x.normalized() * Input.get_axis("left","right"))
+	$Camera3D.rotation_degrees.z = Input.get_axis("left","right")
 	
 	if abs(move_direction.x) + abs(move_direction.y) > 1:
 		move_direction = move_direction.normalized()
 	
 	if Input.is_action_just_pressed("jump") and in_floor:
 		jump()
+	
+	
 	
