@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://dhskpyhdo2ssn"]
+
+[ext_resource type="Script" path="res://assets/player/player.gd" id="1_djctx"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_57xbc"]
+friction = 0.0
+rough = true
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sr4fy"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_fatke"]
+
+[node name="player" type="RigidBody3D"]
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+mass = 100.0
+physics_material_override = SubResource("PhysicsMaterial_57xbc")
+contact_monitor = true
+max_contacts_reported = 5
+script = ExtResource("1_djctx")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_sr4fy")
+
+[node name="floorCheker" type="ShapeCast3D" parent="CollisionShape3D"]
+transform = Transform3D(0.8, 0, 0, 0, 0.27, 0, 0, 0, 0.8, 0, -0.57897, 0)
+shape = SubResource("CylinderShape3D_fatke")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
