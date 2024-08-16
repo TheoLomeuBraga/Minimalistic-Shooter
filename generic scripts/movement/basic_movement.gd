@@ -1,26 +1,14 @@
 extends RigidBody3D
 class_name BasicMovement
 
-
 func _ready():
 	pass
-
-
-
-
-
-
-
-
 
 var sliding_time := 0.0
 
 var in_floor : bool = false
 
 @export var speed := 3.0
-
-
-
 
 @export var move_direction : Vector3 = Vector3.ZERO
 
