@@ -48,7 +48,6 @@ func move(delta):
 			linear_velocity.z = new_velocity.z
 	
 	
-	
 	if in_floor:
 		sliding_time -= delta
 		

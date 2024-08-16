@@ -1,6 +1,6 @@
 extends Node
 
-var mouse_sensitivity : float = 12
+var mouse_sensitivity : float = 6
 var joystick_sensitivity : float = 12
 
 
