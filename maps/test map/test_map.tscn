@@ -1,15 +1,15 @@
 [gd_scene load_steps=4 format=3 uid="uid://di86hud2781qs"]
 
-[ext_resource type="PackedScene" uid="uid://dhskpyhdo2ssn" path="res://assets/player/player.tscn" id="1_51iqf"]
+[ext_resource type="PackedScene" uid="uid://dhskpyhdo2ssn" path="res://assets/player/player.tscn" id="1_1ig3u"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_64oav"]
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_b3xxj"]
 data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
 
-[node name="Node3D" type="Node3D"]
+[node name="test_map" type="Node3D"]
 
-[node name="player" parent="." instance=ExtResource("1_51iqf")]
+[node name="player" parent="." instance=ExtResource("1_1ig3u")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.318375, 0.986402, 0.052144)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]

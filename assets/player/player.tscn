@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://dhskpyhdo2ssn"]
+[gd_scene load_steps=8 format=3 uid="uid://dhskpyhdo2ssn"]
 
 [ext_resource type="Script" path="res://assets/player/player.gd" id="1_djctx"]
 
@@ -6,9 +6,19 @@
 friction = 0.0
 rough = true
 
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_fatke"]
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sr4fy"]
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_fatke"]
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_655ry"]
+
+[sub_resource type="Sky" id="Sky_h8ehh"]
+sky_material = SubResource("PanoramaSkyMaterial_655ry")
+
+[sub_resource type="Environment" id="Environment_pcnwn"]
+background_mode = 1
+sky = SubResource("Sky_h8ehh")
+ambient_light_color = Color(1, 1, 1, 1)
 
 [node name="player" type="RigidBody3D"]
 axis_lock_angular_x = true
@@ -23,11 +33,14 @@ script = ExtResource("1_djctx")
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.71066, 0)
 
+[node name="floorCheker" type="ShapeCast3D" parent="."]
+transform = Transform3D(0.8, 0, 0, 0, 0.27, 0, 0, 0, 0.8, 0, -0.57897, 0)
+shape = SubResource("CylinderShape3D_fatke")
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_sr4fy")
 
-[node name="floorCheker" type="ShapeCast3D" parent="CollisionShape3D"]
-transform = Transform3D(0.8, 0, 0, 0, 0.27, 0, 0, 0, 0.8, 0, -0.57897, 0)
-shape = SubResource("CylinderShape3D_fatke")
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_pcnwn")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
