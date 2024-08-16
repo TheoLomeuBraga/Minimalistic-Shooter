@@ -1,9 +1,6 @@
 extends RigidBody3D
 class_name BasicMovement
 
-func _ready():
-	pass
-
 var sliding_time := 0.0
 
 var in_floor : bool = false
@@ -12,14 +9,15 @@ var in_floor : bool = false
 
 @export var move_direction : Vector3 = Vector3.ZERO
 
-func jump(power):
-	linear_velocity.y = power
-	sliding_time = 0.2
+@export var jump_power = 3
+func jump() -> void:
+	linear_velocity.y = jump_power
+	#sliding_time = 0.2
 
-func is_basic_movement():
+func is_basic_movement() -> void:
 	pass
 
-func move(delta):
+func move(delta) -> void:
 	
 	
 	if move_direction.length() > 0:
@@ -52,7 +50,7 @@ func move(delta):
 		sliding_time -= delta
 		
 
-func _on_body_entered(body):
+func _on_body_entered(body) -> void:
 	if body is RigidBody3D:
 		if body.linear_velocity.length() > 5:
 			sliding_time = 1
@@ -61,10 +59,10 @@ func _on_body_entered(body):
 		
 
 
-func movement_plugin(delta):
+func movement_plugin(delta) -> void:
 	pass
 
-func _physics_process(delta):
+func _physics_process(delta) -> void:
 	movement_plugin(delta)
 	
 	move(delta)
