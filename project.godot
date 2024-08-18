@@ -19,6 +19,11 @@ config/icon="res://icon.svg"
 
 Global="*res://generic scripts/global/Global.tscn"
 
+[display]
+
+window/stretch/mode="canvas_items"
+window/stretch/aspect="ignore"
+
 [filesystem]
 
 import/blender/enabled=false
