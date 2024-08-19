@@ -5,6 +5,7 @@ var joystick_sensitivity : float = 12
 
 var block_pause_ticks : int = false
 var is_paused : bool = false
+var player : Node3D
 
 func pause():
 	if block_pause_ticks <= 0:

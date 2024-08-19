@@ -10,6 +10,7 @@ var in_floor : bool = false
 @export var move_direction : Vector3 = Vector3.ZERO
 
 @export var jump_power = 3
+
 func jump() -> void:
 	linear_velocity.y = jump_power
 	#sliding_time = 0.2
