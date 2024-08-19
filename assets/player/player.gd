@@ -14,6 +14,8 @@ func look_around(delta) -> void:
 	rotation_degrees.y += ((mouse_movement.x * Global.mouse_sensitivity) + (Input.get_axis("look_right","look_left") * Global.joystick_sensitivity * 10)) * delta
 	$Camera3D.rotation_degrees.x += ((mouse_movement.y * Global.mouse_sensitivity) + (Input.get_axis("look_down","look_up") * Global.joystick_sensitivity * 10)) * delta
 	$Camera3D.rotation_degrees.x = max(-90,min(90,$Camera3D.rotation_degrees.x))
+	if delta > 0:
+		$Camera3D.rotation_degrees.z = Input.get_axis("left","right")
 
 
 
@@ -21,7 +23,7 @@ func movement_plugin(delta) -> void:
 	look_around(delta)
 	
 	move_direction = (basis.z.normalized() * Input.get_axis("foward","back")) + (basis.x.normalized() * Input.get_axis("left","right"))
-	$Camera3D.rotation_degrees.z = Input.get_axis("left","right")
+	
 	
 	if abs(move_direction.x) + abs(move_direction.y) > 1:
 		move_direction = move_direction.normalized()
