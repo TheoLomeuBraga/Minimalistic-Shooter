@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=4 uid="uid://dhskpyhdo2ssn"]
+[gd_scene load_steps=36 format=4 uid="uid://dhskpyhdo2ssn"]
 
 [ext_resource type="Animation" uid="uid://dnbq35xbtcp3u" path="res://assets/player/bump_shotgum.res" id="1_7dacw"]
 [ext_resource type="PackedScene" uid="uid://c1yq7dou4albw" path="res://assets/guns/test gun/test_gun.tscn" id="1_t5osk"]
@@ -203,8 +203,13 @@ animation = &"look_gun"
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_w6t2y"]
 animation = &"bump_shotgum"
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_02qch"]
+animation = &"idle gum"
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1044p"]
 animation = &"shoot"
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_hiwah"]
 
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_a1107"]
 
@@ -232,33 +237,37 @@ animation = &"idle gum"
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_h2wxv"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_1og3n"]
-graph_offset = Vector2(-1341.23, -21.4129)
+graph_offset = Vector2(-1356.95, -88.6797)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_1044p")
-nodes/Animation/position = Vector2(-600, 260)
+nodes/Animation/position = Vector2(-940, 600)
 "nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_qu624")
-"nodes/Animation 2/position" = Vector2(-900, 0)
+"nodes/Animation 2/position" = Vector2(-920, -80)
 "nodes/Animation 3/node" = SubResource("AnimationNodeAnimation_botx8")
-"nodes/Animation 3/position" = Vector2(-1060, 120)
+"nodes/Animation 3/position" = Vector2(-1080, 40)
 "nodes/Animation 4/node" = SubResource("AnimationNodeAnimation_2fooc")
-"nodes/Animation 4/position" = Vector2(-1080, -140)
+"nodes/Animation 4/position" = Vector2(-1100, -220)
 "nodes/Animation 5/node" = SubResource("AnimationNodeAnimation_nwyk4")
-"nodes/Animation 5/position" = Vector2(-420, 440)
+"nodes/Animation 5/position" = Vector2(-580, 580)
 "nodes/Animation 6/node" = SubResource("AnimationNodeAnimation_w6t2y")
 "nodes/Animation 6/position" = Vector2(-60, 600)
+"nodes/Animation 7/node" = SubResource("AnimationNodeAnimation_02qch")
+"nodes/Animation 7/position" = Vector2(-860, 380)
+nodes/Blend2/node = SubResource("AnimationNodeBlend2_hiwah")
+nodes/Blend2/position = Vector2(820, 200)
 nodes/OneShot/node = SubResource("AnimationNodeOneShot_a1107")
 nodes/OneShot/position = Vector2(560, 400)
 nodes/Shot/node = SubResource("AnimationNodeOneShot_ube5e")
-nodes/Shot/position = Vector2(-380, 120)
+nodes/Shot/position = Vector2(-520, 340)
 nodes/Transition/node = SubResource("AnimationNodeTransition_5c7mv")
-nodes/Transition/position = Vector2(-600, -40)
+nodes/Transition/position = Vector2(-620, -120)
 nodes/bump/node = SubResource("AnimationNodeOneShot_ce23i")
 nodes/bump/position = Vector2(200, 240)
 "nodes/idle gun/node" = SubResource("AnimationNodeAnimation_peibh")
 "nodes/idle gun/position" = Vector2(360, 520)
 nodes/look/node = SubResource("AnimationNodeOneShot_h2wxv")
-nodes/look/position = Vector2(-80, 120)
-nodes/output/position = Vector2(780, 160)
-node_connections = [&"OneShot", 0, &"bump", &"OneShot", 1, &"idle gun", &"Shot", 0, &"Transition", &"Shot", 1, &"Animation", &"Transition", 0, &"Animation 4", &"Transition", 1, &"Animation 2", &"Transition", 2, &"Animation 3", &"bump", 0, &"look", &"bump", 1, &"Animation 6", &"look", 0, &"Shot", &"look", 1, &"Animation 5", &"output", 0, &"OneShot"]
+nodes/look/position = Vector2(-240, 260)
+nodes/output/position = Vector2(1060, 320)
+node_connections = [&"Blend2", 0, &"Transition", &"Blend2", 1, &"OneShot", &"OneShot", 0, &"bump", &"OneShot", 1, &"idle gun", &"Shot", 0, &"Animation 7", &"Shot", 1, &"Animation", &"Transition", 0, &"Animation 4", &"Transition", 1, &"Animation 2", &"Transition", 2, &"Animation 3", &"bump", 0, &"look", &"bump", 1, &"Animation 6", &"look", 0, &"Shot", &"look", 1, &"Animation 5", &"output", 0, &"Blend2"]
 
 [node name="player" type="RigidBody3D"]
 axis_lock_angular_x = true
@@ -319,7 +328,7 @@ bones/0/name = "Bone"
 bones/0/parent = -1
 bones/0/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.337554, 0.414343)
 bones/0/enabled = true
-bones/0/position = Vector3(1.49012e-08, 0.290595, 0.414343)
+bones/0/position = Vector3(7.45058e-09, 0.325174, 0.414343)
 bones/0/rotation = Quaternion(0, 0, 0, 1)
 bones/0/scale = Vector3(1, 1, 1)
 bones/1/name = "Bone.002"
@@ -338,7 +347,7 @@ bones/2/rotation = Quaternion(0.707107, 0, 0, 0.707107)
 bones/2/scale = Vector3(1, 1, 1)
 
 [node name="example gun" type="BoneAttachment3D" parent="SubViewportContainer/SubViewport/Camera3D/player_animations/Armature/Skeleton3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.11759e-08, -0.0469595, -2.23517e-08)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.58794e-09, -0.0123802, 6.70552e-08)
 bone_name = "example gun"
 bone_idx = 2
 
@@ -358,6 +367,7 @@ libraries = {
 [node name="AnimationTree" type="AnimationTree" parent="SubViewportContainer/SubViewport/Camera3D/player_animations"]
 tree_root = SubResource("AnimationNodeBlendTree_1og3n")
 anim_player = NodePath("../AnimationPlayer")
+parameters/Blend2/blend_amount = 0.5
 parameters/OneShot/active = false
 parameters/OneShot/internal_active = false
 parameters/OneShot/request = 0
