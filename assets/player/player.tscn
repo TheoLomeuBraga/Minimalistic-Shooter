@@ -23,7 +23,7 @@ func _input(event):
 	else:
 		mouse_movement = Vector2.ZERO
 
-var wepon_presentation : bool = false
+var wepon_presentation : float = 0.0
 func _ready() -> void:
 	Global.player = self
 	
@@ -31,14 +31,14 @@ func _ready() -> void:
 	$SubViewportContainer/SubViewport/Camera3D/player_animations/AnimationTree.set(\"parameters/Shot/request\",AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
 	$SubViewportContainer/SubViewport/Camera3D/player_animations/AnimationTree.set(\"parameters/bump/request\",AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
 	$SubViewportContainer/SubViewport/Camera3D/player_animations/AnimationTree.set(\"parameters/idle gun/request\",AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
-	wepon_presentation = true
+	wepon_presentation = 3
 
 func stop_look_gum():
 	$SubViewportContainer/SubViewport/Camera3D/player_animations/AnimationTree.set(\"parameters/look/request\",AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
 	$SubViewportContainer/SubViewport/Camera3D/player_animations/AnimationTree.set(\"parameters/Shot/request\",AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
 	$SubViewportContainer/SubViewport/Camera3D/player_animations/AnimationTree.set(\"parameters/bump/request\",AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
 	$SubViewportContainer/SubViewport/Camera3D/player_animations/AnimationTree.set(\"parameters/idle gun/request\",AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
-	wepon_presentation = false
+	wepon_presentation = -1
 	
 
 func look_around(delta) -> void:
@@ -57,12 +57,8 @@ func look_around(delta) -> void:
 
 func shot_animation():
 	
-	if wepon_presentation:
-		$SubViewportContainer/SubViewport/Camera3D/player_animations/AnimationTree.set(\"parameters/look/request\",AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
-		$SubViewportContainer/SubViewport/Camera3D/player_animations/AnimationTree.set(\"parameters/Shot/request\",AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
-		$SubViewportContainer/SubViewport/Camera3D/player_animations/AnimationTree.set(\"parameters/bump/request\",AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
-		$SubViewportContainer/SubViewport/Camera3D/player_animations/AnimationTree.set(\"parameters/idle gun/request\",AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
-		wepon_presentation = false
+	if wepon_presentation > 0:
+		stop_look_gum()
 	else:
 		$SubViewportContainer/SubViewport/Camera3D/player_animations/AnimationTree.set(\"parameters/look/request\",AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
 		$SubViewportContainer/SubViewport/Camera3D/player_animations/AnimationTree.set(\"parameters/Shot/request\",AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
@@ -71,6 +67,7 @@ func shot_animation():
 	
 
 func movement_plugin(delta) -> void:
+	wepon_presentation -= delta
 	look_around(delta)
 	
 	move_direction = (basis.z.normalized() * Input.get_axis(\"foward\",\"back\")) + (basis.x.normalized() * Input.get_axis(\"left\",\"right\"))
@@ -327,7 +324,7 @@ bones/0/name = "Bone"
 bones/0/parent = -1
 bones/0/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.337554, 0.414343)
 bones/0/enabled = true
-bones/0/position = Vector3(1.49012e-08, 0.401657, 0.414343)
+bones/0/position = Vector3(1.49012e-08, 0.277178, 0.414343)
 bones/0/rotation = Quaternion(0, 0, 0, 1)
 bones/0/scale = Vector3(1, 1, 1)
 bones/1/name = "Bone.002"
@@ -346,7 +343,7 @@ bones/2/rotation = Quaternion(0.707107, 0, 0, 0.707107)
 bones/2/scale = Vector3(1, 1, 1)
 
 [node name="example gun" type="BoneAttachment3D" parent="SubViewportContainer/SubViewport/Camera3D/player_animations/Armature/Skeleton3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.11759e-08, 0.064102, -2.23517e-08)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.11759e-08, -0.060376, -2.23517e-08)
 bone_name = "example gun"
 bone_idx = 2
 

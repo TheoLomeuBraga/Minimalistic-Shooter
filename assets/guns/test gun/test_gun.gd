@@ -10,7 +10,7 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("fire"):
 		
 		
-		if Global.player.wepon_presentation == false:
+		if Global.player.wepon_presentation < 0:
 			var bullet : Node3D = bullet_asset.instantiate()
 			bullet.global_transform = $muzle.global_transform
 			get_tree().get_root().add_child(bullet)
