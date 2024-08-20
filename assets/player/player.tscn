@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=4 uid="uid://dhskpyhdo2ssn"]
+[gd_scene load_steps=34 format=4 uid="uid://dhskpyhdo2ssn"]
 
 [ext_resource type="Animation" uid="uid://dnbq35xbtcp3u" path="res://assets/player/bump_shotgum.res" id="1_7dacw"]
 [ext_resource type="PackedScene" uid="uid://c1yq7dou4albw" path="res://assets/guns/test gun/test_gun.tscn" id="1_t5osk"]
@@ -51,8 +51,8 @@ func look_around(delta) -> void:
 		$Camera3D.rotation_degrees.z = Input.get_axis(\"left\",\"right\")
 		
 		var wepon_rotation_target = Vector2((Input.get_axis(\"look_right\",\"look_left\") * 10) + max(min(mouse_movement.x,1),-1) * 15,(Input.get_axis(\"look_down\",\"look_up\") * 10) + max(min(mouse_movement.y,1),-1) * 15)
-		$SubViewportContainer/SubViewport/Camera3D/player_animations.rotation_degrees.y = lerp($SubViewportContainer/SubViewport/Camera3D/player_animations.rotation_degrees.y,wepon_rotation_target.x,2*delta)
-		$SubViewportContainer/SubViewport/Camera3D/player_animations.rotation_degrees.x = lerp($SubViewportContainer/SubViewport/Camera3D/player_animations.rotation_degrees.x,wepon_rotation_target.y,2*delta)
+		$SubViewportContainer/SubViewport/Camera3D/player_animations/Armature.rotation_degrees.y = lerp($SubViewportContainer/SubViewport/Camera3D/player_animations/Armature.rotation_degrees.y,wepon_rotation_target.x,2*delta)
+		$SubViewportContainer/SubViewport/Camera3D/player_animations/Armature.rotation_degrees.x = lerp($SubViewportContainer/SubViewport/Camera3D/player_animations/Armature.rotation_degrees.x,wepon_rotation_target.y,2*delta)
 
 
 func shot_animation():
@@ -182,7 +182,7 @@ _data = {
 animation = &"walk"
 use_custom_timeline = true
 timeline_length = 1.0
-stretch_time_scale = true
+stretch_time_scale = false
 start_offset = 0.0
 loop_mode = 1
 
@@ -202,9 +202,6 @@ animation = &"look_gun"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_w6t2y"]
 animation = &"bump_shotgum"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5yqv8"]
-animation = &"idle gum"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1044p"]
 animation = &"shoot"
@@ -235,7 +232,7 @@ animation = &"idle gum"
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_h2wxv"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_1og3n"]
-graph_offset = Vector2(-675.338, 310.569)
+graph_offset = Vector2(-1341.23, -21.4129)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_1044p")
 nodes/Animation/position = Vector2(-600, 260)
 "nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_qu624")
@@ -248,8 +245,6 @@ nodes/Animation/position = Vector2(-600, 260)
 "nodes/Animation 5/position" = Vector2(-420, 440)
 "nodes/Animation 6/node" = SubResource("AnimationNodeAnimation_w6t2y")
 "nodes/Animation 6/position" = Vector2(-60, 600)
-"nodes/Animation 7/node" = SubResource("AnimationNodeAnimation_5yqv8")
-"nodes/Animation 7/position" = Vector2(-1060, 720)
 nodes/OneShot/node = SubResource("AnimationNodeOneShot_a1107")
 nodes/OneShot/position = Vector2(560, 400)
 nodes/Shot/node = SubResource("AnimationNodeOneShot_ube5e")
@@ -324,7 +319,7 @@ bones/0/name = "Bone"
 bones/0/parent = -1
 bones/0/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.337554, 0.414343)
 bones/0/enabled = true
-bones/0/position = Vector3(1.49012e-08, 0.277178, 0.414343)
+bones/0/position = Vector3(1.49012e-08, 0.290595, 0.414343)
 bones/0/rotation = Quaternion(0, 0, 0, 1)
 bones/0/scale = Vector3(1, 1, 1)
 bones/1/name = "Bone.002"
@@ -343,7 +338,7 @@ bones/2/rotation = Quaternion(0.707107, 0, 0, 0.707107)
 bones/2/scale = Vector3(1, 1, 1)
 
 [node name="example gun" type="BoneAttachment3D" parent="SubViewportContainer/SubViewport/Camera3D/player_animations/Armature/Skeleton3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.11759e-08, -0.060376, -2.23517e-08)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.11759e-08, -0.0469595, -2.23517e-08)
 bone_name = "example gun"
 bone_idx = 2
 

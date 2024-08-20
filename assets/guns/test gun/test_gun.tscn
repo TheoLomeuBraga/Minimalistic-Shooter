@@ -1,10 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://c1yq7dou4albw"]
+[gd_scene load_steps=5 format=3 uid="uid://c1yq7dou4albw"]
 
 [ext_resource type="Script" path="res://assets/guns/test gun/test_gun.gd" id="1_7om6e"]
 [ext_resource type="PackedScene" uid="uid://bla5w48tj7wf5" path="res://assets/guns/bullet/bullet.tscn" id="2_lm3qu"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_xcylu"]
 size = Vector3(0.5, 0.5, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vricn"]
+albedo_color = Color(1, 0.560784, 0, 1)
 
 [node name="TestGun" type="Node3D"]
 script = ExtResource("1_7om6e")
@@ -13,5 +16,6 @@ bullet_asset = ExtResource("2_lm3qu")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 layers = 2
 mesh = SubResource("BoxMesh_xcylu")
+surface_material_override/0 = SubResource("StandardMaterial3D_vricn")
 
 [node name="muzle" type="Node3D" parent="."]
