@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://cf50agnupuica"]
+[gd_scene load_steps=8 format=3 uid="uid://cf50agnupuica"]
 
 [ext_resource type="Script" path="res://assets/NPCs/test enemy/test_enemy.gd" id="1_6kdfc"]
 
@@ -12,6 +12,11 @@
 resource_local_to_scene = true
 shading_mode = 2
 albedo_color = Color(0.47451, 0.996078, 0.513726, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_or20v"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2horg"]
+albedo_color = Color(0, 0, 0, 1)
 
 [node name="GenericPathFinder" type="CharacterBody3D"]
 script = ExtResource("1_6kdfc")
@@ -29,3 +34,13 @@ surface_material_override/0 = SubResource("StandardMaterial3D_svip2")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 debug_enabled = true
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -0.238318, 0.412649, 0.462)
+mesh = SubResource("CapsuleMesh_or20v")
+surface_material_override/0 = SubResource("StandardMaterial3D_2horg")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0.238, 0.413, 0.462)
+mesh = SubResource("CapsuleMesh_or20v")
+surface_material_override/0 = SubResource("StandardMaterial3D_2horg")
