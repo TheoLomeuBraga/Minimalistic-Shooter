@@ -1,0 +1,92 @@
+[gd_resource type="AnimationNodeBlendTree" load_steps=15 format=3 uid="uid://dy7qx6vcfxkfv"]
+
+[sub_resource type="AnimationNodeAdd2" id="AnimationNodeAdd2_qqeu4"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qu624"]
+animation = &"walk"
+use_custom_timeline = true
+timeline_length = 1.3
+stretch_time_scale = false
+start_offset = 0.0
+loop_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_botx8"]
+animation = &"jump"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2fooc"]
+animation = &"idle"
+use_custom_timeline = true
+timeline_length = 5.0
+stretch_time_scale = true
+start_offset = 0.0
+loop_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_nwyk4"]
+animation = &"look_gun"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_w6t2y"]
+animation = &"bump_shotgum"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_6s8os"]
+animation = &"idle gum"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1044p"]
+animation = &"shoot"
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_a1107"]
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_ube5e"]
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_5c7mv"]
+input_0/name = "state_0"
+input_0/auto_advance = false
+input_0/break_loop_at_end = false
+input_0/reset = true
+input_1/name = "state_1"
+input_1/auto_advance = false
+input_1/break_loop_at_end = false
+input_1/reset = true
+input_2/name = "state_2"
+input_2/auto_advance = false
+input_2/break_loop_at_end = false
+input_2/reset = true
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_ce23i"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_peibh"]
+animation = &"idle gum"
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_h2wxv"]
+
+[resource]
+graph_offset = Vector2(-649.69, -56.2965)
+nodes/Add2/node = SubResource("AnimationNodeAdd2_qqeu4")
+nodes/Add2/position = Vector2(894.475, 174.329)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_1044p")
+nodes/Animation/position = Vector2(-940, 600)
+"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_qu624")
+"nodes/Animation 2/position" = Vector2(200, -60)
+"nodes/Animation 3/node" = SubResource("AnimationNodeAnimation_botx8")
+"nodes/Animation 3/position" = Vector2(40, 60)
+"nodes/Animation 4/node" = SubResource("AnimationNodeAnimation_2fooc")
+"nodes/Animation 4/position" = Vector2(20, -200)
+"nodes/Animation 5/node" = SubResource("AnimationNodeAnimation_nwyk4")
+"nodes/Animation 5/position" = Vector2(-580, 580)
+"nodes/Animation 6/node" = SubResource("AnimationNodeAnimation_w6t2y")
+"nodes/Animation 6/position" = Vector2(-60, 600)
+"nodes/Animation 7/node" = SubResource("AnimationNodeAnimation_6s8os")
+"nodes/Animation 7/position" = Vector2(-711.184, 283.206)
+nodes/OneShot/node = SubResource("AnimationNodeOneShot_a1107")
+nodes/OneShot/position = Vector2(560, 400)
+nodes/Shot/node = SubResource("AnimationNodeOneShot_ube5e")
+nodes/Shot/position = Vector2(-520, 340)
+nodes/Transition/node = SubResource("AnimationNodeTransition_5c7mv")
+nodes/Transition/position = Vector2(500, -100)
+nodes/bump/node = SubResource("AnimationNodeOneShot_ce23i")
+nodes/bump/position = Vector2(200, 240)
+"nodes/idle gun/node" = SubResource("AnimationNodeAnimation_peibh")
+"nodes/idle gun/position" = Vector2(360, 520)
+nodes/look/node = SubResource("AnimationNodeOneShot_h2wxv")
+nodes/look/position = Vector2(-240, 260)
+nodes/output/position = Vector2(1160, 320)
+node_connections = [&"Add2", 0, &"Transition", &"Add2", 1, &"OneShot", &"OneShot", 0, &"bump", &"OneShot", 1, &"idle gun", &"Shot", 0, &"Animation 7", &"Shot", 1, &"Animation", &"Transition", 0, &"Animation 4", &"Transition", 1, &"Animation 2", &"Transition", 2, &"Animation 3", &"bump", 0, &"look", &"bump", 1, &"Animation 6", &"look", 0, &"Shot", &"look", 1, &"Animation 5", &"output", 0, &"Add2"]

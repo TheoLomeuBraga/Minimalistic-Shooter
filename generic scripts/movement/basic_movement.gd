@@ -15,9 +15,6 @@ func jump() -> void:
 	linear_velocity.y = jump_power
 	#sliding_time = 0.2
 
-func is_basic_movement() -> void:
-	pass
-
 func move(delta) -> void:
 	
 	
@@ -65,5 +62,4 @@ func movement_plugin(delta) -> void:
 
 func _physics_process(delta) -> void:
 	movement_plugin(delta)
-	
 	move(delta)
