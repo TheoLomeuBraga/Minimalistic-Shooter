@@ -5,7 +5,7 @@ var joystick_sensitivity : float = 12
 
 var is_paused : bool = false
 var player : Node3D
-
+var camera : Camera3D
 
 var unpause_lock := 0
 

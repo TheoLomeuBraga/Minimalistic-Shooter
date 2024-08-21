@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=3 uid="uid://di86hud2781qs"]
 
 [ext_resource type="PackedScene" uid="uid://dhskpyhdo2ssn" path="res://assets/player/player.tscn" id="1_1ig3u"]
-[ext_resource type="PackedScene" uid="uid://cf50agnupuica" path="res://assets/NPCs/test enemy/test_enemy.tscn" id="2_l7tu0"]
+[ext_resource type="PackedScene" uid="uid://dwbn6fwa2674s" path="res://assets/enemy_spawn/enemy_spawn.tscn" id="2_t18d5"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_ervds"]
 vertices = PackedVector3Array(-49.5, 0.236402, -3, -6, 0.236402, -3, -6, 0.236402, -3.75, -5, 0.236402, -4, -5, 0.236402, -49.5, -49.5, 0.236402, -49.5, -4, 0.236402, -3, 5, 0.236402, -3, 5, 0.236402, -3.75, -4.25, 0.236402, -4, 6, 0.236402, -4, 6, 0.236402, -49.5, 6.75, 0.236402, -4, 7, 0.236402, -3, 49.5, 0.236402, -3, 49.5, 0.236402, -49.5, -1, 0.236402, 6.5, -4.5, 0.236402, -2, -5.75, 0.236402, -2, -1, 0.236402, 7.75, -49.5, 0.236402, 49.5, 0, 0.236402, 49.5, 0, 0.236402, 8, -0.75, 0.236402, 6, -4, 0.236402, -2.25, 0.75, 0.236402, 6, 1, 0.236402, 6.5, 5.5, 0.236402, -2, 5, 0.236402, -2.25, 6.75, 0.236402, -2, 1, 0.236402, 7.75, 49.5, 0.236402, 49.5)
@@ -93,5 +93,32 @@ surface_material_override/0 = SubResource("StandardMaterial3D_me6el")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/MeshInstance3D4/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_o0xnk")
 
-[node name="GenericPathFinder" parent="." instance=ExtResource("2_l7tu0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.768965, 0.986402, 14.2555)
+[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -1, 0)
+size = Vector3(101, 2, 100)
+
+[node name="spawners" type="Node3D" parent="."]
+
+[node name="VisibleOnScreenNotifier3D" parent="spawners" instance=ExtResource("2_t18d5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38.0267, -0.013598, -36.7787)
+
+[node name="VisibleOnScreenNotifier3D2" parent="spawners" instance=ExtResource("2_t18d5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0267143, -0.013598, -36.7787)
+
+[node name="VisibleOnScreenNotifier3D3" parent="spawners" instance=ExtResource("2_t18d5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.9733, -0.013598, -36.7787)
+
+[node name="VisibleOnScreenNotifier3D6" parent="spawners" instance=ExtResource("2_t18d5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38.0267, -0.013598, 39.2213)
+
+[node name="VisibleOnScreenNotifier3D7" parent="spawners" instance=ExtResource("2_t18d5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0267143, -0.013598, 39.2213)
+
+[node name="VisibleOnScreenNotifier3D8" parent="spawners" instance=ExtResource("2_t18d5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.9733, -0.013598, 39.2213)
+
+[node name="VisibleOnScreenNotifier3D4" parent="spawners" instance=ExtResource("2_t18d5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38.0267, -0.013598, 0.22131)
+
+[node name="VisibleOnScreenNotifier3D5" parent="spawners" instance=ExtResource("2_t18d5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.9733, -0.013598, 0.22131)

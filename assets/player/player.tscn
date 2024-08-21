@@ -11,6 +11,29 @@ rough = true
 [sub_resource type="GDScript" id="GDScript_l7khq"]
 script/source = "extends BasicMovement
 
+@export var max_health := 100
+@export var health := 100
+
+@export var max_armor := 50
+@export var armor := 50
+
+func hit_damage(damage : int):
+	if armor > 0:
+		
+		health -= damage / 2
+		armor -= damage / 2
+		
+		if armor < 0:
+			armor = 0
+		
+	else:
+		health -= damage
+	
+	if health < 0:
+		health = 0
+
+
+
 var mouse_movement = Vector2.ZERO
 func _input(event):
 	if event is InputEventMouseMotion:
@@ -24,6 +47,7 @@ func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
 	Global.player = self
+	Global.camera = $Camera3D
 	
 	$SubViewportContainer/SubViewport/Camera3D/player_animations/AnimationTree.set(\"parameters/look/request\",AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 	$SubViewportContainer/SubViewport/Camera3D/player_animations/AnimationTree.set(\"parameters/Shot/request\",AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
@@ -410,7 +434,7 @@ bones/0/name = "Bone"
 bones/0/parent = -1
 bones/0/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.337554, 0.414343)
 bones/0/enabled = true
-bones/0/position = Vector3(-0.0257089, 0.337554, 0.414343)
+bones/0/position = Vector3(-0.00748428, 0.337554, 0.414343)
 bones/0/rotation = Quaternion(0, 0, 0, 1)
 bones/0/scale = Vector3(1, 1, 1)
 bones/1/name = "Bone.002"
@@ -429,7 +453,7 @@ bones/2/rotation = Quaternion(0.707107, 0, 0, 0.707107)
 bones/2/scale = Vector3(1, 1, 1)
 
 [node name="example gun" type="BoneAttachment3D" parent="SubViewportContainer/SubViewport/Camera3D/player_animations/Armature/Skeleton3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0257089, -5.06639e-07, 1.86265e-07)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00748428, -5.06639e-07, 1.86265e-07)
 bone_name = "example gun"
 bone_idx = 2
 

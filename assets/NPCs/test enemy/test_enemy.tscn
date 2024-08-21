@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://cf50agnupuica"]
+[gd_scene load_steps=9 format=3 uid="uid://cf50agnupuica"]
 
 [ext_resource type="Script" path="res://assets/NPCs/test enemy/test_enemy.gd" id="1_6kdfc"]
+[ext_resource type="PackedScene" uid="uid://m2igyiyff6mn" path="res://assets/effects/spark_explosion/spark_explosion.tscn" id="2_8ijc0"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_56jy2"]
 
@@ -20,6 +21,7 @@ albedo_color = Color(0, 0, 0, 1)
 
 [node name="GenericPathFinder" type="CharacterBody3D"]
 script = ExtResource("1_6kdfc")
+explosion_sceane = ExtResource("2_8ijc0")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_56jy2")
