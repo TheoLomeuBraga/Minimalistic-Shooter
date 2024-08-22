@@ -1,4 +1,4 @@
-[gd_resource type="AnimationNodeBlendTree" load_steps=15 format=3 uid="uid://dy7qx6vcfxkfv"]
+[gd_resource type="AnimationNodeBlendTree" load_steps=33 format=3 uid="uid://dy7qx6vcfxkfv"]
 
 [sub_resource type="AnimationNodeAdd2" id="AnimationNodeAdd2_qqeu4"]
 
@@ -30,63 +30,155 @@ animation = &"bump_shotgum"
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_6s8os"]
 animation = &"idle gum"
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1ujck"]
+animation = &"strong shoot"
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1044p"]
 animation = &"shoot"
 
-[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_a1107"]
-
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_ube5e"]
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_53fke"]
+animation = &"bump_shotgum"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8vfrl"]
+animation = &"shoot"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fiw02"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_h53qv"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_tcg1o"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_6mfak"]
+states/bump_shotgum/node = SubResource("AnimationNodeAnimation_53fke")
+states/bump_shotgum/position = Vector2(684, 109)
+states/shoot/node = SubResource("AnimationNodeAnimation_8vfrl")
+states/shoot/position = Vector2(437, 95)
+transitions = ["Start", "shoot", SubResource("AnimationNodeStateMachineTransition_fiw02"), "shoot", "bump_shotgum", SubResource("AnimationNodeStateMachineTransition_h53qv"), "bump_shotgum", "End", SubResource("AnimationNodeStateMachineTransition_tcg1o")]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_i3yq2"]
+animation = &"bump_shotgum"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_h32jx"]
+animation = &"strong shoot"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_w1d8o"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ndm40"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_obyjr"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_s02y3"]
+states/Start/position = Vector2(126, 100)
+states/bump_shotgum/node = SubResource("AnimationNodeAnimation_i3yq2")
+states/bump_shotgum/position = Vector2(619, 149)
+"states/strong shoot/node" = SubResource("AnimationNodeAnimation_h32jx")
+"states/strong shoot/position" = Vector2(346, 116)
+transitions = ["Start", "strong shoot", SubResource("AnimationNodeStateMachineTransition_w1d8o"), "strong shoot", "bump_shotgum", SubResource("AnimationNodeStateMachineTransition_ndm40"), "bump_shotgum", "End", SubResource("AnimationNodeStateMachineTransition_obyjr")]
+graph_offset = Vector2(-226, -29)
+
 [sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_5c7mv"]
-input_0/name = "state_0"
+input_0/name = "idle"
 input_0/auto_advance = false
 input_0/break_loop_at_end = false
 input_0/reset = true
-input_1/name = "state_1"
+input_1/name = "walk"
 input_1/auto_advance = false
 input_1/break_loop_at_end = false
 input_1/reset = true
-input_2/name = "state_2"
+input_2/name = "jump"
 input_2/auto_advance = false
 input_2/break_loop_at_end = false
 input_2/reset = true
+input_3/name = "grab gun"
+input_3/auto_advance = false
+input_3/break_loop_at_end = false
+input_3/reset = true
+input_4/name = "drop gun"
+input_4/auto_advance = false
+input_4/break_loop_at_end = false
+input_4/reset = true
 
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_ce23i"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_c5egd"]
+animation = &"grab gun"
+play_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0symy"]
+animation = &"grab gun"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_peibh"]
 animation = &"idle gum"
 
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_a1107"]
+
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_h2wxv"]
 
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_3nj5r"]
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_h0m2h"]
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_eg7ae"]
+
 [resource]
-graph_offset = Vector2(-649.69, -56.2965)
+graph_offset = Vector2(-50.2071, 184.403)
 nodes/Add2/node = SubResource("AnimationNodeAdd2_qqeu4")
-nodes/Add2/position = Vector2(894.475, 174.329)
+nodes/Add2/position = Vector2(1860, 220)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_1044p")
 nodes/Animation/position = Vector2(-940, 600)
 "nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_qu624")
-"nodes/Animation 2/position" = Vector2(200, -60)
+"nodes/Animation 2/position" = Vector2(880, -240)
 "nodes/Animation 3/node" = SubResource("AnimationNodeAnimation_botx8")
-"nodes/Animation 3/position" = Vector2(40, 60)
+"nodes/Animation 3/position" = Vector2(720, -120)
 "nodes/Animation 4/node" = SubResource("AnimationNodeAnimation_2fooc")
-"nodes/Animation 4/position" = Vector2(20, -200)
+"nodes/Animation 4/position" = Vector2(700, -380)
 "nodes/Animation 5/node" = SubResource("AnimationNodeAnimation_nwyk4")
 "nodes/Animation 5/position" = Vector2(-580, 580)
 "nodes/Animation 6/node" = SubResource("AnimationNodeAnimation_w6t2y")
 "nodes/Animation 6/position" = Vector2(-60, 600)
 "nodes/Animation 7/node" = SubResource("AnimationNodeAnimation_6s8os")
 "nodes/Animation 7/position" = Vector2(-711.184, 283.206)
-nodes/OneShot/node = SubResource("AnimationNodeOneShot_a1107")
-nodes/OneShot/position = Vector2(560, 400)
+"nodes/Animation 9/node" = SubResource("AnimationNodeAnimation_1ujck")
+"nodes/Animation 9/position" = Vector2(640, 620)
 nodes/Shot/node = SubResource("AnimationNodeOneShot_ube5e")
 nodes/Shot/position = Vector2(-520, 340)
+nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_s02y3")
+nodes/StateMachine/position = Vector2(1080, 580)
+"nodes/StateMachine 2/node" = SubResource("AnimationNodeStateMachine_6mfak")
+"nodes/StateMachine 2/position" = Vector2(1480, 500)
 nodes/Transition/node = SubResource("AnimationNodeTransition_5c7mv")
-nodes/Transition/position = Vector2(500, -100)
+nodes/Transition/position = Vector2(1220, -240)
 nodes/bump/node = SubResource("AnimationNodeOneShot_ce23i")
 nodes/bump/position = Vector2(200, 240)
-"nodes/idle gun/node" = SubResource("AnimationNodeAnimation_peibh")
-"nodes/idle gun/position" = Vector2(360, 520)
+"nodes/drop gun/node" = SubResource("AnimationNodeAnimation_c5egd")
+"nodes/drop gun/position" = Vector2(843.811, 120.292)
+"nodes/grab gun/node" = SubResource("AnimationNodeAnimation_0symy")
+"nodes/grab gun/position" = Vector2(900, -40)
+"nodes/idle gun/node" = SubResource("AnimationNodeOneShot_a1107")
+"nodes/idle gun/position" = Vector2(560, 360)
+"nodes/idle gun 2 2/node" = SubResource("AnimationNodeAnimation_peibh")
+"nodes/idle gun 2 2/position" = Vector2(360, 520)
 nodes/look/node = SubResource("AnimationNodeOneShot_h2wxv")
 nodes/look/position = Vector2(-240, 260)
-nodes/output/position = Vector2(1160, 320)
-node_connections = [&"Add2", 0, &"Transition", &"Add2", 1, &"OneShot", &"OneShot", 0, &"bump", &"OneShot", 1, &"idle gun", &"Shot", 0, &"Animation 7", &"Shot", 1, &"Animation", &"Transition", 0, &"Animation 4", &"Transition", 1, &"Animation 2", &"Transition", 2, &"Animation 3", &"bump", 0, &"look", &"bump", 1, &"Animation 6", &"look", 0, &"Shot", &"look", 1, &"Animation 5", &"output", 0, &"Add2"]
+nodes/output/position = Vector2(2140, 360)
+"nodes/shot bump/node" = SubResource("AnimationNodeOneShot_3nj5r")
+"nodes/shot bump/position" = Vector2(1680, 340)
+"nodes/strong shot/node" = SubResource("AnimationNodeOneShot_eg7ae")
+"nodes/strong shot/position" = Vector2(840, 520)
+"nodes/strong shot bump/node" = SubResource("AnimationNodeOneShot_h0m2h")
+"nodes/strong shot bump/position" = Vector2(1280, 340)
+node_connections = [&"Add2", 0, &"Transition", &"Add2", 1, &"shot bump", &"Shot", 0, &"Animation 7", &"Shot", 1, &"Animation", &"Transition", 0, &"Animation 4", &"Transition", 1, &"Animation 2", &"Transition", 2, &"Animation 3", &"Transition", 3, &"grab gun", &"Transition", 4, &"drop gun", &"bump", 0, &"look", &"bump", 1, &"Animation 6", &"idle gun", 0, &"bump", &"idle gun", 1, &"idle gun 2 2", &"look", 0, &"Shot", &"look", 1, &"Animation 5", &"output", 0, &"Add2", &"shot bump", 0, &"strong shot bump", &"shot bump", 1, &"StateMachine 2", &"strong shot", 0, &"idle gun", &"strong shot", 1, &"Animation 9", &"strong shot bump", 0, &"strong shot", &"strong shot bump", 1, &"StateMachine"]

@@ -1,8 +1,8 @@
 extends Sprite3D
 
 func set_distance(distance : float):
-	$RayCast3D.position.z = -distance
-	$RayCast3D.target_position.z = distance
+	$RayCast3D.position.z = -distance * 2
+	$RayCast3D.target_position.z = distance * 2
 
 func _ready() -> void:
 	set_distance(0)

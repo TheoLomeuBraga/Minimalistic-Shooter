@@ -1,8 +1,17 @@
-[gd_scene load_steps=24 format=4 uid="uid://dhskpyhdo2ssn"]
+[gd_scene load_steps=26 format=4 uid="uid://dhskpyhdo2ssn"]
 
 [ext_resource type="PackedScene" uid="uid://c1yq7dou4albw" path="res://assets/guns/test gun/test_gun.tscn" id="1_t5osk"]
 [ext_resource type="AnimationNodeBlendTree" uid="uid://dy7qx6vcfxkfv" path="res://assets/player/player_animation three.tres" id="2_4nf63"]
+[ext_resource type="Animation" uid="uid://coqwbdy3avbpg" path="res://assets/player/bump shotgum.res" id="2_kpelj"]
+[ext_resource type="Animation" uid="uid://bsjhoq6khqfcw" path="res://assets/player/idle.res" id="3_qb0gm"]
+[ext_resource type="Animation" uid="uid://de8ct1ipm4hg6" path="res://assets/player/grab gun.res" id="3_yv4h1"]
 [ext_resource type="Texture2D" uid="uid://cjdo8j5sq15g2" path="res://assets/player/croshair.png" id="4_1scay"]
+[ext_resource type="Animation" uid="uid://dwrfvtudjfymc" path="res://assets/player/jump.res" id="4_pdjqt"]
+[ext_resource type="Animation" uid="uid://ekkhcjx26vur" path="res://assets/player/idle gum.res" id="4_wyo0o"]
+[ext_resource type="Animation" uid="uid://cllx0c6cvqga4" path="res://assets/player/look_gun.res" id="5_aygot"]
+[ext_resource type="Animation" uid="uid://o3akupw87l7v" path="res://assets/player/strong shoot.res" id="5_o25uh"]
+[ext_resource type="Animation" uid="uid://bp3bf52dwph40" path="res://assets/player/shoot.res" id="6_yvh1d"]
+[ext_resource type="Animation" uid="uid://cvxsbuchoe1g7" path="res://assets/player/walk.res" id="7_i0576"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_57xbc"]
 friction = 0.0
@@ -42,7 +51,17 @@ func _input(event):
 		mouse_movement = Vector2.ZERO
 
 var wepon_presentation : float = 0.0
+
+
+func set_border_effect(color : Color,power : float):
+	var mat : Material = $visual_effects.get_material()
+	mat[\"shader_parameter/color\"] = color
+	mat[\"shader_parameter/power\"] = power
+	$visual_effects.set_material(mat)
+
 func _ready() -> void:
+	
+	set_border_effect(Color.RED,0)
 	
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
@@ -50,17 +69,11 @@ func _ready() -> void:
 	Global.camera = $Camera3D
 	
 	$SubViewportContainer/SubViewport/Camera3D/player_animations/AnimationTree.set(\"parameters/look/request\",AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
-	$SubViewportContainer/SubViewport/Camera3D/player_animations/AnimationTree.set(\"parameters/Shot/request\",AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
-	$SubViewportContainer/SubViewport/Camera3D/player_animations/AnimationTree.set(\"parameters/bump/request\",AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
-	$SubViewportContainer/SubViewport/Camera3D/player_animations/AnimationTree.set(\"parameters/idle gun/request\",AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
+	
+	#$SubViewportContainer/SubViewport/Camera3D/player_animations/AnimationTree.set(\"parameters/Transition/transition_request\",\"grab gun\")
+	
 	wepon_presentation = 3
 
-func stop_look_gum():
-	$SubViewportContainer/SubViewport/Camera3D/player_animations/AnimationTree.set(\"parameters/look/request\",AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
-	$SubViewportContainer/SubViewport/Camera3D/player_animations/AnimationTree.set(\"parameters/Shot/request\",AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
-	$SubViewportContainer/SubViewport/Camera3D/player_animations/AnimationTree.set(\"parameters/bump/request\",AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
-	$SubViewportContainer/SubViewport/Camera3D/player_animations/AnimationTree.set(\"parameters/idle gun/request\",AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
-	wepon_presentation = -1
 	
 
 @export var target : Vector3
@@ -88,22 +101,20 @@ func look_around(delta) -> void:
 
 func shot_animation():
 	
-	if wepon_presentation > 0:
-		stop_look_gum()
-	else:
-		$SubViewportContainer/SubViewport/Camera3D/player_animations/AnimationTree.set(\"parameters/look/request\",AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
-		$SubViewportContainer/SubViewport/Camera3D/player_animations/AnimationTree.set(\"parameters/Shot/request\",AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
-		$SubViewportContainer/SubViewport/Camera3D/player_animations/AnimationTree.set(\"parameters/bump/request\",AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
-		$SubViewportContainer/SubViewport/Camera3D/player_animations/AnimationTree.set(\"parameters/idle gun/request\",AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
-	
+	$SubViewportContainer/SubViewport/Camera3D/player_animations/AnimationTree.set(\"parameters/look/request\",AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
+	$SubViewportContainer/SubViewport/Camera3D/player_animations/AnimationTree.set(\"parameters/shot bump/request\",AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+		
+
+func bump_animation():
+	$SubViewportContainer/SubViewport/Camera3D/player_animations/AnimationTree.set(\"parameters/bump/request\",AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 
 
 
 func update_pause():
-	
 	if Input.is_action_just_pressed(\"pause\"):
 		Global.pause()
-	
+
+
 
 func movement_plugin(delta) -> void:
 	update_pause()
@@ -122,11 +133,11 @@ func movement_plugin(delta) -> void:
 	
 	if $floorCheker.is_colliding():
 		if Input.get_axis(\"foward\",\"back\") != 0 or Input.get_axis(\"left\",\"right\") != 0:
-			$SubViewportContainer/SubViewport/Camera3D/player_animations/AnimationTree.set(\"parameters/Transition/transition_request\",\"state_1\")
+			$SubViewportContainer/SubViewport/Camera3D/player_animations/AnimationTree.set(\"parameters/Transition/transition_request\",\"walk\")
 		else:
-			$SubViewportContainer/SubViewport/Camera3D/player_animations/AnimationTree.set(\"parameters/Transition/transition_request\",\"state_0\")
+			$SubViewportContainer/SubViewport/Camera3D/player_animations/AnimationTree.set(\"parameters/Transition/transition_request\",\"idle\")
 	else:
-		$SubViewportContainer/SubViewport/Camera3D/player_animations/AnimationTree.set(\"parameters/Transition/transition_request\",\"state_2\")
+		$SubViewportContainer/SubViewport/Camera3D/player_animations/AnimationTree.set(\"parameters/Transition/transition_request\",\"jump\")
 	
 	
 	if Input.is_action_just_pressed(\"jump\") and in_floor:
@@ -186,190 +197,17 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_qhhhk")
 
-[sub_resource type="Animation" id="Animation_immec"]
-resource_name = "bump_shotgum"
-length = 0.5
-tracks/0/type = "position_3d"
-tracks/0/imported = true
-tracks/0/enabled = true
-tracks/0/path = NodePath("Armature/Skeleton3D:Bone.002")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0.0147692, 4.76837e-07, -0.321514, 0.0333333, 1, 0.0147692, -0.0180751, -0.305346, 0.0666667, 1, 0.0147692, -0.0601774, -0.2673, 0.1, 1, 0.0147692, -0.110557, -0.223059, 0.133333, 1, 0.0147692, -0.153593, -0.188308, 0.166667, 1, 0.0147692, -0.16926, -0.178732, 0.2, 1, 0.0147692, -0.161151, -0.18763, 0.233333, 1, 0.0147692, -0.151234, -0.198053, 0.266667, 1, 0.0147692, -0.139104, -0.210374, 0.3, 1, 0.0147692, -0.124241, -0.225, 0.333333, 1, 0.0147692, -0.106051, -0.242147, 0.366667, 1, 0.0147692, -0.0841107, -0.26125, 0.4, 1, 0.0147692, -0.0590415, -0.280398, 0.433333, 1, 0.0147692, -0.0339395, -0.297291, 0.466667, 1, 0.0147692, -0.0134991, -0.31092, 0.5, 1, 0.0147692, 4.76837e-07, -0.321514)
-tracks/1/type = "rotation_3d"
-tracks/1/imported = true
-tracks/1/enabled = true
-tracks/1/path = NodePath("Armature/Skeleton3D:Bone.002")
-tracks/1/interp = 0
-tracks/1/loop_wrap = true
-tracks/1/keys = PackedFloat32Array(0, 1, -0.707107, 0, 0, 0.707107)
-tracks/2/type = "position_3d"
-tracks/2/imported = true
-tracks/2/enabled = true
-tracks/2/path = NodePath("Armature/Skeleton3D:Bone")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = PackedFloat32Array(0, 1, 0, 0.337554, 0.414343)
-
-[sub_resource type="Animation" id="Animation_bqten"]
-resource_name = "idle"
-length = 6.0
-tracks/0/type = "position_3d"
-tracks/0/imported = true
-tracks/0/enabled = true
-tracks/0/path = NodePath("Armature/Skeleton3D:Bone")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 1.49012e-08, 0.337554, 0.414343, 0.166667, 1, 1.49012e-08, 0.339055, 0.414343, 0.233333, 1, 1.49012e-08, 0.340426, 0.414343, 0.3, 1, 1.49012e-08, 0.342187, 0.414343, 0.333333, 1, 1.49012e-08, 0.343203, 0.414343, 0.366667, 1, 1.49012e-08, 0.344304, 0.414343, 0.4, 1, 1.49012e-08, 0.345485, 0.414343, 0.433333, 1, 1.49012e-08, 0.346742, 0.414343, 0.466667, 1, 1.49012e-08, 0.348072, 0.414343, 0.5, 1, 1.49012e-08, 0.349469, 0.414343, 0.533333, 1, 1.49012e-08, 0.35093, 0.414343, 0.566667, 1, 1.49012e-08, 0.35245, 0.414343, 0.6, 1, 1.49012e-08, 0.354025, 0.414343, 0.633333, 1, 1.49012e-08, 0.355651, 0.414343, 0.666667, 1, 1.49012e-08, 0.357324, 0.414343, 0.7, 1, 1.49012e-08, 0.359039, 0.414343, 0.733333, 1, 1.49012e-08, 0.360792, 0.414343, 0.8, 1, 1.49012e-08, 0.364396, 0.414343, 1.16667, 1, 1.49012e-08, 0.385126, 0.414343, 1.23333, 1, 1.49012e-08, 0.388784, 0.414343, 1.26667, 1, 1.49012e-08, 0.390572, 0.414343, 1.3, 1, 1.49012e-08, 0.392325, 0.414343, 1.33333, 1, 1.49012e-08, 0.39404, 0.414343, 1.36667, 1, 1.49012e-08, 0.395712, 0.414343, 1.4, 1, 1.49012e-08, 0.397338, 0.414343, 1.43333, 1, 1.49012e-08, 0.398914, 0.414343, 1.46667, 1, 1.49012e-08, 0.400434, 0.414343, 1.5, 1, 1.49012e-08, 0.401895, 0.414343, 1.53333, 1, 1.49012e-08, 0.403292, 0.414343, 1.56667, 1, 1.49012e-08, 0.404622, 0.414343, 1.6, 1, 1.49012e-08, 0.405879, 0.414343, 1.63333, 1, 1.49012e-08, 0.40706, 0.414343, 1.66667, 1, 1.49012e-08, 0.408161, 0.414343, 1.7, 1, 1.49012e-08, 0.409177, 0.414343, 1.76667, 1, 1.49012e-08, 0.410938, 0.414343, 1.83333, 1, 1.49012e-08, 0.412309, 0.414343, 1.93333, 1, 1.49012e-08, 0.413561, 0.414343, 2.13333, 1, 1.49012e-08, 0.411766, 0.414343, 2.16667, 1, 1.49012e-08, 0.410653, 0.414343, 2.2, 1, 1.49012e-08, 0.409318, 0.414343, 2.23333, 1, 1.49012e-08, 0.407769, 0.414343, 2.26667, 1, 1.49012e-08, 0.406015, 0.414343, 2.3, 1, 1.49012e-08, 0.404065, 0.414343, 2.33333, 1, 1.49012e-08, 0.401927, 0.414343, 2.36667, 1, 1.49012e-08, 0.399612, 0.414343, 2.4, 1, 1.49012e-08, 0.397127, 0.414343, 2.43333, 1, 1.49012e-08, 0.394481, 0.414343, 2.46667, 1, 1.49012e-08, 0.391685, 0.414343, 2.5, 1, 1.49012e-08, 0.388745, 0.414343, 2.53333, 1, 1.49012e-08, 0.385672, 0.414343, 2.56667, 1, 1.49012e-08, 0.382474, 0.414343, 2.6, 1, 1.49012e-08, 0.379161, 0.414343, 2.63333, 1, 1.49012e-08, 0.37574, 0.414343, 2.66667, 1, 1.49012e-08, 0.372221, 0.414343, 2.7, 1, 1.49012e-08, 0.368613, 0.414343, 2.73333, 1, 1.49012e-08, 0.364925, 0.414343, 2.76667, 1, 1.49012e-08, 0.361166, 0.414343, 2.8, 1, 1.49012e-08, 0.357344, 0.414343, 2.83333, 1, 1.49012e-08, 0.353469, 0.414343, 2.9, 1, 1.49012e-08, 0.345594, 0.414343, 3.1, 1, 1.49012e-08, 0.321613, 0.414343, 3.16667, 1, 1.49012e-08, 0.313738, 0.414343, 3.2, 1, 1.49012e-08, 0.309862, 0.414343, 3.23333, 1, 1.49012e-08, 0.306041, 0.414343, 3.26667, 1, 1.49012e-08, 0.302281, 0.414343, 3.3, 1, 1.49012e-08, 0.298593, 0.414343, 3.33333, 1, 1.49012e-08, 0.294986, 0.414343, 3.36667, 1, 1.49012e-08, 0.291467, 0.414343, 3.4, 1, 1.49012e-08, 0.288046, 0.414343, 3.43333, 1, 1.49012e-08, 0.284733, 0.414343, 3.46667, 1, 1.49012e-08, 0.281535, 0.414343, 3.5, 1, 1.49012e-08, 0.278462, 0.414343, 3.53333, 1, 1.49012e-08, 0.275522, 0.414343, 3.56667, 1, 1.49012e-08, 0.272725, 0.414343, 3.6, 1, 1.49012e-08, 0.27008, 0.414343, 3.63333, 1, 1.49012e-08, 0.267595, 0.414343, 3.66667, 1, 1.49012e-08, 0.26528, 0.414343, 3.7, 1, 1.49012e-08, 0.263142, 0.414343, 3.73333, 1, 1.49012e-08, 0.261192, 0.414343, 3.76667, 1, 1.49012e-08, 0.259438, 0.414343, 3.8, 1, 1.49012e-08, 0.257889, 0.414343, 3.83333, 1, 1.49012e-08, 0.256554, 0.414343, 3.86667, 1, 1.49012e-08, 0.255441, 0.414343, 3.93333, 1, 1.49012e-08, 0.25392, 0.414343, 4.16667, 1, 1.49012e-08, 0.255053, 0.414343, 4.23333, 1, 1.49012e-08, 0.256566, 0.414343, 4.26667, 1, 1.49012e-08, 0.257487, 0.414343, 4.3, 1, 1.49012e-08, 0.25851, 0.414343, 4.33333, 1, 1.49012e-08, 0.259631, 0.414343, 4.36667, 1, 1.49012e-08, 0.260846, 0.414343, 4.4, 1, 1.49012e-08, 0.26215, 0.414343, 4.43333, 1, 1.49012e-08, 0.263537, 0.414343, 4.46667, 1, 1.49012e-08, 0.265005, 0.414343, 4.5, 1, 1.49012e-08, 0.266547, 0.414343, 4.53333, 1, 1.49012e-08, 0.268159, 0.414343, 4.56667, 1, 1.49012e-08, 0.269837, 0.414343, 4.6, 1, 1.49012e-08, 0.271575, 0.414343, 4.63333, 1, 1.49012e-08, 0.27337, 0.414343, 4.66667, 1, 1.49012e-08, 0.275216, 0.414343, 4.7, 1, 1.49012e-08, 0.277108, 0.414343, 4.73333, 1, 1.49012e-08, 0.279043, 0.414343, 4.8, 1, 1.49012e-08, 0.283021, 0.414343, 4.9, 1, 1.49012e-08, 0.289185, 0.414343, 5.13333, 1, 1.49012e-08, 0.303842, 0.414343, 5.2, 1, 1.49012e-08, 0.307931, 0.414343, 5.26667, 1, 1.49012e-08, 0.311908, 0.414343, 5.3, 1, 1.49012e-08, 0.313843, 0.414343, 5.33333, 1, 1.49012e-08, 0.315736, 0.414343, 5.36667, 1, 1.49012e-08, 0.317582, 0.414343, 5.4, 1, 1.49012e-08, 0.319376, 0.414343, 5.43333, 1, 1.49012e-08, 0.321115, 0.414343, 5.46667, 1, 1.49012e-08, 0.322793, 0.414343, 5.5, 1, 1.49012e-08, 0.324405, 0.414343, 5.53333, 1, 1.49012e-08, 0.325947, 0.414343, 5.56667, 1, 1.49012e-08, 0.327414, 0.414343, 5.6, 1, 1.49012e-08, 0.328802, 0.414343, 5.63333, 1, 1.49012e-08, 0.330106, 0.414343, 5.66667, 1, 1.49012e-08, 0.33132, 0.414343, 5.7, 1, 1.49012e-08, 0.332442, 0.414343, 5.73333, 1, 1.49012e-08, 0.333465, 0.414343, 5.8, 1, 1.49012e-08, 0.335198, 0.414343, 5.86667, 1, 1.49012e-08, 0.336482, 0.414343, 5.96667, 1, 1.49012e-08, 0.337485, 0.414343, 6, 1, 1.49012e-08, 0.337554, 0.414343)
-tracks/1/type = "position_3d"
-tracks/1/imported = true
-tracks/1/enabled = true
-tracks/1/path = NodePath("Armature/Skeleton3D:Bone.002")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = PackedFloat32Array(0, 1, 0.0147692, 4.76837e-07, -0.321514)
-tracks/2/type = "rotation_3d"
-tracks/2/imported = true
-tracks/2/enabled = true
-tracks/2/path = NodePath("Armature/Skeleton3D:Bone.002")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = PackedFloat32Array(0, 1, -0.707107, 0, 0, 0.707107)
-
-[sub_resource type="Animation" id="Animation_058qb"]
-resource_name = "idle gum"
-length = 0.001
-tracks/0/type = "position_3d"
-tracks/0/imported = true
-tracks/0/enabled = true
-tracks/0/path = NodePath("Armature/Skeleton3D:Bone.002")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0.0147692, 4.76837e-07, -0.321514)
-tracks/1/type = "rotation_3d"
-tracks/1/imported = true
-tracks/1/enabled = true
-tracks/1/path = NodePath("Armature/Skeleton3D:Bone.002")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = PackedFloat32Array(0, 1, -0.707107, 0, 0, 0.707107)
-tracks/2/type = "position_3d"
-tracks/2/imported = true
-tracks/2/enabled = true
-tracks/2/path = NodePath("Armature/Skeleton3D:Bone")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = PackedFloat32Array(0, 1, 0, 0.337554, 0.414343)
-
-[sub_resource type="Animation" id="Animation_ljv8m"]
-resource_name = "jump"
-length = 0.166667
-tracks/0/type = "position_3d"
-tracks/0/imported = true
-tracks/0/enabled = true
-tracks/0/path = NodePath("Armature/Skeleton3D:Bone")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 1.49012e-08, 0.337554, 0.414343, 0.0333333, 1, 1.49012e-08, 0.302256, 0.414343, 0.0666667, 1, 1.49012e-08, 0.218085, 0.414343, 0.1, 1, 1.49012e-08, 0.117622, 0.414343, 0.133333, 1, 1.49012e-08, 0.03345, 0.414343, 0.166667, 1, 1.49012e-08, -0.00184777, 0.414343)
-tracks/1/type = "position_3d"
-tracks/1/imported = true
-tracks/1/enabled = true
-tracks/1/path = NodePath("Armature/Skeleton3D:Bone.002")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = PackedFloat32Array(0, 1, 0.0147692, 4.76837e-07, -0.321514)
-tracks/2/type = "rotation_3d"
-tracks/2/imported = true
-tracks/2/enabled = true
-tracks/2/path = NodePath("Armature/Skeleton3D:Bone.002")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = PackedFloat32Array(0, 1, -0.707107, 0, 0, 0.707107)
-
-[sub_resource type="Animation" id="Animation_h3nkx"]
-resource_name = "look_gun"
-length = 3.0
-tracks/0/type = "position_3d"
-tracks/0/imported = true
-tracks/0/enabled = true
-tracks/0/path = NodePath("Armature/Skeleton3D:Bone.002")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0.0147692, 4.76837e-07, -0.321514, 0.0333333, 1, -0.00204288, 4.76837e-07, -0.321514, 0.0666667, 1, -0.0476758, 4.76837e-07, -0.321514, 0.1, 1, -0.114924, 4.76837e-07, -0.321514, 0.133333, 1, -0.196583, 4.76837e-07, -0.321514, 0.2, 1, -0.374311, 4.76837e-07, -0.321514, 0.233333, 1, -0.45597, 4.76837e-07, -0.321514, 0.266667, 1, -0.523218, 4.76837e-07, -0.321514, 0.3, 1, -0.568851, 4.76837e-07, -0.321514, 0.333333, 1, -0.585663, 4.76837e-07, -0.321514, 0.666667, 1, -0.585663, 4.76837e-07, -0.321514, 0.7, 1, -0.594647, 0.0141935, -0.321514, 0.733333, 1, -0.619032, 0.0527176, -0.321514, 0.766667, 1, -0.654968, 0.10949, -0.321514, 0.8, 1, -0.698604, 0.178428, -0.321514, 0.866667, 1, -0.793577, 0.328469, -0.321514, 0.9, 1, -0.837214, 0.397407, -0.321514, 0.933333, 1, -0.873149, 0.454179, -0.321514, 0.966667, 1, -0.897534, 0.492703, -0.321514, 1, 1, -0.906518, 0.506896, -0.321514, 1.66667, 1, -0.906518, 0.506896, -0.321514, 1.7, 1, -0.92558, 0.504677, -0.321514, 1.73333, 1, -0.977319, 0.498654, -0.321514, 1.76667, 1, -1.05357, 0.489779, -0.321514, 1.8, 1, -1.14615, 0.479002, -0.321514, 1.86667, 1, -1.34766, 0.455546, -0.321514, 1.9, 1, -1.44025, 0.444768, -0.321514, 1.93333, 1, -1.51649, 0.435893, -0.321514, 1.96667, 1, -1.56823, 0.42987, -0.321514, 2, 1, -1.58729, 0.427652, -0.321514, 2.66667, 1, -1.58729, 0.427652, -0.321514, 2.7, 1, -1.54244, 0.415677, -0.321514, 2.73333, 1, -1.42068, 0.383176, -0.321514, 2.76667, 1, -1.24125, 0.335279, -0.321514, 2.8, 1, -1.02337, 0.277119, -0.321514, 2.86667, 1, -0.549157, 0.150534, -0.321514, 2.9, 1, -0.331277, 0.0923731, -0.321514, 2.93333, 1, -0.151845, 0.0444762, -0.321514, 2.96667, 1, -0.0300885, 0.0119746, -0.321514, 3, 1, 0.0147692, 4.76837e-07, -0.321514)
-tracks/1/type = "rotation_3d"
-tracks/1/imported = true
-tracks/1/enabled = true
-tracks/1/path = NodePath("Armature/Skeleton3D:Bone.002")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = PackedFloat32Array(0, 1, -0.707107, 0, 0, 0.707107, 0.0333333, 1, -0.704156, 0.0148081, 0.00589962, 0.709867, 0.0666667, 1, -0.695011, 0.0557055, 0.0221934, 0.716494, 0.1, 1, -0.678418, 0.117456, 0.0467952, 0.723715, 0.133333, 1, -0.6532, 0.193714, 0.0771769, 0.727907, 0.2, 1, -0.580538, 0.356611, 0.142076, 0.718066, 0.233333, 1, -0.540644, 0.426322, 0.169849, 0.705056, 0.266667, 1, -0.505783, 0.479924, 0.191205, 0.690867, 0.3, 1, -0.481462, 0.514052, 0.204801, 0.679707, 0.333333, 1, -0.472415, 0.526141, 0.209618, 0.675323, 0.666667, 1, -0.472415, 0.526141, 0.209618, 0.675323, 0.7, 1, -0.466482, 0.519042, 0.224526, 0.680131, 0.733333, 1, -0.449201, 0.498436, 0.265525, 0.692298, 0.766667, 1, -0.42061, 0.464525, 0.326802, 0.707463, 0.8, 1, -0.381121, 0.417978, 0.401063, 0.720548, 0.866667, 1, -0.281041, 0.301062, 0.551708, 0.725256, 0.9, 1, -0.231484, 0.243583, 0.611483, 0.716359, 0.933333, 1, -0.190501, 0.196216, 0.654931, 0.704467, 0.966667, 1, -0.16304, 0.164554, 0.68128, 0.694404, 1, 1, -0.153046, 0.153046, 0.690346, 0.690346, 1.66667, 1, -0.153046, 0.153046, 0.690346, 0.690346, 1.7, 1, -0.170268, 0.144056, 0.676065, 0.702277, 1.73333, 1, -0.219526, 0.117388, 0.63187, 0.734009, 1.76667, 1, -0.297613, 0.0719756, 0.550804, 0.776441, 1.8, 1, -0.396068, 0.00818416, 0.425669, 0.813553, 1.83333, 1, -0.495975, -0.0669569, 0.262169, 0.825102, 1.86667, 1, -0.574807, -0.139253, 0.0875291, 0.801589, 1.9, 1, -0.622755, -0.196226, -0.0643037, 0.754677, 1.93333, 1, -0.64576, -0.234202, -0.174485, 0.705477, 1.96667, 1, -0.654536, -0.255405, -0.240079, 0.669861, 2, 1, -0.656636, -0.262353, -0.262353, 0.656636, 2.66667, 1, -0.656636, -0.262353, -0.262353, 0.656636, 2.7, 1, -0.659331, -0.255504, -0.255504, 0.659331, 2.73333, 1, -0.666332, -0.236648, -0.236648, 0.666332, 2.76667, 1, -0.675756, -0.208217, -0.208217, 0.675756, 2.8, 1, -0.685657, -0.172842, -0.172842, 0.685657, 2.86667, 1, -0.700846, -0.0938896, -0.0938896, 0.700846, 2.9, 1, -0.704776, -0.057366, -0.057366, 0.704776, 2.93333, 1, -0.706573, -0.027468, -0.027468, 0.706573, 2.96667, 1, -0.707069, -0.00736021, -0.00736021, 0.707069, 3, 1, -0.707107, 0, 0, 0.707107)
-tracks/2/type = "position_3d"
-tracks/2/imported = true
-tracks/2/enabled = true
-tracks/2/path = NodePath("Armature/Skeleton3D:Bone")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = PackedFloat32Array(0, 1, 0, 0.337554, 0.414343)
-
-[sub_resource type="Animation" id="Animation_f3efb"]
-resource_name = "shoot"
-length = 0.5
-tracks/0/type = "position_3d"
-tracks/0/imported = true
-tracks/0/enabled = true
-tracks/0/path = NodePath("Armature/Skeleton3D:Bone.002")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0.0147692, 4.76837e-07, -0.321514, 0.0333333, 1, 0.0147692, 4.76837e-07, -0.0497026, 0.0666667, 1, 0.0147692, 4.76837e-07, -0.0536648, 0.1, 1, 0.0147692, 4.76837e-07, -0.0647591, 0.133333, 1, 0.0147692, 4.76837e-07, -0.0817969, 0.166667, 1, 0.0147692, 4.76837e-07, -0.103589, 0.2, 1, 0.0147692, 4.76837e-07, -0.128948, 0.233333, 1, 0.0147692, 4.76837e-07, -0.156684, 0.3, 1, 0.0147692, 4.76837e-07, -0.214533, 0.333333, 1, 0.0147692, 4.76837e-07, -0.242269, 0.366667, 1, 0.0147692, 4.76837e-07, -0.267627, 0.4, 1, 0.0147692, 4.76837e-07, -0.289419, 0.433333, 1, 0.0147692, 4.76837e-07, -0.306457, 0.466667, 1, 0.0147692, 4.76837e-07, -0.317552, 0.5, 1, 0.0147692, 4.76837e-07, -0.321514)
-tracks/1/type = "rotation_3d"
-tracks/1/imported = true
-tracks/1/enabled = true
-tracks/1/path = NodePath("Armature/Skeleton3D:Bone.002")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = PackedFloat32Array(0, 1, -0.707107, 0, 0, 0.707107, 0.0333333, 1, -0.674927, 0, 0, 0.737884, 0.0666667, 1, -0.675406, 0, 0, 0.737446, 0.1, 1, -0.676745, 0, 0, 0.736218, 0.133333, 1, -0.678797, 0, 0, 0.734326, 0.166667, 1, -0.681414, 0, 0, 0.731898, 0.2, 1, -0.684449, 0, 0, 0.729061, 0.233333, 1, -0.687755, 0, 0, 0.725943, 0.3, 1, -0.694606, 0, 0, 0.719391, 0.333333, 1, -0.697868, 0, 0, 0.716227, 0.366667, 1, -0.700838, 0, 0, 0.713321, 0.4, 1, -0.70338, 0, 0, 0.710814, 0.433333, 1, -0.705361, 0, 0, 0.708848, 0.466667, 1, -0.706648, 0, 0, 0.707566, 0.5, 1, -0.707107, 0, 0, 0.707107)
-tracks/2/type = "position_3d"
-tracks/2/imported = true
-tracks/2/enabled = true
-tracks/2/path = NodePath("Armature/Skeleton3D:Bone")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = PackedFloat32Array(0, 1, 0, 0.337554, 0.414343)
-
-[sub_resource type="Animation" id="Animation_eas7s"]
-resource_name = "walk"
-length = 1.33333
-tracks/0/type = "position_3d"
-tracks/0/imported = true
-tracks/0/enabled = true
-tracks/0/path = NodePath("Armature/Skeleton3D:Bone")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 1.49012e-08, 0.337554, 0.414343, 0.0666667, 1, -0.0516832, 0.337554, 0.414343, 0.1, 1, -0.0767485, 0.337554, 0.414343, 0.133333, 1, -0.100473, 0.337554, 0.414343, 0.166667, 1, -0.122241, 0.337554, 0.414343, 0.2, 1, -0.141435, 0.337554, 0.414343, 0.233333, 1, -0.157439, 0.337554, 0.414343, 0.266667, 1, -0.169634, 0.337554, 0.414343, 0.3, 1, -0.177405, 0.337554, 0.414343, 0.333333, 1, -0.180133, 0.337554, 0.414343, 0.366667, 1, -0.177527, 0.337554, 0.414343, 0.4, 1, -0.170066, 0.337554, 0.414343, 0.433333, 1, -0.158288, 0.337554, 0.414343, 0.466667, 1, -0.142729, 0.337554, 0.414343, 0.5, 1, -0.123925, 0.337554, 0.414343, 0.533333, 1, -0.102411, 0.337554, 0.414343, 0.566667, 1, -0.0787259, 0.337554, 0.414343, 0.6, 1, -0.0534046, 0.337554, 0.414343, 0.633333, 1, -0.0269839, 0.337554, 0.414343, 0.7, 1, 0.0270088, 0.337554, 0.414343, 0.733333, 1, 0.0534972, 0.337554, 0.414343, 0.766667, 1, 0.0789182, 0.337554, 0.414343, 0.8, 1, 0.102725, 0.337554, 0.414343, 0.833333, 1, 0.12437, 0.337554, 0.414343, 0.866667, 1, 0.143306, 0.337554, 0.414343, 0.9, 1, 0.158986, 0.337554, 0.414343, 0.933333, 1, 0.170864, 0.337554, 0.414343, 0.966667, 1, 0.178392, 0.337554, 0.414343, 1, 1, 0.181023, 0.337554, 0.414343, 1.03333, 1, 0.1775, 0.337554, 0.414343, 1.06667, 1, 0.168534, 0.337554, 0.414343, 1.1, 1, 0.155648, 0.337554, 0.414343, 1.13333, 1, 0.139729, 0.337554, 0.414343, 1.16667, 1, 0.121332, 0.337554, 0.414343, 1.2, 1, 0.100823, 0.337554, 0.414343, 1.23333, 1, 0.0784313, 0.337554, 0.414343, 1.26667, 1, 0.0542717, 0.337554, 0.414343, 1.3, 1, 0.028303, 0.337554, 0.414343, 1.33333, 1, 1.49012e-08, 0.337554, 0.414343)
-tracks/1/type = "position_3d"
-tracks/1/imported = true
-tracks/1/enabled = true
-tracks/1/path = NodePath("Armature/Skeleton3D:Bone.002")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = PackedFloat32Array(0, 1, 0.0147692, 4.76837e-07, -0.321514)
-tracks/2/type = "rotation_3d"
-tracks/2/imported = true
-tracks/2/enabled = true
-tracks/2/path = NodePath("Armature/Skeleton3D:Bone.002")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = PackedFloat32Array(0, 1, -0.707107, 0, 0, 0.707107)
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_1ehw5"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_h4dky"]
 _data = {
-"bump_shotgum": SubResource("Animation_immec"),
-"idle": SubResource("Animation_bqten"),
-"idle gum": SubResource("Animation_058qb"),
-"jump": SubResource("Animation_ljv8m"),
-"look_gun": SubResource("Animation_h3nkx"),
-"shoot": SubResource("Animation_f3efb"),
-"walk": SubResource("Animation_eas7s")
+"bump shotgum": ExtResource("2_kpelj"),
+"grab gun": ExtResource("3_yv4h1"),
+"idle": ExtResource("3_qb0gm"),
+"idle gum": ExtResource("4_wyo0o"),
+"jump": ExtResource("4_pdjqt"),
+"look_gun": ExtResource("5_aygot"),
+"shoot": ExtResource("6_yvh1d"),
+"strong shoot": ExtResource("5_o25uh"),
+"walk": ExtResource("7_i0576")
 }
 
 [sub_resource type="Shader" id="Shader_ek16j"]
@@ -380,25 +218,23 @@ render_mode blend_mix;
 
 uniform sampler2D screen_texture : hint_screen_texture, repeat_disable, filter_nearest;
 
-uniform float damage = 1;
+uniform float power = 1;
 
-const vec4 RED = vec4(1.0,0.0,0.0,1.0);
+uniform vec4 color : source_color = vec4(1.0,0.0,0.0,1.0);
 const vec2 CENTER = vec2(0.5,0.5);
 
 void fragment() {
-	if (damage > 0.0){
-		COLOR = mix(texture(screen_texture,SCREEN_UV),RED,distance(CENTER,SCREEN_UV) * damage);
-	}else{
-		COLOR = texture(screen_texture,SCREEN_UV);
-	}
+	COLOR = mix(texture(screen_texture,SCREEN_UV),color,distance(CENTER,SCREEN_UV) * power);
 
 
 
 }"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_x2nxm"]
+resource_local_to_scene = true
 shader = SubResource("Shader_ek16j")
-shader_parameter/damage = 1.0
+shader_parameter/power = 1.0
+shader_parameter/color = Color(1, 0, 0, 1)
 
 [node name="player" type="RigidBody3D"]
 axis_lock_angular_x = true
@@ -462,7 +298,7 @@ bones/0/name = "Bone"
 bones/0/parent = -1
 bones/0/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.337554, 0.414343)
 bones/0/enabled = true
-bones/0/position = Vector3(0.108699, 0.337554, 0.414343)
+bones/0/position = Vector3(1.49012e-08, 0.299007, 0.414342)
 bones/0/rotation = Quaternion(0, 0, 0, 1)
 bones/0/scale = Vector3(1, 1, 1)
 bones/1/name = "Bone.002"
@@ -481,7 +317,7 @@ bones/2/rotation = Quaternion(0.707107, 0, 0, 0.707107)
 bones/2/scale = Vector3(1, 1, 1)
 
 [node name="example gun" type="BoneAttachment3D" parent="SubViewportContainer/SubViewport/Camera3D/player_animations/Armature/Skeleton3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.108699, -5.06639e-07, 1.86265e-07)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.65661e-08, -0.0385477, -3.50177e-07)
 bone_name = "example gun"
 bone_idx = 2
 
@@ -492,30 +328,40 @@ visible = false
 mesh = SubResource("ArrayMesh_sl6xk")
 skeleton = NodePath("")
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SubViewportContainer/SubViewport/Camera3D/player_animations"]
+root_node = NodePath("")
+libraries = {
+"": SubResource("AnimationLibrary_h4dky")
+}
+
 [node name="AnimationTree" type="AnimationTree" parent="SubViewportContainer/SubViewport/Camera3D/player_animations"]
 tree_root = ExtResource("2_4nf63")
 anim_player = NodePath("../AnimationPlayer")
 parameters/Add2/add_amount = 1.0
-parameters/OneShot/active = false
-parameters/OneShot/internal_active = false
-parameters/OneShot/request = 0
 parameters/Shot/active = false
 parameters/Shot/internal_active = false
 parameters/Shot/request = 0
-parameters/Transition/current_state = "state_1"
+parameters/Transition/current_state = "idle"
 parameters/Transition/transition_request = ""
-parameters/Transition/current_index = 1
+parameters/Transition/current_index = 0
 parameters/bump/active = false
 parameters/bump/internal_active = false
 parameters/bump/request = 0
+"parameters/idle gun/active" = false
+"parameters/idle gun/internal_active" = false
+"parameters/idle gun/request" = 0
 parameters/look/active = false
 parameters/look/internal_active = false
 parameters/look/request = 0
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="SubViewportContainer/SubViewport/Camera3D/player_animations"]
-libraries = {
-"": SubResource("AnimationLibrary_1ehw5")
-}
+"parameters/shot bump/active" = false
+"parameters/shot bump/internal_active" = false
+"parameters/shot bump/request" = 0
+"parameters/strong shot/active" = false
+"parameters/strong shot/internal_active" = false
+"parameters/strong shot/request" = 0
+"parameters/strong shot bump/active" = false
+"parameters/strong shot bump/internal_active" = false
+"parameters/strong shot bump/request" = 0
 
 [node name="croshair" type="TextureRect" parent="."]
 modulate = Color(0.446777, 0.446777, 0.446777, 1)
@@ -533,7 +379,7 @@ grow_vertical = 2
 size_flags_horizontal = 4
 texture = ExtResource("4_1scay")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="visual_effects" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_x2nxm")
 offset_right = 1152.0
 offset_bottom = 648.0
