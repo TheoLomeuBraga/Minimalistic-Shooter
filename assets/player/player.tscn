@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=4 uid="uid://dhskpyhdo2ssn"]
+[gd_scene load_steps=24 format=4 uid="uid://dhskpyhdo2ssn"]
 
 [ext_resource type="PackedScene" uid="uid://c1yq7dou4albw" path="res://assets/guns/test gun/test_gun.tscn" id="1_t5osk"]
 [ext_resource type="AnimationNodeBlendTree" uid="uid://dy7qx6vcfxkfv" path="res://assets/player/player_animation three.tres" id="2_4nf63"]
@@ -372,6 +372,34 @@ _data = {
 "walk": SubResource("Animation_eas7s")
 }
 
+[sub_resource type="Shader" id="Shader_ek16j"]
+code = "// NOTE: Shader automatically converted from Godot Engine 4.3.stable's CanvasItemMaterial.
+
+shader_type canvas_item;
+render_mode blend_mix;
+
+uniform sampler2D screen_texture : hint_screen_texture, repeat_disable, filter_nearest;
+
+uniform float damage = 1;
+
+const vec4 RED = vec4(1.0,0.0,0.0,1.0);
+const vec2 CENTER = vec2(0.5,0.5);
+
+void fragment() {
+	if (damage > 0.0){
+		COLOR = mix(texture(screen_texture,SCREEN_UV),RED,distance(CENTER,SCREEN_UV) * damage);
+	}else{
+		COLOR = texture(screen_texture,SCREEN_UV);
+	}
+
+
+
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x2nxm"]
+shader = SubResource("Shader_ek16j")
+shader_parameter/damage = 1.0
+
 [node name="player" type="RigidBody3D"]
 axis_lock_angular_x = true
 axis_lock_angular_y = true
@@ -434,7 +462,7 @@ bones/0/name = "Bone"
 bones/0/parent = -1
 bones/0/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.337554, 0.414343)
 bones/0/enabled = true
-bones/0/position = Vector3(-0.17647, 0.337554, 0.414343)
+bones/0/position = Vector3(0.108699, 0.337554, 0.414343)
 bones/0/rotation = Quaternion(0, 0, 0, 1)
 bones/0/scale = Vector3(1, 1, 1)
 bones/1/name = "Bone.002"
@@ -453,7 +481,7 @@ bones/2/rotation = Quaternion(0.707107, 0, 0, 0.707107)
 bones/2/scale = Vector3(1, 1, 1)
 
 [node name="example gun" type="BoneAttachment3D" parent="SubViewportContainer/SubViewport/Camera3D/player_animations/Armature/Skeleton3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.17647, -5.06639e-07, 1.86265e-07)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.108699, -5.06639e-07, 1.86265e-07)
 bone_name = "example gun"
 bone_idx = 2
 
@@ -504,6 +532,11 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 texture = ExtResource("4_1scay")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_x2nxm")
+offset_right = 1152.0
+offset_bottom = 648.0
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="tree_exiting" from="." to="." method="_on_tree_exiting"]
