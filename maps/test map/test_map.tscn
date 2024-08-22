@@ -100,25 +100,25 @@ size = Vector3(101, 2, 100)
 [node name="spawners" type="Node3D" parent="."]
 
 [node name="VisibleOnScreenNotifier3D" parent="spawners" instance=ExtResource("2_t18d5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38.0267, -0.013598, -36.7787)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38.0267, 0.986402, -36.7787)
 
 [node name="VisibleOnScreenNotifier3D2" parent="spawners" instance=ExtResource("2_t18d5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0267143, -0.013598, -36.7787)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0267143, 0.986402, -36.7787)
 
 [node name="VisibleOnScreenNotifier3D3" parent="spawners" instance=ExtResource("2_t18d5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.9733, -0.013598, -36.7787)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.9733, 0.986402, -36.7787)
 
 [node name="VisibleOnScreenNotifier3D6" parent="spawners" instance=ExtResource("2_t18d5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38.0267, -0.013598, 39.2213)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38.0267, 0.986402, 39.2213)
 
 [node name="VisibleOnScreenNotifier3D7" parent="spawners" instance=ExtResource("2_t18d5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0267143, -0.013598, 39.2213)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0267143, 0.986402, 39.2213)
 
 [node name="VisibleOnScreenNotifier3D8" parent="spawners" instance=ExtResource("2_t18d5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.9733, -0.013598, 39.2213)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.9733, 0.986402, 39.2213)
 
 [node name="VisibleOnScreenNotifier3D4" parent="spawners" instance=ExtResource("2_t18d5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38.0267, -0.013598, 0.22131)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38.0267, 0.986402, 0.22131)
 
 [node name="VisibleOnScreenNotifier3D5" parent="spawners" instance=ExtResource("2_t18d5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.9733, -0.013598, 0.22131)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.9733, 0.986402, 0.22131)

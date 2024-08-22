@@ -14,7 +14,8 @@ func _physics_process(delta: float) -> void:
 			var bullet : Node3D = bullet_asset.instantiate()
 			$muzle.look_at(Global.player.target)
 			bullet.global_transform = $muzle.global_transform
-			bullet.position -= bullet.basis.z.normalized() * delta * bullet.speed
+			bullet.position -= bullet.basis.z.normalized() * (delta + 1)
+			bullet.set_distance(delta * bullet.speed)
 			get_tree().get_root().add_child(bullet)
 		
 		Global.player.shot_animation()
