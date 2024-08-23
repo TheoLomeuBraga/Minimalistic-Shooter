@@ -22,6 +22,7 @@ albedo_color = Color(0, 0, 0, 1)
 
 [node name="GenericPathFinder" type="CharacterBody3D"]
 script = ExtResource("1_6kdfc")
+health = 5
 explosion_sceane = ExtResource("2_8ijc0")
 projectile = ExtResource("3_qjyac")
 

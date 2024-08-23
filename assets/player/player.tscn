@@ -102,11 +102,11 @@ func look_around(delta) -> void:
 func shot_animation():
 	
 	$SubViewportContainer/SubViewport/Camera3D/player_animations/AnimationTree.set(\"parameters/look/request\",AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
-	$SubViewportContainer/SubViewport/Camera3D/player_animations/AnimationTree.set(\"parameters/shot bump/request\",AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+	$SubViewportContainer/SubViewport/Camera3D/player_animations/AnimationTree.set(\"parameters/shot/request\",AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 		
 
-func bump_animation():
-	$SubViewportContainer/SubViewport/Camera3D/player_animations/AnimationTree.set(\"parameters/bump/request\",AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+func bump_shot_animation():
+	$SubViewportContainer/SubViewport/Camera3D/player_animations/AnimationTree.set(\"parameters/strong shot bump/request\",AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 
 
 
@@ -298,7 +298,7 @@ bones/0/name = "Bone"
 bones/0/parent = -1
 bones/0/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.337554, 0.414343)
 bones/0/enabled = true
-bones/0/position = Vector3(1.49012e-08, 0.404443, 0.414342)
+bones/0/position = Vector3(1.49012e-08, 0.405605, 0.414342)
 bones/0/rotation = Quaternion(0, 0, 0, 1)
 bones/0/scale = Vector3(1, 1, 1)
 bones/1/name = "Bone.002"
@@ -317,7 +317,7 @@ bones/2/rotation = Quaternion(0.707107, 0, 0, 0.707107)
 bones/2/scale = Vector3(1, 1, 1)
 
 [node name="example gun" type="BoneAttachment3D" parent="SubViewportContainer/SubViewport/Camera3D/player_animations/Armature/Skeleton3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.65661e-08, 0.0668886, -3.50177e-07)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.65661e-08, 0.0680508, -3.50177e-07)
 bone_name = "example gun"
 bone_idx = 2
 
@@ -328,19 +328,10 @@ visible = false
 mesh = SubResource("ArrayMesh_sl6xk")
 skeleton = NodePath("")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="SubViewportContainer/SubViewport/Camera3D/player_animations"]
-root_node = NodePath("")
-libraries = {
-"": SubResource("AnimationLibrary_h4dky")
-}
-
 [node name="AnimationTree" type="AnimationTree" parent="SubViewportContainer/SubViewport/Camera3D/player_animations"]
 tree_root = ExtResource("2_4nf63")
 anim_player = NodePath("../AnimationPlayer")
 parameters/Add2/add_amount = 1.0
-parameters/Shot/active = false
-parameters/Shot/internal_active = false
-parameters/Shot/request = 0
 parameters/Transition/current_state = "idle"
 parameters/Transition/transition_request = ""
 parameters/Transition/current_index = 0
@@ -353,6 +344,9 @@ parameters/bump/request = 0
 parameters/look/active = false
 parameters/look/internal_active = false
 parameters/look/request = 0
+parameters/shot/active = false
+parameters/shot/internal_active = false
+parameters/shot/request = 0
 "parameters/shot bump/active" = false
 "parameters/shot bump/internal_active" = false
 "parameters/shot bump/request" = 0
@@ -362,6 +356,12 @@ parameters/look/request = 0
 "parameters/strong shot bump/active" = false
 "parameters/strong shot bump/internal_active" = false
 "parameters/strong shot bump/request" = 0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SubViewportContainer/SubViewport/Camera3D/player_animations"]
+root_node = NodePath("")
+libraries = {
+"": SubResource("AnimationLibrary_h4dky")
+}
 
 [node name="croshair" type="TextureRect" parent="."]
 modulate = Color(0.446777, 0.446777, 0.446777, 1)

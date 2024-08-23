@@ -36,10 +36,8 @@ animation = &"strong shoot"
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1044p"]
 animation = &"shoot"
 
-[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_ube5e"]
-
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_53fke"]
-animation = &"bump_shotgum"
+animation = &"bump shotgum"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8vfrl"]
 animation = &"shoot"
@@ -49,6 +47,7 @@ switch_mode = 2
 advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_h53qv"]
+reset = false
 switch_mode = 2
 advance_mode = 2
 
@@ -64,7 +63,7 @@ states/shoot/position = Vector2(437, 95)
 transitions = ["Start", "shoot", SubResource("AnimationNodeStateMachineTransition_fiw02"), "shoot", "bump_shotgum", SubResource("AnimationNodeStateMachineTransition_h53qv"), "bump_shotgum", "End", SubResource("AnimationNodeStateMachineTransition_tcg1o")]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_i3yq2"]
-animation = &"bump_shotgum"
+animation = &"bump shotgum"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_h32jx"]
 animation = &"strong shoot"
@@ -130,12 +129,14 @@ animation = &"idle gum"
 
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_3nj5r"]
 
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_ube5e"]
+
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_h0m2h"]
 
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_eg7ae"]
 
 [resource]
-graph_offset = Vector2(-50.2071, 184.403)
+graph_offset = Vector2(106.113, 340.31)
 nodes/Add2/node = SubResource("AnimationNodeAdd2_qqeu4")
 nodes/Add2/position = Vector2(1860, 220)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_1044p")
@@ -154,8 +155,6 @@ nodes/Animation/position = Vector2(-940, 600)
 "nodes/Animation 7/position" = Vector2(-711.184, 283.206)
 "nodes/Animation 9/node" = SubResource("AnimationNodeAnimation_1ujck")
 "nodes/Animation 9/position" = Vector2(640, 620)
-nodes/Shot/node = SubResource("AnimationNodeOneShot_ube5e")
-nodes/Shot/position = Vector2(-520, 340)
 nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_s02y3")
 nodes/StateMachine/position = Vector2(1080, 580)
 "nodes/StateMachine 2/node" = SubResource("AnimationNodeStateMachine_6mfak")
@@ -175,10 +174,12 @@ nodes/bump/position = Vector2(200, 240)
 nodes/look/node = SubResource("AnimationNodeOneShot_h2wxv")
 nodes/look/position = Vector2(-240, 260)
 nodes/output/position = Vector2(2140, 360)
+nodes/shot/node = SubResource("AnimationNodeOneShot_ube5e")
+nodes/shot/position = Vector2(-520, 340)
 "nodes/shot bump/node" = SubResource("AnimationNodeOneShot_3nj5r")
 "nodes/shot bump/position" = Vector2(1680, 340)
 "nodes/strong shot/node" = SubResource("AnimationNodeOneShot_eg7ae")
 "nodes/strong shot/position" = Vector2(840, 520)
 "nodes/strong shot bump/node" = SubResource("AnimationNodeOneShot_h0m2h")
 "nodes/strong shot bump/position" = Vector2(1280, 340)
-node_connections = [&"Add2", 0, &"Transition", &"Add2", 1, &"shot bump", &"Shot", 0, &"Animation 7", &"Shot", 1, &"Animation", &"Transition", 0, &"Animation 4", &"Transition", 1, &"Animation 2", &"Transition", 2, &"Animation 3", &"Transition", 3, &"grab gun", &"Transition", 4, &"drop gun", &"bump", 0, &"look", &"bump", 1, &"Animation 6", &"idle gun", 0, &"bump", &"idle gun", 1, &"idle gun 2 2", &"look", 0, &"Shot", &"look", 1, &"Animation 5", &"output", 0, &"Add2", &"shot bump", 0, &"strong shot bump", &"shot bump", 1, &"StateMachine 2", &"strong shot", 0, &"idle gun", &"strong shot", 1, &"Animation 9", &"strong shot bump", 0, &"strong shot", &"strong shot bump", 1, &"StateMachine"]
+node_connections = [&"Add2", 0, &"Transition", &"Add2", 1, &"shot bump", &"Transition", 0, &"Animation 4", &"Transition", 1, &"Animation 2", &"Transition", 2, &"Animation 3", &"Transition", 3, &"grab gun", &"Transition", 4, &"drop gun", &"bump", 0, &"look", &"bump", 1, &"Animation 6", &"idle gun", 0, &"bump", &"idle gun", 1, &"idle gun 2 2", &"look", 0, &"shot", &"look", 1, &"Animation 5", &"output", 0, &"Add2", &"shot", 0, &"Animation 7", &"shot", 1, &"Animation", &"shot bump", 0, &"strong shot bump", &"shot bump", 1, &"StateMachine 2", &"strong shot", 0, &"idle gun", &"strong shot", 1, &"Animation 9", &"strong shot bump", 0, &"strong shot", &"strong shot bump", 1, &"StateMachine"]
