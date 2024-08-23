@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://cf50agnupuica"]
+[gd_scene load_steps=10 format=3 uid="uid://cf50agnupuica"]
 
 [ext_resource type="Script" path="res://assets/NPCs/test enemy/test_enemy.gd" id="1_6kdfc"]
 [ext_resource type="PackedScene" uid="uid://m2igyiyff6mn" path="res://assets/effects/spark_explosion/spark_explosion.tscn" id="2_8ijc0"]
+[ext_resource type="PackedScene" uid="uid://cvlkl7k8gbcwm" path="res://assets/guns/bullet/bullet_2.tscn" id="3_qjyac"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_56jy2"]
 
@@ -22,6 +23,7 @@ albedo_color = Color(0, 0, 0, 1)
 [node name="GenericPathFinder" type="CharacterBody3D"]
 script = ExtResource("1_6kdfc")
 explosion_sceane = ExtResource("2_8ijc0")
+projectile = ExtResource("3_qjyac")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_56jy2")
@@ -46,3 +48,6 @@ surface_material_override/0 = SubResource("StandardMaterial3D_2horg")
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0.238, 0.413, 0.462)
 mesh = SubResource("CapsuleMesh_or20v")
 surface_material_override/0 = SubResource("StandardMaterial3D_2horg")
+
+[node name="muzle" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.657012)

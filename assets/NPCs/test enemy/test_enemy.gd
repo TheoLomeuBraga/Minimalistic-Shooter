@@ -12,7 +12,7 @@ func _ready() -> void:
 
 @export var explosion_sceane : PackedScene
 
-
+@export var projectile : PackedScene
 
 func hit_damage(damage : int) -> void:
 	
@@ -37,8 +37,19 @@ func manage_damage(delta: float) -> void:
 		material.albedo_color = original_color
 	$MeshInstance3D.set_surface_override_material(0,material)
 
+var gun_cooldown : float = 2.0
 func manage_gum(delta: float) -> void:
-	pass
+	$muzle.look_at(Global.player.global_position)
+	if gun_cooldown <= 0.0:
+		var p : Node3D = projectile.instantiate()
+		
+		get_tree().get_root().add_child(p)
+		p.global_position = $muzle.global_position
+		p.global_rotation = $muzle.global_rotation
+		
+		gun_cooldown = 2.0
+	gun_cooldown -= delta
+
 
 func movement_plugin(delta: float) -> void:
 	target_location = Global.player.global_position

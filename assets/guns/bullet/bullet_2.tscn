@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://cvlkl7k8gbcwm"]
+
+[ext_resource type="Texture2D" uid="uid://btls78mq8tmrd" path="res://assets/guns/bullet/bullet_2.png" id="1_10b03"]
+[ext_resource type="Script" path="res://assets/guns/bullet/bullet.gd" id="2_kasme"]
+
+[node name="Bullet" type="Sprite3D"]
+pixel_size = 0.02
+billboard = 1
+texture_filter = 0
+texture = ExtResource("1_10b03")
+script = ExtResource("2_kasme")
+speed = 20.0
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+target_position = Vector3(0, 0, -1)
+hit_from_inside = true
