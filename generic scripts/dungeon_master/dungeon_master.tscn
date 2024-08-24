@@ -6,3 +6,4 @@
 [node name="DungeonMaster" type="Node"]
 script = ExtResource("1_f2wsh")
 enemy_list = Array[PackedScene]([ExtResource("2_8w7b2")])
+wave_dificulty = 1.0
