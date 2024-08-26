@@ -1,0 +1,52 @@
+[gd_scene load_steps=10 format=3 uid="uid://d3tbcqpuwudic"]
+
+[ext_resource type="Script" path="res://assets/NPCs/test enemy/test_enemy.gd" id="1_wwvl4"]
+[ext_resource type="PackedScene" uid="uid://m2igyiyff6mn" path="res://assets/effects/spark_explosion/spark_explosion.tscn" id="2_3ifkq"]
+[ext_resource type="PackedScene" uid="uid://cvlkl7k8gbcwm" path="res://assets/guns/bullet/bullet_2.tscn" id="3_yy4g3"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_56jy2"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_mf7fo"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_acwnm"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_svip2"]
+resource_local_to_scene = true
+albedo_color = Color(0.47451, 0.996078, 0.513726, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_o3gf4"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_leumc"]
+albedo_color = Color(0, 0, 0, 1)
+
+[node name="GenericPathFinder" type="CharacterBody3D"]
+script = ExtResource("1_wwvl4")
+explosion_sceane = ExtResource("2_3ifkq")
+projectile = ExtResource("3_yy4g3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_56jy2")
+
+[node name="floorCheker" type="ShapeCast3D" parent="."]
+transform = Transform3D(0.8, 0, 0, 0, 0.27, 0, 0, 0, 0.8, 0, -0.57897, 0)
+shape = SubResource("CylinderShape3D_mf7fo")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_acwnm")
+surface_material_override/0 = SubResource("StandardMaterial3D_svip2")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+debug_enabled = true
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -0.238318, 0.412649, 0.462)
+mesh = SubResource("CapsuleMesh_o3gf4")
+surface_material_override/0 = SubResource("StandardMaterial3D_leumc")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0.238, 0.413, 0.462)
+mesh = SubResource("CapsuleMesh_o3gf4")
+surface_material_override/0 = SubResource("StandardMaterial3D_leumc")
+
+[node name="muzle" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.657012)
