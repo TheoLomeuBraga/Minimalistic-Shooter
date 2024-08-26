@@ -50,16 +50,33 @@ func manage_gum(delta: float) -> void:
 		gun_cooldown = 2.0
 	gun_cooldown -= delta
 
+enum test_enemy_states {
+	walk = 0,
+	shoot = 1,
+}
+var test_enemy_state : test_enemy_states
 
 func movement_plugin(delta: float) -> void:
 	target_location = Global.player.global_position
 	go = global_position.distance_to(Global.player.global_position) > 5
+	if test_enemy_state == test_enemy_states.walk:
+		
+		if go == false:
+			test_enemy_state = test_enemy_states.shoot
+			gun_cooldown = 0
+		
+	elif test_enemy_state == test_enemy_states.shoot:
+		manage_gum(delta)
+		if go == true:
+			test_enemy_state = test_enemy_states.walk
 	if go:
 		look_mode = 1
 	else:
 		look_mode = 2
 	
+	
+	
 	manage_damage(delta)
 	
-	manage_gum(delta)
+	
 	

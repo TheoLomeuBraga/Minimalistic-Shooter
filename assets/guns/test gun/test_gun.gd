@@ -71,7 +71,7 @@ func _physics_process(delta: float) -> void:
 			if burst_firre_cooldown <= 0:
 				shoot(delta)
 				Global.player.shot_animation()
-				cooldown = 1
+				cooldown = 0.5
 				burst_firre_cooldown = time_between_shots
 				
 	elif fire_mode == 2:

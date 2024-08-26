@@ -23,20 +23,32 @@ script/source = "extends BasicMovement
 @export var max_health := 100
 @export var health := 100
 
+
 @export var max_armor := 50
 @export var armor := 50
 
+var damage_vision_polution := 0.0
+var damage_vision_power := 0.1
+func set_border_effect(color : Color,power : float):
+	var mat : Material = $visual_effects.get_material()
+	mat[\"shader_parameter/color\"] = color
+	mat[\"shader_parameter/power\"] = power
+	$visual_effects.set_material(mat)
+
 func hit_damage(damage : int):
+	print(damage)
 	if armor > 0:
 		
 		health -= damage / 2
 		armor -= damage / 2
+		damage_vision_polution = 0.5
 		
 		if armor < 0:
 			armor = 0
 		
 	else:
 		health -= damage
+		damage_vision_polution = 0.5
 	
 	if health < 0:
 		health = 0
@@ -53,15 +65,13 @@ func _input(event):
 var wepon_presentation : float = 0.0
 
 
-func set_border_effect(color : Color,power : float):
-	var mat : Material = $visual_effects.get_material()
-	mat[\"shader_parameter/color\"] = color
-	mat[\"shader_parameter/power\"] = power
-	$visual_effects.set_material(mat)
+
 
 func _ready() -> void:
 	
-	set_border_effect(Color.RED,0)
+	var color := Color.RED
+	color.a = damage_vision_power
+	set_border_effect(color,0)
 	
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
@@ -118,6 +128,13 @@ func update_pause():
 
 func movement_plugin(delta) -> void:
 	update_pause()
+	
+	if damage_vision_polution < 0:
+		damage_vision_polution = 0
+	
+	set_border_effect(Color.RED,damage_vision_polution)
+	
+	damage_vision_polution -= delta
 	
 	
 	wepon_presentation -= delta
@@ -227,7 +244,6 @@ void fragment() {
 	COLOR = mix(texture(screen_texture,SCREEN_UV),color,distance(CENTER,SCREEN_UV) * power);
 
 
-
 }"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_x2nxm"]
@@ -298,7 +314,7 @@ bones/0/name = "Bone"
 bones/0/parent = -1
 bones/0/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.337554, 0.414343)
 bones/0/enabled = true
-bones/0/position = Vector3(1.49012e-08, 0.405605, 0.414342)
+bones/0/position = Vector3(1.49012e-08, 0.339134, 0.414342)
 bones/0/rotation = Quaternion(0, 0, 0, 1)
 bones/0/scale = Vector3(1, 1, 1)
 bones/1/name = "Bone.002"
@@ -317,7 +333,7 @@ bones/2/rotation = Quaternion(0.707107, 0, 0, 0.707107)
 bones/2/scale = Vector3(1, 1, 1)
 
 [node name="example gun" type="BoneAttachment3D" parent="SubViewportContainer/SubViewport/Camera3D/player_animations/Armature/Skeleton3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.65661e-08, 0.0680508, -3.50177e-07)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.65661e-08, 0.00157988, -3.50177e-07)
 bone_name = "example gun"
 bone_idx = 2
 
