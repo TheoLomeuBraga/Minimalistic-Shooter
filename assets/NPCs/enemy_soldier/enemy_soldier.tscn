@@ -1,8 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://d3tbcqpuwudic"]
-
-[ext_resource type="Script" path="res://assets/NPCs/test enemy/test_enemy.gd" id="1_wwvl4"]
-[ext_resource type="PackedScene" uid="uid://m2igyiyff6mn" path="res://assets/effects/spark_explosion/spark_explosion.tscn" id="2_3ifkq"]
-[ext_resource type="PackedScene" uid="uid://cvlkl7k8gbcwm" path="res://assets/guns/bullet/bullet_2.tscn" id="3_yy4g3"]
+[gd_scene load_steps=7 format=3 uid="uid://d3tbcqpuwudic"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_56jy2"]
 
@@ -12,7 +8,7 @@
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_svip2"]
 resource_local_to_scene = true
-albedo_color = Color(0.47451, 0.996078, 0.513726, 1)
+albedo_color = Color(1, 0, 0, 1)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_o3gf4"]
 
@@ -20,9 +16,6 @@ albedo_color = Color(0.47451, 0.996078, 0.513726, 1)
 albedo_color = Color(0, 0, 0, 1)
 
 [node name="GenericPathFinder" type="CharacterBody3D"]
-script = ExtResource("1_wwvl4")
-explosion_sceane = ExtResource("2_3ifkq")
-projectile = ExtResource("3_yy4g3")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_56jy2")

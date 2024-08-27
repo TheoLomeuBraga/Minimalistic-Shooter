@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://bn76kct78bbb3"]
+
+[ext_resource type="Script" path="res://generic scripts/state_machine/test/state_machine_test.gd" id="1_sj2fq"]
+[ext_resource type="Script" path="res://generic scripts/state_machine/test/wait.gd" id="2_qe1ge"]
+[ext_resource type="Script" path="res://generic scripts/state_machine/test/end.gd" id="3_eifwi"]
+
+[node name="StateMachineTest" type="Node"]
+script = ExtResource("1_sj2fq")
+
+[node name="wait" type="Node" parent="."]
+script = ExtResource("2_qe1ge")
+
+[node name="end" type="Node" parent="."]
+script = ExtResource("3_eifwi")
