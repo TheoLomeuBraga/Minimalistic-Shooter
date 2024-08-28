@@ -36,7 +36,6 @@ func set_border_effect(color : Color,power : float):
 	$visual_effects.set_material(mat)
 
 func hit_damage(damage : int):
-	print(damage)
 	if armor > 0:
 		
 		health -= damage / 2
@@ -314,7 +313,7 @@ bones/0/name = "Bone"
 bones/0/parent = -1
 bones/0/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.337554, 0.414343)
 bones/0/enabled = true
-bones/0/position = Vector3(1.49012e-08, 0.345454, 0.414342)
+bones/0/position = Vector3(1.49012e-08, 0.315982, 0.414342)
 bones/0/rotation = Quaternion(0, 0, 0, 1)
 bones/0/scale = Vector3(1, 1, 1)
 bones/1/name = "Bone.002"
@@ -333,7 +332,7 @@ bones/2/rotation = Quaternion(0.707107, 0, 0, 0.707107)
 bones/2/scale = Vector3(1, 1, 1)
 
 [node name="example gun" type="BoneAttachment3D" parent="SubViewportContainer/SubViewport/Camera3D/player_animations/Armature/Skeleton3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.65661e-08, 0.00789985, -3.50177e-07)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.65661e-08, -0.0215723, -3.50177e-07)
 bone_name = "example gun"
 bone_idx = 2
 
