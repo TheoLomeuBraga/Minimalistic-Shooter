@@ -1,5 +1,3 @@
-// NOTE: Shader automatically converted from Godot Engine 4.3.stable's StandardMaterial3D.
-
 shader_type spatial;
 render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_burley, specular_schlick_ggx, vertex_lighting;
 
@@ -66,7 +64,6 @@ void fragment() {
 
 
 	ALBEDO = albedo_color.rgb * albedo_tex.rgb;
-	//ALBEDO = NORMAL;
 
 	METALLIC = 0.0;
 	SPECULAR = 0.0;

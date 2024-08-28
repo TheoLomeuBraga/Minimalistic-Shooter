@@ -22,5 +22,20 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 1, 4)
 radius = 3.0
 material = ExtResource("1_p4v7f")
 
+[node name="CSGTorus3D" type="CSGTorus3D" parent="CSGCombiner3D"]
+transform = Transform3D(-1.13133e-08, 7.35137e-08, -1, 4.2222e-08, 1, 7.35137e-08, 1, -4.2222e-08, -1.13133e-08, 0, 6, -11)
+inner_radius = 5.0
+outer_radius = 8.0
+material = ExtResource("1_p4v7f")
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 21)
+polygon = PackedVector2Array(-0.473311, -0.383106, 0, 1, 1.42814, 0.440494, 1.06169, -0.874076)
+material = ExtResource("1_p4v7f")
+
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.311323, 0.950304, 0, -0.950304, 0.311323, -50.4559, 7.5311, 0)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, -2.31946e-08, -3.81425e-08, 4.17163e-08, 0.789727, 0.613459, 1.58932e-08, -0.613459, 0.789727, 1.79939, 11.5397, 24.9177)
+fov = 90.0
