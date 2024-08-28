@@ -1,0 +1,17 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://cgi82vp0c8shj"]
+
+[ext_resource type="Shader" path="res://shaders/triplanar_shader.tres.gdshader" id="1_pywmf"]
+[ext_resource type="Texture2D" uid="uid://q5o47l74lr0w" path="res://test_custom_map/test.png" id="2_gtyt7"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_pywmf")
+shader_parameter/albedo_wall = Color(1, 0.568627, 0, 1)
+shader_parameter/albedo_floor = Color(0, 1, 0.513726, 1)
+shader_parameter/ground_threshold = 0.8
+shader_parameter/blend_smoothness = 0.1
+shader_parameter/uv1_blend_sharpness = 1.0
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/texture_albedo_wall = ExtResource("2_gtyt7")
+shader_parameter/texture_albedo_floor = ExtResource("2_gtyt7")

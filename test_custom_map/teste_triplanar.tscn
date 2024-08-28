@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=3 uid="uid://cln1tb8hh68hf"]
+
+[ext_resource type="Material" uid="uid://cgi82vp0c8shj" path="res://test_custom_map/source_orange_texture.tres" id="1_p4v7f"]
+
+[node name="TesteTriplanar" type="Node3D"]
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+use_collision = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(71.4731, 0, 0, 0, 1, 0, 0, 0, 63.83, 0, 0, 0)
+material = ExtResource("1_p4v7f")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -12)
+radius = 3.0
+height = 8.0
+material = ExtResource("1_p4v7f")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 1, 4)
+radius = 3.0
+material = ExtResource("1_p4v7f")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.311323, 0.950304, 0, -0.950304, 0.311323, -50.4559, 7.5311, 0)

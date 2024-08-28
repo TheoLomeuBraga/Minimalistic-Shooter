@@ -24,22 +24,24 @@ shape = SubResource("CapsuleShape3D_56jy2")
 transform = Transform3D(0.8, 0, 0, 0, 0.27, 0, 0, 0, 0.8, 0, -0.57897, 0)
 shape = SubResource("CylinderShape3D_mf7fo")
 
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+debug_enabled = true
+
+[node name="muzle" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.657012)
+
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("CapsuleMesh_acwnm")
 surface_material_override/0 = SubResource("StandardMaterial3D_svip2")
 
-[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
-debug_enabled = true
-
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="MeshInstance3D"]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -0.238318, 0.412649, 0.462)
 mesh = SubResource("CapsuleMesh_o3gf4")
+skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_leumc")
 
-[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="MeshInstance3D"]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0.238, 0.413, 0.462)
 mesh = SubResource("CapsuleMesh_o3gf4")
+skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_leumc")
-
-[node name="muzle" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.657012)
