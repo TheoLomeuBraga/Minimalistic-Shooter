@@ -50,7 +50,7 @@ func move(delta) -> void:
 
 func _on_body_entered(body) -> void:
 	if body is RigidBody3D:
-		if body.linear_velocity.length() > 5:
+		if body.linear_velocity.length() > 50:
 			sliding_time = 1
 			physics_material_override.friction = 0
 			linear_velocity += (body.linear_velocity * body.mass) / mass

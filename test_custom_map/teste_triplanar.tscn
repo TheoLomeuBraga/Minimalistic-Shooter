@@ -1,6 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://cln1tb8hh68hf"]
+[gd_scene load_steps=5 format=3 uid="uid://cln1tb8hh68hf"]
 
 [ext_resource type="Material" uid="uid://cgi82vp0c8shj" path="res://test_custom_map/source_orange_texture.tres" id="1_p4v7f"]
+[ext_resource type="Script" path="res://test_custom_map/test_path.gd" id="2_gnyuj"]
+
+[sub_resource type="Curve3D" id="Curve3D_e0vw1"]
+bake_interval = 0.1
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3.29, -5.94, 0, 0, 0, 0, 3.59, 3.265, 0, 3.99, 0, 0, 0, 0, -7.225, 0, 1.4, 0, -2.425, -3.09, 0, 0, 0, 0, 0, 0),
+"tilts": PackedFloat32Array(0, 0, 0, 0)
+}
+point_count = 4
+
+[sub_resource type="BoxMesh" id="BoxMesh_sxe2o"]
 
 [node name="TesteTriplanar" type="Node3D"]
 
@@ -39,3 +50,12 @@ transform = Transform3D(1, 0, 0, 0, 0.311323, 0.950304, 0, -0.950304, 0.311323, 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, -2.31946e-08, -3.81425e-08, 4.17163e-08, 0.789727, 0.613459, 1.58932e-08, -0.613459, 0.789727, 1.79939, 11.5397, 24.9177)
 fov = 90.0
+
+[node name="Path3D" type="Path3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 3.31933, 0)
+curve = SubResource("Curve3D_e0vw1")
+script = ExtResource("2_gnyuj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Path3D"]
+mesh = SubResource("BoxMesh_sxe2o")
+surface_material_override/0 = ExtResource("1_p4v7f")

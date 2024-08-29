@@ -48,7 +48,8 @@ func update_wave(delta: float) -> void:
 		cooldown -= delta
 
 func _ready() -> void:
-	start_wave()
+	#start_wave()
+	pass
 
 func _process(delta: float) -> void:
 	update_wave(delta)
