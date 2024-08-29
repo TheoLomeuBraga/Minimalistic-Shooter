@@ -1,9 +1,9 @@
 [gd_scene load_steps=3 format=3 uid="uid://bmcopmnotjx3c"]
 
 [ext_resource type="Script" path="res://generic scripts/dungeon_master/dungeon_master.gd" id="1_f2wsh"]
-[ext_resource type="PackedScene" uid="uid://cf50agnupuica" path="res://assets/NPCs/test enemy/test_enemy.tscn" id="2_7slxk"]
+[ext_resource type="PackedScene" uid="uid://d3tbcqpuwudic" path="res://assets/NPCs/enemy_soldier/enemy_soldier.tscn" id="2_fnvef"]
 
 [node name="DungeonMaster" type="Node"]
 script = ExtResource("1_f2wsh")
-enemy_list = Array[PackedScene]([ExtResource("2_7slxk")])
+enemy_list = Array[PackedScene]([ExtResource("2_fnvef")])
 wave_dificulty = 1.0

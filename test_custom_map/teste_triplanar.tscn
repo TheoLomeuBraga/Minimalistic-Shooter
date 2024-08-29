@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://cln1tb8hh68hf"]
+[gd_scene load_steps=6 format=3 uid="uid://cln1tb8hh68hf"]
 
 [ext_resource type="Material" uid="uid://cgi82vp0c8shj" path="res://test_custom_map/source_orange_texture.tres" id="1_p4v7f"]
 [ext_resource type="Script" path="res://test_custom_map/test_path.gd" id="2_gnyuj"]
@@ -13,35 +13,67 @@ point_count = 4
 
 [sub_resource type="BoxMesh" id="BoxMesh_sxe2o"]
 
+[sub_resource type="Curve3D" id="Curve3D_2qwyi"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, -2.27434, -3.73652, -4.58161, 2.27434, 3.73652, 4.58161, 3.73724, 5.68943, -11.0578, 1.59549, -3.30787, 3.92466, -1.59549, 3.30787, -3.92466, -5.5921, 8.09594, -4.91353, 5.36765, -3.77339, 0.854679, -5.36765, 3.77339, -0.854679, 11.1368, 9.25235, -30.0273, -0.113152, -2.5805, -1.90696, 0.113152, 2.5805, 1.90696, -0.618984, 11.5223, -19.2774, -1.79293, 0.366635, -0.426579, 1.79293, -0.366635, 0.426579, 2.01374, 14.8219, -14.9185, -10.0423, 4.75352, 5.29828, 10.0423, -4.75352, -5.29828, 1.88397, 4.86972, 0.789005, 0, 0, 0, 0, 0, 0, 14.8895, 4.0553, -12.5148),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 8
+
 [node name="TesteTriplanar" type="Node3D"]
 
-[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+[node name="wierd_structure" type="CSGCombiner3D" parent="."]
 use_collision = true
 
-[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D"]
-transform = Transform3D(71.4731, 0, 0, 0, 1, 0, 0, 0, 63.83, 0, 0, 0)
-material = ExtResource("1_p4v7f")
-
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGCombiner3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -12)
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="wierd_structure"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 13.2274, -12)
 radius = 3.0
 height = 8.0
 material = ExtResource("1_p4v7f")
 
-[node name="CSGSphere3D" type="CSGSphere3D" parent="CSGCombiner3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 1, 4)
-radius = 3.0
-material = ExtResource("1_p4v7f")
-
-[node name="CSGTorus3D" type="CSGTorus3D" parent="CSGCombiner3D"]
-transform = Transform3D(-1.13133e-08, 7.35137e-08, -1, 4.2222e-08, 1, 7.35137e-08, 1, -4.2222e-08, -1.13133e-08, 0, 6, -11)
+[node name="CSGTorus3D" type="CSGTorus3D" parent="wierd_structure"]
+transform = Transform3D(-1.13133e-08, 7.35137e-08, -1, 4.2222e-08, 1, 7.35137e-08, 1, -4.2222e-08, -1.13133e-08, 0, 15.2274, -11)
 inner_radius = 5.0
 outer_radius = 8.0
 material = ExtResource("1_p4v7f")
 
-[node name="CSGPolygon3D" type="CSGPolygon3D" parent="CSGCombiner3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 21)
-polygon = PackedVector2Array(-0.473311, -0.383106, 0, 1, 1.42814, 0.440494, 1.06169, -0.874076)
+[node name="CSGPolygon3D2" type="CSGPolygon3D" parent="wierd_structure"]
+mode = 2
+path_node = NodePath("../../Path3D2")
+path_interval_type = 0
+path_interval = 1.0
+path_simplify_angle = 0.0
+path_rotation = 2
+path_local = false
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = false
+material = ExtResource("1_p4v7f")
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="wierd_structure"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 15.2274, -12)
+operation = 2
+radius = 1.26035
+height = 27.2731
+material = ExtResource("1_p4v7f")
+
+[node name="CSGCylinder3D4" type="CSGCylinder3D" parent="wierd_structure"]
+transform = Transform3D(-4.37114e-08, -1, 4.37114e-08, 0, -4.37114e-08, -1, 1, -4.37114e-08, 1.91069e-15, 0, 15.2274, -12)
+operation = 2
+radius = 1.26035
+height = 27.2731
+material = ExtResource("1_p4v7f")
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="wierd_structure"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 15.2274, -12)
+radius = 0.447146
+height = 27.2731
+material = ExtResource("1_p4v7f")
+
+[node name="CSGCylinder3D5" type="CSGCylinder3D" parent="wierd_structure"]
+transform = Transform3D(-4.37114e-08, -1, 4.37114e-08, 0, -4.37114e-08, -1, 1, -4.37114e-08, 1.91069e-15, 0, 15.2274, -12)
+radius = 0.447146
+height = 27.2731
 material = ExtResource("1_p4v7f")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
@@ -59,3 +91,43 @@ script = ExtResource("2_gnyuj")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Path3D"]
 mesh = SubResource("BoxMesh_sxe2o")
 surface_material_override/0 = ExtResource("1_p4v7f")
+
+[node name="Path3D2" type="Path3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.619, 12.386, 4.74325)
+curve = SubResource("Curve3D_2qwyi")
+
+[node name="terrain" type="CSGCombiner3D" parent="."]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="terrain"]
+transform = Transform3D(71.4731, 0, 0, 0, 1, 0, 0, 0, 63.83, 0, 0, 0)
+material = ExtResource("1_p4v7f")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="terrain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 1, 4)
+radius = 3.0
+material = ExtResource("1_p4v7f")
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="terrain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 21)
+polygon = PackedVector2Array(-0.473311, -0.383106, 0, 1, 1.42814, 0.440494, 1.06169, -0.874076)
+material = ExtResource("1_p4v7f")
+
+[node name="CSGSphere3D2" type="CSGSphere3D" parent="terrain"]
+transform = Transform3D(16.8, 0, 0, 0, 1, 0, 0, 0, 15.86, 14.0243, 0.407799, 7.14931)
+snap = 1e-06
+material = ExtResource("1_p4v7f")
+
+[node name="CSGSphere3D3" type="CSGSphere3D" parent="terrain"]
+transform = Transform3D(16.8, 0, 0, 0, 1, 0, 0, 0, 15.86, 20.276, 0.407799, -2.2246)
+snap = 1e-06
+material = ExtResource("1_p4v7f")
+
+[node name="CSGSphere3D4" type="CSGSphere3D" parent="terrain"]
+transform = Transform3D(16.8, 0, 0, 0, 1, 0, 0, 0, 15.86, 23.8081, 0.407799, 8.22882)
+snap = 1e-06
+material = ExtResource("1_p4v7f")
+
+[node name="CSGSphere3D5" type="CSGSphere3D" parent="terrain"]
+transform = Transform3D(16.8, 0, 0, 0, 1, 0, 0, 0, 15.86, 9.77526, 0.407799, -3.97728)
+snap = 1e-06
+material = ExtResource("1_p4v7f")
