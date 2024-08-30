@@ -1,7 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://cln1tb8hh68hf"]
+[gd_scene load_steps=16 format=3 uid="uid://cln1tb8hh68hf"]
 
 [ext_resource type="Material" uid="uid://cgi82vp0c8shj" path="res://test_custom_map/source_orange_texture.tres" id="1_p4v7f"]
 [ext_resource type="Script" path="res://test_custom_map/test_path.gd" id="2_gnyuj"]
+[ext_resource type="Shader" path="res://shaders/triplanar_shader.tres.gdshader" id="3_n602g"]
+[ext_resource type="Texture2D" uid="uid://q5o47l74lr0w" path="res://test_custom_map/test.png" id="4_jtont"]
 
 [sub_resource type="Curve3D" id="Curve3D_e0vw1"]
 bake_interval = 0.1
@@ -24,16 +26,6 @@ point_count = 8
 top_radius = 2.0
 bottom_radius = 0.0
 
-[sub_resource type="Animation" id="Animation_eoaap"]
-resource_name = "new_animation"
-tracks/0/type = "position_3d"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("MeshInstance3D")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 1, 0, 8, 0)
-
 [sub_resource type="Animation" id="Animation_p3pde"]
 length = 0.001
 tracks/0/type = "position_3d"
@@ -43,6 +35,16 @@ tracks/0/path = NodePath("MeshInstance3D")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = PackedFloat32Array(0, 1, 0, 8, 0)
+
+[sub_resource type="Animation" id="Animation_eoaap"]
+resource_name = "new_animation"
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 1, 0, 8, 0)
 
 [sub_resource type="Animation" id="Animation_w4d03"]
 resource_name = "plataform"
@@ -61,6 +63,32 @@ _data = {
 "new_animation": SubResource("Animation_eoaap"),
 "plataform": SubResource("Animation_w4d03")
 }
+
+[sub_resource type="Curve3D" id="Curve3D_ujot3"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0.0281296, 0.484908, 0.0432401, 0, 0, 0, 0, 0, 0, 3.07716, 0.484908, 0.0323114, 0, 0, 0, 0, 0, 0, 7.3728, 0.484908, 0.152524, 0, 0, 0, 0, 0, 0, 12.5546, 0.484908, 4.21716, 0, 0, 0, 0, 0, 0, 12.5695, 0.484908, 10.6487, 0, 0, 0, 0, 0, 0, 12.5678, 0.484908, 12.698),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0)
+}
+point_count = 6
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_el64t"]
+render_priority = 0
+shader = ExtResource("3_n602g")
+shader_parameter/albedo_wall = Color(0.168627, 0.568627, 1, 1)
+shader_parameter/albedo_floor = Color(1, 1, 1, 1)
+shader_parameter/ground_threshold = 0.8
+shader_parameter/blend_smoothness = 0.1
+shader_parameter/uv1_blend_sharpness = 1.0
+shader_parameter/uv1_scale = Vector3(1, 28.75, 1.025)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/use_uv_on_wall = true
+shader_parameter/texture_albedo_wall = ExtResource("4_jtont")
+shader_parameter/texture_albedo_floor = ExtResource("4_jtont")
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_i70hy"]
+top_radius = 1.0
+bottom_radius = 1.0
+height = 15.333
 
 [node name="TesteTriplanar" type="Node3D"]
 
@@ -187,3 +215,55 @@ surface_material_override/0 = ExtResource("1_p4v7f")
 libraries = {
 "": SubResource("AnimationLibrary_vtmeq")
 }
+
+[node name="room" type="CSGCombiner3D" parent="."]
+
+[node name="Path3D" type="Path3D" parent="room"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+curve = SubResource("Curve3D_ujot3")
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="room"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 41.6015, 7.02271, -3.17236)
+flip_faces = true
+polygon = PackedVector2Array(0, 0, 3, 0, 3, 2, 2, 3, 1, 3, 0, 2)
+mode = 2
+path_node = NodePath("../Path3D")
+path_interval_type = 0
+path_interval = 2.0
+path_simplify_angle = 0.0
+path_rotation = 2
+path_local = false
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = false
+material = SubResource("ShaderMaterial_el64t")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="room"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37.6015, 11.2637, -3.17236)
+mesh = SubResource("CylinderMesh_i70hy")
+skeleton = NodePath("../CSGBox3D3")
+surface_material_override/0 = ExtResource("1_p4v7f")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="room"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.2696, 11.2637, -3.17236)
+flip_faces = true
+size = Vector3(9.53918, 7.52734, 7.34473)
+material = ExtResource("1_p4v7f")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="room"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37.6015, 11.2637, -3.17236)
+flip_faces = true
+size = Vector3(9.53918, 7.52734, 7.34473)
+material = ExtResource("1_p4v7f")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="room"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 52.5595, 11.2637, 11.6959)
+flip_faces = true
+size = Vector3(9.53918, 7.52734, 7.34473)
+material = ExtResource("1_p4v7f")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="room"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.0056, 9.5401, -1.81961)
+flip_faces = true
+size = Vector3(9.53918, 4.0802, 1.6452)
+material = ExtResource("1_p4v7f")

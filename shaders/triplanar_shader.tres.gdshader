@@ -12,6 +12,7 @@ uniform float blend_smoothness : hint_range(0.0, 1.0, 0.01) = 0.1; // Controle d
 
 
 varying vec3 uv1_triplanar_pos;
+varying vec2 uv1;
 
 uniform float uv1_blend_sharpness : hint_range(0.0, 150.0, 0.001);
 varying vec3 uv1_power_normal;
@@ -41,23 +42,36 @@ void vertex() {
 	uv1_triplanar_pos = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz * uv1_scale + uv1_offset;
 	uv1_power_normal /= dot(uv1_power_normal, vec3(1.0));
 	uv1_triplanar_pos *= vec3(1.0, -1.0, 1.0);
+
+	uv1 = UV;
 }
+
 
 vec4 triplanar_texture(sampler2D p_sampler, vec3 p_weights, vec3 p_triplanar_pos) {
 	vec4 samp = vec4(0.0);
 	samp += texture(p_sampler, p_triplanar_pos.xy) * p_weights.z;
 	samp += texture(p_sampler, p_triplanar_pos.xz) * p_weights.y;
 	samp += texture(p_sampler, p_triplanar_pos.zy * vec2(-1.0, 1.0)) * p_weights.x;
+
+
 	return samp;
 }
 
 const vec4 ZERO = vec4(0.0,0.0,0.0,0.0);
 
+uniform bool use_uv_on_wall = false;
 void fragment() {
 	float blend_factor = smoothstep(ground_threshold - blend_smoothness, ground_threshold + blend_smoothness, vertex_normal.y);
 
 	vec4 albedo_tex_floor = triplanar_texture(texture_albedo_floor, uv1_power_normal, uv1_triplanar_pos);
-	vec4 albedo_tex_wall = triplanar_texture(texture_albedo_wall, uv1_power_normal, uv1_triplanar_pos);
+
+	vec4 albedo_tex_wall = vec4(0.0);
+	if(use_uv_on_wall){
+		albedo_tex_wall = texture(texture_albedo_wall,UV * uv1_scale.xy + uv1_offset.xy);
+	}else{
+		albedo_tex_wall = triplanar_texture(texture_albedo_wall, uv1_power_normal, uv1_triplanar_pos);
+	}
+
 
 	vec4 albedo_tex = mix(albedo_tex_wall, albedo_tex_floor, blend_factor);
 	vec4 albedo_color = mix(albedo_wall, albedo_floor, blend_factor);
