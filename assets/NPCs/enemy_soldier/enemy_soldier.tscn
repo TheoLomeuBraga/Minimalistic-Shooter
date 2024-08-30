@@ -21,9 +21,11 @@ albedo_color = Color(1, 0, 0, 1)
 albedo_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ulteh"]
+resource_local_to_scene = true
 resource_name = "charter"
 cull_mode = 2
 albedo_texture = ExtResource("1_vgx4r")
+emission_enabled = true
 texture_filter = 2
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_xcglr"]
@@ -61,10 +63,12 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_xcglr")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s3amg"]
+resource_local_to_scene = true
 resource_name = "gun"
 cull_mode = 2
 vertex_color_use_as_albedo = true
 roughness = 0.5
+emission_enabled = true
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_fbyur"]
 _surfaces = [{
@@ -723,10 +727,11 @@ _data = {
 "walk": SubResource("Animation_3lwkk")
 }
 
-[node name="GenericPathFinder" type="CharacterBody3D"]
+[node name="GenericPathFinder" type="CharacterBody3D" node_paths=PackedStringArray("array_meshes_display_damage")]
 script = ExtResource("1_gp7fw")
 explosion_sceane = ExtResource("2_el7hd")
 projectile = ExtResource("3_fyn6v")
+array_meshes_display_damage = [NodePath("enemy_soldier/skeletom/Skeleton3D/helmet/helmet"), NodePath("enemy_soldier/skeletom/Skeleton3D/wepon_1/wepon_1"), NodePath("enemy_soldier/skeletom/Skeleton3D/charter_body")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_56jy2")
@@ -969,6 +974,7 @@ bone_idx = 7
 [node name="helmet" type="MeshInstance3D" parent="enemy_soldier/skeletom/Skeleton3D/helmet"]
 mesh = SubResource("ArrayMesh_rnn5p")
 skeleton = NodePath("")
+surface_material_override/0 = SubResource("StandardMaterial3D_ulteh")
 
 [node name="wepon_1" type="BoneAttachment3D" parent="enemy_soldier/skeletom/Skeleton3D"]
 transform = Transform3D(-0.516994, 0.702346, 0.489313, 0.758628, 0.640725, -0.118133, -0.396486, 0.310132, -0.86407, -0.0462885, 1.1229, 0.253669)
@@ -978,10 +984,12 @@ bone_idx = 15
 [node name="wepon_1" type="MeshInstance3D" parent="enemy_soldier/skeletom/Skeleton3D/wepon_1"]
 mesh = SubResource("ArrayMesh_img8a")
 skeleton = NodePath("")
+surface_material_override/0 = SubResource("StandardMaterial3D_s3amg")
 
 [node name="charter_body" type="MeshInstance3D" parent="enemy_soldier/skeletom/Skeleton3D"]
 mesh = SubResource("ArrayMesh_63hi8")
 skin = SubResource("Skin_1rtm0")
+surface_material_override/0 = SubResource("StandardMaterial3D_ulteh")
 
 [node name="Empty" type="Node3D" parent="enemy_soldier"]
 transform = Transform3D(0.9504, 0, 0, 0, 0, -0.924823, 0, 0.9504, 0, 0.0177173, 0.999602, -2)

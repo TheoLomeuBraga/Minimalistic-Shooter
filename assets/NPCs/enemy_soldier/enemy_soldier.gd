@@ -25,17 +25,22 @@ func hit_damage(damage : int) -> void:
 		explosion.global_position = global_position
 	
 
+@export var array_meshes_display_damage : Array[MeshInstance3D]
 func manage_damage(delta: float) -> void:
 	damage_color_time -= delta
 	if damage_color_time < 0:
 		damage_color_time = 0
 	
-	var material : Material = $MeshInstance3D.get_surface_override_material(0)
-	if damage_color_time > 0:
-		material.albedo_color = lerp(original_color,Color.RED,damage_color_time * 4) 
-	else:
-		material.albedo_color = original_color
-	$MeshInstance3D.set_surface_override_material(0,material)
+	for mi in array_meshes_display_damage:
+		var material : Material = mi.get_surface_override_material(0)
+		if material == null:
+			material = mi.mesh.surface_get_material(0)
+		
+		if damage_color_time > 0:
+			material.emission = lerp(Color.BLACK,Color.WHITE,damage_color_time * 4) 
+		else:
+			material.emission = Color.BLACK
+		mi.set_surface_override_material(0,material)
 
 var gun_cooldown : float = 2.0
 func manage_gum(delta: float) -> void:
