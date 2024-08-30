@@ -967,7 +967,7 @@ bones/27/rotation = Quaternion(-4.81132e-07, 0.961248, -0.275684, 1.33306e-06)
 bones/27/scale = Vector3(1, 1, 1)
 
 [node name="helmet" type="BoneAttachment3D" parent="enemy_soldier/skeletom/Skeleton3D"]
-transform = Transform3D(0.594056, 1.55236e-08, -0.0842474, 7.66369e-08, 0.6, 6.52671e-07, 0.0842474, -6.53468e-07, 0.594056, -0.00397298, 1.78777, -0.0676988)
+transform = Transform3D(0.594056, 4.23458e-08, -0.0842474, 9.45184e-08, 0.6, 9.0301e-07, 0.0842474, -9.57452e-07, 0.594056, -0.00397296, 1.78777, -0.0676991)
 bone_name = "helmet"
 bone_idx = 7
 
@@ -977,7 +977,7 @@ skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_ulteh")
 
 [node name="wepon_1" type="BoneAttachment3D" parent="enemy_soldier/skeletom/Skeleton3D"]
-transform = Transform3D(-0.516994, 0.702346, 0.489313, 0.758628, 0.640725, -0.118133, -0.396486, 0.310132, -0.86407, -0.0462885, 1.1229, 0.253669)
+transform = Transform3D(-0.516994, 0.702346, 0.489313, 0.758628, 0.640725, -0.118134, -0.396486, 0.310132, -0.86407, -0.0462884, 1.1229, 0.253669)
 bone_name = "wepon_1"
 bone_idx = 15
 

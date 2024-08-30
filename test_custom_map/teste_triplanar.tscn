@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://cln1tb8hh68hf"]
+[gd_scene load_steps=11 format=3 uid="uid://cln1tb8hh68hf"]
 
 [ext_resource type="Material" uid="uid://cgi82vp0c8shj" path="res://test_custom_map/source_orange_texture.tres" id="1_p4v7f"]
 [ext_resource type="Script" path="res://test_custom_map/test_path.gd" id="2_gnyuj"]
@@ -19,6 +19,48 @@ _data = {
 "tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0)
 }
 point_count = 8
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_yoj4s"]
+top_radius = 2.0
+bottom_radius = 0.0
+
+[sub_resource type="Animation" id="Animation_eoaap"]
+resource_name = "new_animation"
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 1, 0, 8, 0)
+
+[sub_resource type="Animation" id="Animation_p3pde"]
+length = 0.001
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 8, 0)
+
+[sub_resource type="Animation" id="Animation_w4d03"]
+resource_name = "plataform"
+length = 2.0
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 1, 0, 7, 0, 2, 1, 0, 0, 0)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vtmeq"]
+_data = {
+"RESET": SubResource("Animation_p3pde"),
+"new_animation": SubResource("Animation_eoaap"),
+"plataform": SubResource("Animation_w4d03")
+}
 
 [node name="TesteTriplanar" type="Node3D"]
 
@@ -132,3 +174,16 @@ material = ExtResource("1_p4v7f")
 transform = Transform3D(16.8, 0, 0, 0, 1, 0, 0, 0, 15.86, 9.77526, 0.407799, -3.97728)
 snap = 1e-06
 material = ExtResource("1_p4v7f")
+
+[node name="animated_plataform" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="animated_plataform"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8, 0)
+mesh = SubResource("CylinderMesh_yoj4s")
+skeleton = NodePath("../../wierd_structure")
+surface_material_override/0 = ExtResource("1_p4v7f")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="animated_plataform"]
+libraries = {
+"": SubResource("AnimationLibrary_vtmeq")
+}
