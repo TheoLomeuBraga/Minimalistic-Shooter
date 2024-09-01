@@ -26,7 +26,7 @@ func move(delta) -> void:
 	
 	in_floor = $floorCheker.is_colliding()
 	if in_floor and move_direction != Vector3.ZERO:
-		new_move_direction = move_direction.slide($floorCheker.get_collision_normal(0)).normalized()
+		new_move_direction = move_direction.slide($floorCheker.get_collision_normal()).normalized()
 	
 	
 	if new_move_direction != Vector3.ZERO:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://di86hud2781qs"]
+[gd_scene load_steps=16 format=3 uid="uid://di86hud2781qs"]
 
 [ext_resource type="PackedScene" uid="uid://dhskpyhdo2ssn" path="res://assets/player/player.tscn" id="1_1ig3u"]
 [ext_resource type="PackedScene" uid="uid://dwbn6fwa2674s" path="res://assets/enemy_spawn/enemy_spawn.tscn" id="2_t18d5"]
@@ -41,9 +41,6 @@ data = PackedVector3Array(0, 1, 0.5, 0.049, 1, 0.4976, 0, 0.6, 0.5, 0.049, 1, 0.
 [sub_resource type="BoxShape3D" id="BoxShape3D_r5amy"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_ijf3t"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_tfmky"]
-size = Vector3(23, 1, 17)
 
 [node name="test_map" type="Node3D"]
 
@@ -155,20 +152,3 @@ mesh = SubResource("BoxMesh_ijf3t")
 remote_path = NodePath("../../CSGCombiner3D/CSGSphere3D")
 update_rotation = false
 update_scale = false
-
-[node name="RigidBody3D2" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75896, -16.8759)
-axis_lock_linear_x = true
-axis_lock_linear_y = true
-axis_lock_linear_z = true
-axis_lock_angular_x = true
-axis_lock_angular_y = true
-axis_lock_angular_z = true
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0148926, 0, 0.0200195)
-shape = SubResource("BoxShape3D_tfmky")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D2"]
-transform = Transform3D(20.9865, 0, 0, 0, 1, 0, 0, 0, 16.1046, 0, 0, 0)
-mesh = SubResource("BoxMesh_ijf3t")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=4 uid="uid://dhskpyhdo2ssn"]
+[gd_scene load_steps=25 format=4 uid="uid://dhskpyhdo2ssn"]
 
 [ext_resource type="PackedScene" uid="uid://c1yq7dou4albw" path="res://assets/guns/test gun/test_gun.tscn" id="1_t5osk"]
 [ext_resource type="AnimationNodeBlendTree" uid="uid://dy7qx6vcfxkfv" path="res://assets/player/player_animation three.tres" id="2_4nf63"]
@@ -166,8 +166,6 @@ func _on_tree_exiting() -> void:
 	Global.player = null
 "
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_fatke"]
-
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sr4fy"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_655ry"]
@@ -272,12 +270,11 @@ fov = 90.0
 [node name="RayCast3D" type="RayCast3D" parent="Camera3D"]
 target_position = Vector3(0, 0, -1000)
 
-[node name="floorCheker" type="ShapeCast3D" parent="."]
-transform = Transform3D(0.8, 0, 0, 0, 0.27, 0, 0, 0, 0.8, 0, -0.57897, 0)
-shape = SubResource("CylinderShape3D_fatke")
-
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_sr4fy")
+
+[node name="floorCheker" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.485707, 0)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_pcnwn")
@@ -312,7 +309,7 @@ bones/0/name = "Bone"
 bones/0/parent = -1
 bones/0/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.337554, 0.414343)
 bones/0/enabled = true
-bones/0/position = Vector3(1.49012e-08, 0.369751, 0.414342)
+bones/0/position = Vector3(1.49012e-08, 0.339671, 0.414342)
 bones/0/rotation = Quaternion(0, 0, 0, 1)
 bones/0/scale = Vector3(1, 1, 1)
 bones/1/name = "Bone.002"
@@ -331,7 +328,7 @@ bones/2/rotation = Quaternion(0.707107, 0, 0, 0.707107)
 bones/2/scale = Vector3(1, 1, 1)
 
 [node name="example gun" type="BoneAttachment3D" parent="SubViewportContainer/SubViewport/Camera3D/player_animations/Armature/Skeleton3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.65661e-08, 0.0321961, -3.50177e-07)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.65661e-08, 0.00211626, -3.50177e-07)
 bone_name = "example gun"
 bone_idx = 2
 
