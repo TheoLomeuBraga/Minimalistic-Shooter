@@ -32,7 +32,7 @@ func move(delta) -> void:
 	if new_move_direction != Vector3.ZERO:
 		new_move_direction = new_move_direction.normalized()
 		if sliding_time > 0 or not in_floor:
-			var new_velocity = new_move_direction * speed * 100 * delta
+			var new_velocity = new_move_direction * speed * delta
 			new_velocity = new_velocity.normalized() * min(new_velocity.length(), speed)
 			apply_impulse(new_velocity)
 			physics_material_override.friction = 0
