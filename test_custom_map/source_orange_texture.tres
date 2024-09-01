@@ -6,6 +6,7 @@
 [resource]
 render_priority = 0
 shader = ExtResource("1_pywmf")
+shader_parameter/albedo_ceiling = Color(1, 0, 0.498039, 1)
 shader_parameter/albedo_wall = Color(0.168627, 0.568627, 1, 1)
 shader_parameter/albedo_floor = Color(1, 1, 1, 1)
 shader_parameter/ground_threshold = 0.8
@@ -13,6 +14,10 @@ shader_parameter/blend_smoothness = 0.0
 shader_parameter/uv1_blend_sharpness = 1.0
 shader_parameter/uv1_scale = Vector3(1, 1, 1)
 shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv_global = true
 shader_parameter/use_uv_on_wall = false
+shader_parameter/use_uv_on_floor = false
+shader_parameter/use_uv_on_ceiling = false
+shader_parameter/texture_albedo_ceiling = ExtResource("2_gtyt7")
 shader_parameter/texture_albedo_wall = ExtResource("2_gtyt7")
 shader_parameter/texture_albedo_floor = ExtResource("2_gtyt7")

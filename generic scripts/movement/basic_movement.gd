@@ -13,7 +13,6 @@ var in_floor : bool = false
 
 func jump() -> void:
 	linear_velocity.y = jump_power
-	#sliding_time = 0.2
 
 func move(delta) -> void:
 	
@@ -44,6 +43,7 @@ func move(delta) -> void:
 			linear_velocity.z = new_velocity.z
 	
 	
+	
 	if in_floor:
 		sliding_time -= delta
 		
@@ -54,7 +54,6 @@ func _on_body_entered(body) -> void:
 			sliding_time = 1
 			physics_material_override.friction = 0
 			linear_velocity += (body.linear_velocity * body.mass) / mass
-		
 
 
 func movement_plugin(delta) -> void:

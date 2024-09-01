@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cln1tb8hh68hf"]
+[gd_scene load_steps=22 format=3 uid="uid://cln1tb8hh68hf"]
 
 [ext_resource type="Material" uid="uid://cgi82vp0c8shj" path="res://test_custom_map/source_orange_texture.tres" id="1_p4v7f"]
 [ext_resource type="Script" path="res://test_custom_map/test_path.gd" id="2_gnyuj"]
@@ -25,6 +25,24 @@ point_count = 8
 [sub_resource type="CylinderMesh" id="CylinderMesh_yoj4s"]
 top_radius = 2.0
 bottom_radius = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jq0ry"]
+render_priority = 0
+shader = ExtResource("3_n602g")
+shader_parameter/albedo_ceiling = null
+shader_parameter/albedo_wall = Color(0.168627, 0.568627, 1, 1)
+shader_parameter/albedo_floor = Color(1, 1, 1, 1)
+shader_parameter/ground_threshold = 0.8
+shader_parameter/blend_smoothness = 0.0
+shader_parameter/uv1_blend_sharpness = 1.0
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv_global = false
+shader_parameter/use_uv_on_wall = false
+shader_parameter/use_uv_on_floor = false
+shader_parameter/use_uv_on_ceiling = false
+shader_parameter/texture_albedo_wall = ExtResource("4_jtont")
+shader_parameter/texture_albedo_floor = ExtResource("4_jtont")
 
 [sub_resource type="Animation" id="Animation_p3pde"]
 length = 0.001
@@ -74,6 +92,7 @@ point_count = 6
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_el64t"]
 render_priority = 0
 shader = ExtResource("3_n602g")
+shader_parameter/albedo_ceiling = Color(0.513726, 0, 1, 1)
 shader_parameter/albedo_wall = Color(0.168627, 0.568627, 1, 1)
 shader_parameter/albedo_floor = Color(1, 1, 1, 1)
 shader_parameter/ground_threshold = 0.8
@@ -81,7 +100,11 @@ shader_parameter/blend_smoothness = 0.1
 shader_parameter/uv1_blend_sharpness = 1.0
 shader_parameter/uv1_scale = Vector3(1, 28.75, 1.025)
 shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv_global = true
 shader_parameter/use_uv_on_wall = true
+shader_parameter/use_uv_on_floor = false
+shader_parameter/use_uv_on_ceiling = true
+shader_parameter/texture_albedo_ceiling = ExtResource("4_jtont")
 shader_parameter/texture_albedo_wall = ExtResource("4_jtont")
 shader_parameter/texture_albedo_floor = ExtResource("4_jtont")
 
@@ -89,6 +112,20 @@ shader_parameter/texture_albedo_floor = ExtResource("4_jtont")
 top_radius = 1.0
 bottom_radius = 1.0
 height = 15.333
+
+[sub_resource type="SphereMesh" id="SphereMesh_vmofq"]
+
+[sub_resource type="Gradient" id="Gradient_lgcm6"]
+colors = PackedColorArray(0, 0.270588, 0, 1, 1, 0.556863, 0, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_phavg"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_y0qjy"]
+color_ramp = SubResource("Gradient_lgcm6")
+noise = SubResource("FastNoiseLite_phavg")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_33820"]
+albedo_texture = SubResource("NoiseTexture2D_y0qjy")
 
 [node name="TesteTriplanar" type="Node3D"]
 
@@ -206,10 +243,10 @@ material = ExtResource("1_p4v7f")
 [node name="animated_plataform" type="Node3D" parent="."]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="animated_plataform"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8, 0)
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 0, 8, 0)
 mesh = SubResource("CylinderMesh_yoj4s")
 skeleton = NodePath("../../wierd_structure")
-surface_material_override/0 = ExtResource("1_p4v7f")
+surface_material_override/0 = SubResource("ShaderMaterial_jq0ry")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="animated_plataform"]
 libraries = {
@@ -261,6 +298,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 52.5595, 11.2637, 11.6959)
 flip_faces = true
 size = Vector3(9.53918, 7.52734, 7.34473)
 material = ExtResource("1_p4v7f")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="room/CSGBox3D4"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+mesh = SubResource("SphereMesh_vmofq")
+surface_material_override/0 = SubResource("StandardMaterial3D_33820")
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="room"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.0056, 9.5401, -1.81961)
