@@ -91,6 +91,7 @@ func look_target():
 		target = $Camera3D/RayCast3D.get_collision_point()
 	else:
 		target = $Camera3D/RayCast3D.global_basis.z.normalized() * -1000
+	target += target.normalized() * 0.2
 
 func look_around(delta) -> void:
 	
@@ -177,7 +178,7 @@ sky_material = SubResource("PanoramaSkyMaterial_655ry")
 background_mode = 1
 sky = SubResource("Sky_h8ehh")
 ambient_light_source = 2
-ambient_light_color = Color(0.303233, 0.303233, 0.303233, 1)
+ambient_light_color = Color(1, 1, 1, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lod8h"]
 
@@ -309,7 +310,7 @@ bones/0/name = "Bone"
 bones/0/parent = -1
 bones/0/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.337554, 0.414343)
 bones/0/enabled = true
-bones/0/position = Vector3(1.49012e-08, 0.409125, 0.414342)
+bones/0/position = Vector3(1.49012e-08, 0.36539, 0.414342)
 bones/0/rotation = Quaternion(0, 0, 0, 1)
 bones/0/scale = Vector3(1, 1, 1)
 bones/1/name = "Bone.002"
@@ -328,7 +329,7 @@ bones/2/rotation = Quaternion(0.707107, 0, 0, 0.707107)
 bones/2/scale = Vector3(1, 1, 1)
 
 [node name="example gun" type="BoneAttachment3D" parent="SubViewportContainer/SubViewport/Camera3D/player_animations/Armature/Skeleton3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.65661e-08, 0.0715705, -3.50177e-07)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.65661e-08, 0.0278358, -3.50177e-07)
 bone_name = "example gun"
 bone_idx = 2
 

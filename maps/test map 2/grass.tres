@@ -1,0 +1,23 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://dtoj5s5vipwh2"]
+
+[ext_resource type="Shader" path="res://shaders/triplanar_shader.tres.gdshader" id="1_ncwxn"]
+[ext_resource type="Texture2D" uid="uid://b3ryxdyss5r77" path="res://textures/grass.png" id="2_ssqr8"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_ncwxn")
+shader_parameter/albedo_ceiling = Color(1, 1, 1, 1)
+shader_parameter/albedo_wall = Color(0.955963, 0.955963, 0.955963, 1)
+shader_parameter/albedo_floor = Color(1, 1, 1, 1)
+shader_parameter/ground_threshold = 0.8
+shader_parameter/blend_smoothness = 0.1
+shader_parameter/uv1_blend_sharpness = 1.515
+shader_parameter/uv1_scale = Vector3(0.5, 0.5, 0.5)
+shader_parameter/uv1_offset = Vector3(5, 5, 0.1)
+shader_parameter/uv_global = true
+shader_parameter/use_uv_on_wall = false
+shader_parameter/use_uv_on_floor = false
+shader_parameter/use_uv_on_ceiling = false
+shader_parameter/texture_albedo_ceiling = ExtResource("2_ssqr8")
+shader_parameter/texture_albedo_wall = ExtResource("2_ssqr8")
+shader_parameter/texture_albedo_floor = ExtResource("2_ssqr8")

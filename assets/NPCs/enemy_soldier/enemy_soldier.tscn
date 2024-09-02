@@ -744,7 +744,7 @@ shape = SubResource("CylinderShape3D_mf7fo")
 debug_enabled = true
 
 [node name="muzle" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.657012)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.398849, 0.657012)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 visible = false

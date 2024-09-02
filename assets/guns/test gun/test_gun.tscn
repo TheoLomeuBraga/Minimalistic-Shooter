@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://c1yq7dou4albw"]
+[gd_scene load_steps=9 format=3 uid="uid://c1yq7dou4albw"]
 
 [ext_resource type="Script" path="res://assets/guns/test gun/test_gun.gd" id="1_7om6e"]
+[ext_resource type="PackedScene" uid="uid://bla5w48tj7wf5" path="res://assets/guns/bullet/bullet_1.tscn" id="2_rfypu"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_xcylu"]
 size = Vector3(0.5, 0.5, 1)
@@ -22,6 +23,8 @@ albedo_color = Color(0.4, 0.4, 0.4, 1)
 
 [node name="TestGun" type="Node3D"]
 script = ExtResource("1_7om6e")
+projectile = true
+bullet_asset = ExtResource("2_rfypu")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 layers = 2
@@ -35,13 +38,19 @@ mesh = SubResource("BoxMesh_4giul")
 surface_material_override/0 = SubResource("StandardMaterial3D_yl7sn")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="MeshInstance3D"]
-transform = Transform3D(0.125046, 0, 0, 0, 0.198787, -0.0542846, 0, 0.0532947, 0.20248, 0.15, 0.289, 0.261)
+transform = Transform3D(0.1, 0, 0, 0, 0.198973, -0.0543805, 0, 0.0533446, 0.202837, 0.15, 0.289, 0.261)
 layers = 2
 mesh = SubResource("BoxMesh_4giul")
 surface_material_override/0 = SubResource("StandardMaterial3D_yl7sn")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="MeshInstance3D"]
-transform = Transform3D(0.125046, 0, 0, 0, 0.198787, -0.0542846, 0, 0.0532947, 0.20248, -0.15, 0.289, 0.261)
+transform = Transform3D(0.1, 0, 0, 0, 0.198973, -0.0543805, 0, 0.0533446, 0.202837, -0.15, 0.289, 0.261)
+layers = 2
+mesh = SubResource("BoxMesh_4giul")
+surface_material_override/0 = SubResource("StandardMaterial3D_yl7sn")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(0.1, 0, 0, 0, 0.198973, -0.0543805, 0, 0.0533446, 0.202837, 0, 0.289, -0.362435)
 layers = 2
 mesh = SubResource("BoxMesh_4giul")
 surface_material_override/0 = SubResource("StandardMaterial3D_yl7sn")
@@ -53,3 +62,4 @@ mesh = SubResource("CylinderMesh_1h71b")
 surface_material_override/0 = SubResource("StandardMaterial3D_gab5u")
 
 [node name="muzle" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.2686)

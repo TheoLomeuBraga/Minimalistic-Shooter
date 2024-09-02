@@ -11,7 +11,7 @@ uniform vec4 albedo_floor : source_color;
 uniform sampler2D texture_albedo_floor : source_color, filter_nearest, repeat_enable;
 
 uniform float ground_threshold : hint_range(0.0, 1.0, 0.01) = 0.8;
-uniform float blend_smoothness : hint_range(0.0, 1.0, 0.01) = 0.1; // Controle de suavidade da transição
+uniform float blend_smoothness : hint_range(0.0, 1.0, 0.01) = 0.1;
 
 
 varying vec3 uv1_triplanar_pos;
@@ -64,11 +64,8 @@ vec4 triplanar_texture(sampler2D p_sampler, vec3 p_weights, vec3 p_triplanar_pos
 	samp += texture(p_sampler, p_triplanar_pos.xz) * p_weights.y;
 	samp += texture(p_sampler, p_triplanar_pos.zy * vec2(-1.0, 1.0)) * p_weights.x;
 
-
 	return samp;
 }
-
-const vec4 ZERO = vec4(0.0,0.0,0.0,0.0);
 
 
 uniform bool use_uv_on_wall = false;

@@ -3,14 +3,17 @@
 [ext_resource type="Texture2D" uid="uid://cha3tc8wxn3a2" path="res://assets/guns/bullet/bullet_1.png" id="1_pb82m"]
 [ext_resource type="Script" path="res://assets/guns/bullet/bullet.gd" id="2_q2ixc"]
 
-[node name="Bullet" type="Sprite3D"]
-pixel_size = 0.05
-billboard = 1
-texture_filter = 0
-texture = ExtResource("1_pb82m")
+[node name="Bullet" type="Node3D"]
 script = ExtResource("2_q2ixc")
-distance = 50.0
 
 [node name="RayCast3D" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
 target_position = Vector3(0, 0, -1)
+hit_from_inside = true
+
+[node name="sprite" type="Sprite3D" parent="."]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+pixel_size = 0.05
+billboard = 1
+texture_filter = 0
+texture = ExtResource("1_pb82m")
