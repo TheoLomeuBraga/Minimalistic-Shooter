@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://ceqv432c4rn70"]
+
+[ext_resource type="Script" path="res://assets/NPCs/melee enemy/melee_enemy.gd" id="1_crafw"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_iq5sp"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1xwcd"]
+albedo_color = Color(1, 0, 0.254902, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_gqm4n"]
+material = SubResource("StandardMaterial3D_1xwcd")
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_amcof"]
+
+[node name="MeleeEnemy" type="CharacterBody3D"]
+script = ExtResource("1_crafw")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_iq5sp")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_gqm4n")
+
+[node name="floorCheker" type="ShapeCast3D" parent="."]
+transform = Transform3D(0.8, 0, 0, 0, 0.27, 0, 0, 0, 0.8, 0, -0.57897, 0)
+shape = SubResource("CylinderShape3D_amcof")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+debug_enabled = true

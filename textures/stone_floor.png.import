@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bv0in67owbuco"
-path="res://.godot/imported/stone pilar.png-f3c6a6ff0688c44fa90fe46bdd4eaad6.ctex"
+uid="uid://ctwl3ev3ba2jy"
+path="res://.godot/imported/stone_floor.png-5dd732b82a3addaed37e3d8bf04c7a5e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/stone pilar.png"
-dest_files=["res://.godot/imported/stone pilar.png-f3c6a6ff0688c44fa90fe46bdd4eaad6.ctex"]
+source_file="res://textures/stone_floor.png"
+dest_files=["res://.godot/imported/stone_floor.png-5dd732b82a3addaed37e3d8bf04c7a5e.ctex"]
 
 [params]
 
