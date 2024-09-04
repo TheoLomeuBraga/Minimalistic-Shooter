@@ -65,7 +65,7 @@ var test_enemy_state : test_enemy_states
 
 func movement_plugin(delta: float) -> void:
 	target_location = Global.player.global_position
-	go = global_position.distance_to(Global.player.global_position) > 5
+	go = global_position.distance_to(target_location) > 5
 	if test_enemy_state == test_enemy_states.walk:
 		
 		if go == false:
