@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://crd4s0ph63i03"]
+
+[ext_resource type="Script" path="res://assets/guns/bullet/melee.gd" id="1_m4wlt"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yb3k3"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_qak71"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yd8t1"]
+albedo_color = Color(1, 0.211765, 0.345098, 1)
+
+[node name="melee" type="ShapeCast3D"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+shape = SubResource("BoxShape3D_yb3k3")
+target_position = Vector3(0, 0, 0)
+script = ExtResource("1_m4wlt")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_qak71")
+surface_material_override/0 = SubResource("StandardMaterial3D_yd8t1")

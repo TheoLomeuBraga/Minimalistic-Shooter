@@ -35,10 +35,29 @@ func manage_damage(delta: float) -> void:
 
 
 func _init() -> void:
-	look_mode = 1
+	speed = 800.0
 
+@export var melee_sceane : PackedScene
+var melee_colldown := 0.0
 
 func movement_plugin(delta: float) -> void:
 	target_location = Global.player.global_position
 	go = global_position.distance_to(target_location) > 2
+	if go:
+		look_mode = 1
+		$melee_enemy/AnimationPlayer.speed_scale = 2
+		$melee_enemy/AnimationPlayer.play("walk")
+	else:
+		$melee_enemy/AnimationPlayer.speed_scale = 1
+		$melee_enemy/AnimationPlayer.play("slash")
+		if melee_colldown <= 0:
+			melee_colldown = 0.5
+			
+			var m = melee_sceane.instantiate()
+			get_tree().get_root().add_child(m)
+			m.global_position = $melee_launch_point.global_position
+			
+	
+	melee_colldown -= delta
+	
 	manage_damage(delta)
