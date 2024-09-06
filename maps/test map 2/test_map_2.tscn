@@ -379,3 +379,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.9733, 0.986402, 0.22131)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 23.1603, 0)
 mesh = SubResource("CylinderMesh_2romq")
 surface_material_override/0 = SubResource("StandardMaterial3D_g0sh2")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 44, 0)
+spot_range = 71.1102
