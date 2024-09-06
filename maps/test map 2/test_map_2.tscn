@@ -106,7 +106,7 @@ albedo_color = Color(1, 1, 0.866667, 0.0117647)
 [node name="test_map" type="Node3D"]
 
 [node name="player" parent="." instance=ExtResource("1_suxpv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.318375, 37.9864, 0.052144)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.6816, 21.9864, 0.052144)
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_ervds")
