@@ -1,8 +1,5 @@
-[gd_scene load_steps=27 format=4 uid="uid://dhskpyhdo2ssn"]
+[gd_scene load_steps=24 format=4 uid="uid://dhskpyhdo2ssn"]
 
-[ext_resource type="PackedScene" uid="uid://bbemfsfh4icb4" path="res://assets/guns/smg/smg.tscn" id="1_1sqsm"]
-[ext_resource type="PackedScene" uid="uid://xk4bxfktxs8x" path="res://assets/guns/pistol/pistol.tscn" id="1_d42h3"]
-[ext_resource type="PackedScene" uid="uid://bw2owoh028a6r" path="res://assets/guns/shotgum/shotgum.tscn" id="1_g0be1"]
 [ext_resource type="AnimationNodeBlendTree" uid="uid://dy7qx6vcfxkfv" path="res://assets/player/player_animation three.tres" id="2_4nf63"]
 [ext_resource type="Animation" uid="uid://coqwbdy3avbpg" path="res://assets/player/bump shotgum.res" id="2_kpelj"]
 [ext_resource type="Animation" uid="uid://bsjhoq6khqfcw" path="res://assets/player/idle.res" id="3_qb0gm"]
@@ -33,9 +30,10 @@ var current_gun : Node3D
 
 var damage_vision_polution := 0.0
 var damage_vision_power := 0.1
-func set_border_effect(color : Color,power : float):
+var damage_color : Color = Color.RED
+func set_border_effect(power : float):
 	var mat : Material = $visual_effects.get_material()
-	mat[\"shader_parameter/color\"] = color
+	mat[\"shader_parameter/color\"] = damage_color
 	mat[\"shader_parameter/power\"] = power
 	$visual_effects.set_material(mat)
 
@@ -45,6 +43,7 @@ func hit_damage(damage : int):
 		health -= damage / 2
 		armor -= damage / 2
 		damage_vision_polution = 0.5
+		damage_color  = Color.RED
 		
 		if armor < 0:
 			armor = 0
@@ -52,6 +51,7 @@ func hit_damage(damage : int):
 	else:
 		health -= damage
 		damage_vision_polution = 0.5
+		damage_color  = Color.RED
 	
 	if health < 0:
 		health = 0
@@ -71,8 +71,11 @@ var wepon_presentation : float = 0.0
 func select_gun(no : int ) -> void:
 	if current_gun != null:
 		current_gun.queue_free()
-	current_gun = guns[no].instantiate()
-	$\"SubViewportContainer/SubViewport/Camera3D/player_animations/Armature/Skeleton3D/example gun/gun_base\".add_child(current_gun)
+		current_gun = null
+	
+	if guns.size() > no:
+		current_gun = guns[no].instantiate()
+		$\"SubViewportContainer/SubViewport/Camera3D/player_animations/Armature/Skeleton3D/example gun/gun_base\".add_child(current_gun)
 
 var selected_gun_no := 0
 
@@ -80,7 +83,7 @@ func _ready() -> void:
 	
 	var color := Color.RED
 	color.a = damage_vision_power
-	set_border_effect(color,0)
+	set_border_effect(0)
 	
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
@@ -143,7 +146,7 @@ func movement_plugin(delta) -> void:
 	if damage_vision_polution < 0:
 		damage_vision_polution = 0
 	
-	set_border_effect(Color.RED,damage_vision_polution)
+	set_border_effect(damage_vision_polution)
 	
 	damage_vision_polution -= delta
 	
@@ -174,19 +177,20 @@ func movement_plugin(delta) -> void:
 	if Input.is_action_just_pressed(\"fire\"):
 		$SubViewportContainer/SubViewport/Camera3D/player_animations/AnimationTree.set(\"parameters/look/request\",AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
 	
-	if Input.is_action_just_pressed(\"next_wepon\"):
-		selected_gun_no += 1
-		if selected_gun_no >= guns.size():
-			selected_gun_no = 0
+	if guns.size() > 0:
+		if Input.is_action_just_pressed(\"next_wepon\"):
+			selected_gun_no += 1
+			if selected_gun_no >= guns.size():
+				selected_gun_no = 0
+			
+			select_gun(selected_gun_no)
 		
-		select_gun(selected_gun_no)
+		if Input.is_action_just_pressed(\"previous_wepon\"):
+			selected_gun_no -= 1
+			if 0 > selected_gun_no:
+				selected_gun_no = guns.size() - 1
+			select_gun(selected_gun_no)
 	
-	if Input.is_action_just_pressed(\"previous_wepon\"):
-		selected_gun_no -= 1
-		if 0 > selected_gun_no:
-			selected_gun_no = guns.size() - 1
-		print(selected_gun_no)
-		select_gun(selected_gun_no)
 	
 
 
@@ -285,7 +289,6 @@ physics_material_override = SubResource("PhysicsMaterial_57xbc")
 contact_monitor = true
 max_contacts_reported = 5
 script = SubResource("GDScript_l7khq")
-guns = Array[PackedScene]([ExtResource("1_d42h3"), ExtResource("1_g0be1"), ExtResource("1_1sqsm")])
 speed = 12.0
 jump_power = 7
 
@@ -338,7 +341,7 @@ bones/0/name = "Bone"
 bones/0/parent = -1
 bones/0/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.337554, 0.414343)
 bones/0/enabled = true
-bones/0/position = Vector3(1.49012e-08, 0.257122, 0.414342)
+bones/0/position = Vector3(1.49012e-08, 0.346602, 0.414342)
 bones/0/rotation = Quaternion(0, 0, 0, 1)
 bones/0/scale = Vector3(1, 1, 1)
 bones/1/name = "Bone.002"
@@ -357,7 +360,7 @@ bones/2/rotation = Quaternion(0.707107, 0, 0, 0.707107)
 bones/2/scale = Vector3(1, 1, 1)
 
 [node name="example gun" type="BoneAttachment3D" parent="SubViewportContainer/SubViewport/Camera3D/player_animations/Armature/Skeleton3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.65661e-08, -0.0804325, -3.50177e-07)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.65661e-08, 0.00904733, -3.50177e-07)
 bone_name = "example gun"
 bone_idx = 2
 

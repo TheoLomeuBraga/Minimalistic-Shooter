@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://cvoev624l0o5t"]
+
+[ext_resource type="Script" path="res://assets/health/health.gd" id="1_rsylj"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_s77bv"]
+radius = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cgt8f"]
+albedo_color = Color(7.94157e-07, 0.647912, 0.167545, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_76jwc"]
+material = SubResource("StandardMaterial3D_cgt8f")
+
+[node name="Health" type="Area3D"]
+script = ExtResource("1_rsylj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CylinderShape3D_s77bv")
+
+[node name="display" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="display"]
+mesh = SubResource("BoxMesh_76jwc")
+skeleton = NodePath("../..")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

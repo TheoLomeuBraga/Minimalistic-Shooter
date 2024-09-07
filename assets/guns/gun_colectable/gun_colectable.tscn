@@ -1,0 +1,48 @@
+[gd_scene load_steps=8 format=3 uid="uid://cx1akpjbyvi4n"]
+
+[ext_resource type="Script" path="res://assets/guns/gun_colectable/gun_colectable.gd" id="1_rg0x7"]
+[ext_resource type="PackedScene" uid="uid://xk4bxfktxs8x" path="res://assets/guns/pistol/pistol.tscn" id="1_rq6wr"]
+[ext_resource type="PackedScene" uid="uid://bw2owoh028a6r" path="res://assets/guns/shotgum/shotgum.tscn" id="2_nd748"]
+[ext_resource type="PackedScene" uid="uid://bbemfsfh4icb4" path="res://assets/guns/smg/smg.tscn" id="3_5tx81"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ybcme"]
+radius = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_87830"]
+albedo_color = Color(0.993367, 0.993368, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_q3h5m"]
+material = SubResource("StandardMaterial3D_87830")
+
+[node name="GunColectable" type="Area3D"]
+script = ExtResource("1_rg0x7")
+pistol_sceane = ExtResource("1_rq6wr")
+smg_sceane = ExtResource("3_5tx81")
+shotgum_sceane = ExtResource("2_nd748")
+gun = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CylinderShape3D_ybcme")
+
+[node name="display" type="Node3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -0.0320041, 0)
+
+[node name="Pistol" parent="display" instance=ExtResource("1_rq6wr")]
+process_mode = 4
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.27175, 0.485289)
+visible = false
+
+[node name="Shotgum" parent="display" instance=ExtResource("2_nd748")]
+process_mode = 4
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.27175, 0.485289)
+visible = false
+
+[node name="Smg" parent="display" instance=ExtResource("3_5tx81")]
+process_mode = 4
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.27175, 0.485289)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="display"]
+mesh = SubResource("BoxMesh_q3h5m")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
