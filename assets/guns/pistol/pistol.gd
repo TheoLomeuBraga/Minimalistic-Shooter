@@ -36,7 +36,8 @@ func spawn_bullet():
 	
 
 func shoot(delta: float,inaccuracy : float = 0.0):
-	
+	$AudioStreamPlayer3D.pitch_scale = rng.randf_range(0.75,1.25)
+	$AudioStreamPlayer3D.play()
 	$AnimationPlayer.stop()
 	$AnimationPlayer.play("shot")
 	
@@ -89,6 +90,8 @@ enum fire_modes {
 
 @export var fire_mode : fire_modes
 
+
+
 func _physics_process(delta: float) -> void:
 	
 	
@@ -113,7 +116,7 @@ func _physics_process(delta: float) -> void:
 			Global.player.shot_animation()
 			cooldown = 0.25
 			burst_firre_cooldown = time_between_shots
-			
+		
 	
 	
 	cooldown -= delta

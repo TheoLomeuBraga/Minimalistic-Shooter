@@ -1,9 +1,10 @@
-[gd_scene load_steps=22 format=3 uid="uid://cln1tb8hh68hf"]
+[gd_scene load_steps=23 format=3 uid="uid://cln1tb8hh68hf"]
 
 [ext_resource type="Material" uid="uid://cgi82vp0c8shj" path="res://test_custom_map/source_orange_texture.tres" id="1_p4v7f"]
 [ext_resource type="Script" path="res://test_custom_map/test_path.gd" id="2_gnyuj"]
 [ext_resource type="Shader" path="res://shaders/triplanar_shader.tres.gdshader" id="3_n602g"]
 [ext_resource type="Texture2D" uid="uid://q5o47l74lr0w" path="res://test_custom_map/test.png" id="4_jtont"]
+[ext_resource type="PackedScene" uid="uid://c5cr3r0ii7xid" path="res://test_custom_map/test_explosion_implosion.tscn" id="5_fb6g7"]
 
 [sub_resource type="Curve3D" id="Curve3D_e0vw1"]
 bake_interval = 0.1
@@ -309,3 +310,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.0056, 9.5401, -1.81961)
 flip_faces = true
 size = Vector3(9.53918, 4.0802, 1.6452)
 material = ExtResource("1_p4v7f")
+
+[node name="TestExplosionImplosion" parent="." instance=ExtResource("5_fb6g7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.38623, 5.52334, 5.9656)

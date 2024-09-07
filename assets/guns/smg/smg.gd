@@ -89,6 +89,8 @@ func _physics_process(delta: float) -> void:
 	
 	
 	if Input.is_action_pressed("fire") and not Global.is_paused and cooldown < 0:
+		$AudioStreamPlayer3D.pitch_scale = rng.randf_range(1.5,1.75)
+		$AudioStreamPlayer3D.play()
 		$AnimationPlayer.stop()
 		$AnimationPlayer.play("shot")
 		$muzle/MeshInstance3D.visible = true

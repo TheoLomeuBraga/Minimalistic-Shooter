@@ -1,8 +1,9 @@
-[gd_scene load_steps=19 format=4 uid="uid://xk4bxfktxs8x"]
+[gd_scene load_steps=20 format=4 uid="uid://xk4bxfktxs8x"]
 
 [ext_resource type="Texture2D" uid="uid://ckcw7n1l5xkgv" path="res://assets/guns/guns_pistol.png" id="1_3tmds"]
 [ext_resource type="Script" path="res://assets/guns/pistol/pistol.gd" id="1_a28wu"]
 [ext_resource type="PackedScene" uid="uid://bla5w48tj7wf5" path="res://assets/guns/bullet/bullet_1.tscn" id="2_0bnmu"]
+[ext_resource type="AudioStream" uid="uid://cwivp74h1qoxg" path="res://sfx/shot.wav.ogg" id="4_s5714"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_svopk"]
 radial_segments = 4
@@ -232,3 +233,6 @@ libraries = {
 "": SubResource("AnimationLibrary_8ns2p")
 }
 speed_scale = 2.0
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_s5714")

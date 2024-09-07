@@ -1,8 +1,9 @@
-[gd_scene load_steps=19 format=4 uid="uid://bw2owoh028a6r"]
+[gd_scene load_steps=20 format=4 uid="uid://bw2owoh028a6r"]
 
 [ext_resource type="Texture2D" uid="uid://dsgq4yesi4hep" path="res://assets/guns/guns_shotgum.png" id="1_esh2o"]
 [ext_resource type="Script" path="res://assets/guns/shotgum/shotgum.gd" id="1_ewvb7"]
 [ext_resource type="PackedScene" uid="uid://bla5w48tj7wf5" path="res://assets/guns/bullet/bullet_1.tscn" id="2_wfi8d"]
+[ext_resource type="AudioStream" uid="uid://cwivp74h1qoxg" path="res://sfx/shot.wav.ogg" id="4_84l3j"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tt4mj"]
 resource_name = "shotgum.001"
@@ -197,3 +198,6 @@ surface_material_override/0 = SubResource("StandardMaterial3D_f6xwr")
 libraries = {
 "": SubResource("AnimationLibrary_15ll6")
 }
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_84l3j")

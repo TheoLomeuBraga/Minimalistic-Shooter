@@ -1,8 +1,9 @@
-[gd_scene load_steps=19 format=4 uid="uid://bbemfsfh4icb4"]
+[gd_scene load_steps=20 format=4 uid="uid://bbemfsfh4icb4"]
 
 [ext_resource type="Texture2D" uid="uid://cwu84lrkrikhf" path="res://assets/guns/guns_smg.png" id="1_7yh1h"]
 [ext_resource type="Script" path="res://assets/guns/smg/smg.gd" id="1_e0hut"]
 [ext_resource type="PackedScene" uid="uid://bla5w48tj7wf5" path="res://assets/guns/bullet/bullet_1.tscn" id="2_nwijk"]
+[ext_resource type="AudioStream" uid="uid://cwivp74h1qoxg" path="res://sfx/shot.wav.ogg" id="4_r40d6"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y3mx1"]
 resource_name = "smg"
@@ -234,3 +235,6 @@ libraries = {
 "": SubResource("AnimationLibrary_djymr")
 }
 speed_scale = 2.0
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_r40d6")

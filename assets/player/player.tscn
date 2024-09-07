@@ -26,6 +26,7 @@ script/source = "extends BasicMovement
 @export var health := 100
 
 @export var guns : Array[PackedScene] 
+var current_gun : Node3D
 
 @export var max_armor := 50
 @export var armor := 50
@@ -67,7 +68,13 @@ func _input(event):
 var wepon_presentation : float = 0.0
 
 
+func select_gun(no : int ) -> void:
+	if current_gun != null:
+		current_gun.queue_free()
+	current_gun = guns[no].instantiate()
+	$\"SubViewportContainer/SubViewport/Camera3D/player_animations/Armature/Skeleton3D/example gun/gun_base\".add_child(current_gun)
 
+var selected_gun_no := 0
 
 func _ready() -> void:
 	
@@ -82,11 +89,11 @@ func _ready() -> void:
 	
 	$SubViewportContainer/SubViewport/Camera3D/player_animations/AnimationTree.set(\"parameters/look/request\",AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 	
-	#$SubViewportContainer/SubViewport/Camera3D/player_animations/AnimationTree.set(\"parameters/Transition/transition_request\",\"grab gun\")
+	select_gun(selected_gun_no)
 	
 	wepon_presentation = 3
 	
-	$\"SubViewportContainer/SubViewport/Camera3D/player_animations/Armature/Skeleton3D/example gun/gun_base\".add_child(guns[0].instantiate())
+	
 	
 
 @export var target : Vector3
@@ -166,6 +173,20 @@ func movement_plugin(delta) -> void:
 	
 	if Input.is_action_just_pressed(\"fire\"):
 		$SubViewportContainer/SubViewport/Camera3D/player_animations/AnimationTree.set(\"parameters/look/request\",AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
+	
+	if Input.is_action_just_pressed(\"next_wepon\"):
+		selected_gun_no += 1
+		if selected_gun_no >= guns.size():
+			selected_gun_no = 0
+		
+		select_gun(selected_gun_no)
+	
+	if Input.is_action_just_pressed(\"previous_wepon\"):
+		selected_gun_no -= 1
+		if 0 > selected_gun_no:
+			selected_gun_no = guns.size() - 1
+		print(selected_gun_no)
+		select_gun(selected_gun_no)
 	
 
 
@@ -264,7 +285,7 @@ physics_material_override = SubResource("PhysicsMaterial_57xbc")
 contact_monitor = true
 max_contacts_reported = 5
 script = SubResource("GDScript_l7khq")
-guns = Array[PackedScene]([ExtResource("1_1sqsm"), ExtResource("1_g0be1"), ExtResource("1_d42h3")])
+guns = Array[PackedScene]([ExtResource("1_d42h3"), ExtResource("1_g0be1"), ExtResource("1_1sqsm")])
 speed = 12.0
 jump_power = 7
 
@@ -317,7 +338,7 @@ bones/0/name = "Bone"
 bones/0/parent = -1
 bones/0/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.337554, 0.414343)
 bones/0/enabled = true
-bones/0/position = Vector3(1.49012e-08, 0.269741, 0.414342)
+bones/0/position = Vector3(1.49012e-08, 0.257122, 0.414342)
 bones/0/rotation = Quaternion(0, 0, 0, 1)
 bones/0/scale = Vector3(1, 1, 1)
 bones/1/name = "Bone.002"
@@ -336,7 +357,7 @@ bones/2/rotation = Quaternion(0.707107, 0, 0, 0.707107)
 bones/2/scale = Vector3(1, 1, 1)
 
 [node name="example gun" type="BoneAttachment3D" parent="SubViewportContainer/SubViewport/Camera3D/player_animations/Armature/Skeleton3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.65661e-08, -0.0678136, -3.50177e-07)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.65661e-08, -0.0804325, -3.50177e-07)
 bone_name = "example gun"
 bone_idx = 2
 
