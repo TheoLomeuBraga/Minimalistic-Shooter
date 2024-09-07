@@ -136,7 +136,7 @@ animation = &"idle gum"
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_eg7ae"]
 
 [resource]
-graph_offset = Vector2(106.113, 340.31)
+graph_offset = Vector2(-69.7387, 219.289)
 nodes/Add2/node = SubResource("AnimationNodeAdd2_qqeu4")
 nodes/Add2/position = Vector2(1860, 220)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_1044p")

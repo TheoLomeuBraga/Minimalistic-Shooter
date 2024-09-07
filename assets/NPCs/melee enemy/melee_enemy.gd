@@ -55,7 +55,7 @@ func movement_plugin(delta: float) -> void:
 			
 			var m = melee_sceane.instantiate()
 			get_tree().get_root().add_child(m)
-			m.global_position = $melee_launch_point.global_position
+			m.global_transform = $melee_launch_point.global_transform
 			
 	
 	melee_colldown -= delta
