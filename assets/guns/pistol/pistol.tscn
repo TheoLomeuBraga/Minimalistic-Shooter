@@ -198,6 +198,7 @@ _data = {
 script = ExtResource("1_a28wu")
 projectile = true
 bullet_asset = ExtResource("2_0bnmu")
+damage = 10
 
 [node name="muzle" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.350775, -1.46866)

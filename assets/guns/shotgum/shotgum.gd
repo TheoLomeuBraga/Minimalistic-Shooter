@@ -91,8 +91,15 @@ func _physics_process(delta: float) -> void:
 	
 	
 	if Input.is_action_just_pressed("fire") and not Global.is_paused and cooldown < 0:
-		$AudioStreamPlayer3D.pitch_scale = rng.randf_range(0.5,0.25)
-		$AudioStreamPlayer3D.play()
+		$Node3D/AudioStreamPlayer3D.pitch_scale = rng.randf_range(0.5,0.25)
+		$Node3D/AudioStreamPlayer3D2.pitch_scale = rng.randf_range(0.5,0.25)
+		$Node3D/AudioStreamPlayer3D3.pitch_scale = rng.randf_range(0.5,0.25)
+		
+		$Node3D/AudioStreamPlayer3D.play()
+		$Node3D/AudioStreamPlayer3D2.play()
+		$Node3D/AudioStreamPlayer3D3.play()
+		
+		
 		$AnimationPlayer.stop()
 		$AnimationPlayer.play("shoot")
 		$muzle/MeshInstance3D.visible = true

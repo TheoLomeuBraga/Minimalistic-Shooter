@@ -161,7 +161,6 @@ _data = {
 script = ExtResource("1_ewvb7")
 projectile = true
 bullet_asset = ExtResource("2_wfi8d")
-damage = 10
 
 [node name="guns" type="Node3D" parent="."]
 
@@ -199,5 +198,13 @@ libraries = {
 "": SubResource("AnimationLibrary_15ll6")
 }
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+[node name="Node3D" type="Node3D" parent="."]
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Node3D"]
+stream = ExtResource("4_84l3j")
+
+[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="Node3D"]
+stream = ExtResource("4_84l3j")
+
+[node name="AudioStreamPlayer3D3" type="AudioStreamPlayer3D" parent="Node3D"]
 stream = ExtResource("4_84l3j")
