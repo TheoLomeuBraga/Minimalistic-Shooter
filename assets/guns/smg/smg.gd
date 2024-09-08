@@ -94,7 +94,7 @@ func _physics_process(delta: float) -> void:
 		$AnimationPlayer.stop()
 		$AnimationPlayer.play("shot")
 		$muzle/MeshInstance3D.visible = true
-		shoot(delta,5)
+		shoot(delta,2.5)
 		Global.player.shot_animation()
 		cooldown = 0.1
 	

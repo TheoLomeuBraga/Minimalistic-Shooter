@@ -10,23 +10,25 @@ collision_mode = 1
 collision_friction = 0.0
 collision_bounce = 0.0
 
-[sub_resource type="Curve" id="Curve_8iggr"]
-_data = [Vector2(0, 0.186813), 0.0, 0.0, 0, 0, Vector2(0.485714, 0.274725), 0.0, 0.0, 0, 0, Vector2(1, 0.252747), 0.0, 0.0, 0, 0]
-point_count = 3
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qegad"]
+use_particle_trails = true
 
-[sub_resource type="RibbonTrailMesh" id="RibbonTrailMesh_0sf25"]
-curve = SubResource("Curve_8iggr")
+[sub_resource type="TubeTrailMesh" id="TubeTrailMesh_jeu8y"]
+material = SubResource("StandardMaterial3D_qegad")
+radius = 0.1
+section_length = 0.5
 
 [node name="TestExplosionImplosion" type="Node3D"]
 script = ExtResource("1_4yjc0")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
-amount = 128
+amount = 32
 explosiveness = 1.0
 transform_align = 2
 trail_enabled = true
+trail_lifetime = 0.8
 process_material = SubResource("ParticleProcessMaterial_bxvcf")
-draw_pass_1 = SubResource("RibbonTrailMesh_0sf25")
+draw_pass_1 = SubResource("TubeTrailMesh_jeu8y")
 
 [node name="GPUParticlesAttractorSphere3D" type="GPUParticlesAttractorSphere3D" parent="."]
 strength = 200.0
