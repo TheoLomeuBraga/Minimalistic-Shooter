@@ -14,6 +14,7 @@ func pause():
 	get_tree().paused = true
 	unpause_lock = 2
 	$Pause.visible = true
+	
 
 func unpause():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -29,5 +30,6 @@ func _process(delta: float) -> void:
 	
 	if get_tree().paused and unpause_lock <= 0 and Input.is_action_just_pressed("pause"):
 		unpause()
+	
 	
 	unpause_lock -= 1

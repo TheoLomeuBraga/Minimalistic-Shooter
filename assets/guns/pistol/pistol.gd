@@ -103,10 +103,6 @@ func _physics_process(delta: float) -> void:
 		Global.player.shot_animation()
 		$muzle/MeshInstance3D.visible = true
 		
-	if Input.is_action_just_pressed("alt_fire") and not Global.is_paused and cooldown < 0:
-		burst_fire_timer = 0.25
-		$muzle/MeshInstance3D.visible = true
-		
 	if burst_fire_timer > 0:
 		burst_fire_timer -= delta
 		

@@ -1,0 +1,29 @@
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://kjjq0xk0r8i5"]
+
+[sub_resource type="Gradient" id="Gradient_1dk4a"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(1, 0.568627, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_r7y1c"]
+gradient = SubResource("Gradient_1dk4a")
+width = 16
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_c1kkq"]
+gradient = SubResource("Gradient_1dk4a")
+width = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f4g2n"]
+bg_color = Color(0.875225, 0.487799, 3.85046e-07, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8okij"]
+bg_color = Color(1, 0.353969, 0.143512, 1)
+
+[resource]
+HSlider/icons/grabber = SubResource("GradientTexture2D_r7y1c")
+HSlider/icons/grabber_disabled = SubResource("GradientTexture2D_r7y1c")
+HSlider/icons/grabber_highlight = SubResource("GradientTexture2D_c1kkq")
+HSlider/icons/tick = SubResource("GradientTexture2D_r7y1c")
+HSlider/styles/grabber_area = SubResource("StyleBoxFlat_f4g2n")
+HSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_8okij")
+Label/colors/font_color = Color(0.247059, 0.176471, 1, 1)

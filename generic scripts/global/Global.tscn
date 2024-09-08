@@ -9,4 +9,3 @@ script = ExtResource("1_0cveb")
 
 [node name="Pause" parent="." instance=ExtResource("2_8vo7u")]
 visible = false
-z_index = 10

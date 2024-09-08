@@ -39,6 +39,6 @@ func _on_body_entered(body: Node3D) -> void:
 	if body == Global.player:
 		if Global.player.guns.count(selected_gun) == 0:
 			Global.player.guns.push_back(selected_gun)
-			Global.player.select_gun(0)
+			Global.player.select_gun(Global.player.guns.size() -1)
 		
 		queue_free()
