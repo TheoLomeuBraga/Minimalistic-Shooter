@@ -24,9 +24,15 @@ func move(delta) -> void:
 	
 	var new_move_direction : Vector3 = move_direction
 	
-	in_floor = $floorCheker.is_colliding()
+	in_floor = $floorChekerRay.is_colliding() or $floorChekerShape.is_colliding()
 	if in_floor and move_direction != Vector3.ZERO:
-		new_move_direction = move_direction.slide($floorCheker.get_collision_normal()).normalized()
+		
+		if  $floorChekerRay.is_colliding():
+			new_move_direction = move_direction.slide($floorChekerRay.get_collision_normal()).normalized()
+		elif $floorChekerShape.is_colliding():
+			new_move_direction = move_direction.slide($floorChekerShape.get_collision_normal(0)).normalized()
+		else:
+			new_move_direction = move_direction
 	
 	
 	if new_move_direction != Vector3.ZERO:

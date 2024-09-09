@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=4 uid="uid://dhskpyhdo2ssn"]
+[gd_scene load_steps=25 format=4 uid="uid://dhskpyhdo2ssn"]
 
 [ext_resource type="AnimationNodeBlendTree" uid="uid://dy7qx6vcfxkfv" path="res://assets/player/player_animation three.tres" id="2_4nf63"]
 [ext_resource type="Animation" uid="uid://coqwbdy3avbpg" path="res://assets/player/bump shotgum.res" id="2_kpelj"]
@@ -162,7 +162,7 @@ func movement_plugin(delta) -> void:
 	
 	
 	
-	if $floorCheker.is_colliding():
+	if in_floor:
 		if Input.get_axis(\"foward\",\"back\") != 0 or Input.get_axis(\"left\",\"right\") != 0:
 			$SubViewportContainer/SubViewport/Camera3D/player_animations/AnimationTree.set(\"parameters/Transition/transition_request\",\"walk\")
 		else:
@@ -197,6 +197,10 @@ func movement_plugin(delta) -> void:
 func _on_tree_exiting() -> void:
 	Global.player = null
 "
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_mmbuf"]
+height = 0.5
+radius = 0.4
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sr4fy"]
 
@@ -292,6 +296,14 @@ script = SubResource("GDScript_l7khq")
 speed = 12.0
 jump_power = 7
 
+[node name="floorChekerRay" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.485707, 0)
+
+[node name="floorChekerShape" type="ShapeCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.785732, 0)
+shape = SubResource("CylinderShape3D_mmbuf")
+target_position = Vector3(0, 0, 0)
+
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.71066, 0)
 cull_mask = 1
@@ -304,9 +316,6 @@ target_position = Vector3(0, 0, -2.5)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_sr4fy")
-
-[node name="floorCheker" type="RayCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.485707, 0)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_pcnwn")
@@ -341,7 +350,7 @@ bones/0/name = "Bone"
 bones/0/parent = -1
 bones/0/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.337554, 0.414343)
 bones/0/enabled = true
-bones/0/position = Vector3(1.49012e-08, 0.289826, 0.414342)
+bones/0/position = Vector3(1.49012e-08, 0.412377, 0.414342)
 bones/0/rotation = Quaternion(0, 0, 0, 1)
 bones/0/scale = Vector3(1, 1, 1)
 bones/1/name = "Bone.002"
@@ -360,7 +369,7 @@ bones/2/rotation = Quaternion(0.707107, 0, 0, 0.707107)
 bones/2/scale = Vector3(1, 1, 1)
 
 [node name="example gun" type="BoneAttachment3D" parent="SubViewportContainer/SubViewport/Camera3D/player_animations/Armature/Skeleton3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.65661e-08, -0.0477281, -3.50177e-07)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.65661e-08, 0.0748222, -3.50177e-07)
 bone_name = "example gun"
 bone_idx = 2
 

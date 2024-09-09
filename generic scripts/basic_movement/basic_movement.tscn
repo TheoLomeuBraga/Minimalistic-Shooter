@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://r3xbmat4si26"]
+[gd_scene load_steps=5 format=3 uid="uid://r3xbmat4si26"]
 
 [ext_resource type="Script" path="res://generic scripts/basic_movement/basic_movement.gd" id="1_b4bk6"]
 
@@ -7,6 +7,10 @@ friction = 0.0
 rough = true
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sr4fy"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_4dfy6"]
+height = 0.5
+radius = 0.4
 
 [node name="basic_movement" type="RigidBody3D"]
 axis_lock_angular_x = true
@@ -21,7 +25,12 @@ script = ExtResource("1_b4bk6")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_sr4fy")
 
-[node name="floorCheker" type="RayCast3D" parent="."]
+[node name="floorChekerRay" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.485707, 0)
+
+[node name="floorChekerShape" type="ShapeCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.785732, 0)
+shape = SubResource("CylinderShape3D_4dfy6")
+target_position = Vector3(0, 0, 0)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

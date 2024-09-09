@@ -1,15 +1,81 @@
-[gd_scene load_steps=5 format=3 uid="uid://cvoev624l0o5t"]
+[gd_scene load_steps=9 format=4 uid="uid://cvoev624l0o5t"]
 
 [ext_resource type="Script" path="res://assets/health/health.gd" id="1_rsylj"]
+[ext_resource type="Texture2D" uid="uid://cb3gn6vel3fof" path="res://assets/health/health_Untitled.png" id="2_kcm67"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_s77bv"]
 radius = 1.0
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cgt8f"]
-albedo_color = Color(7.94157e-07, 0.647912, 0.167545, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wwnmm"]
+resource_name = "health"
+cull_mode = 2
+albedo_texture = ExtResource("2_kcm67")
+roughness = 0.5
+texture_filter = 2
 
-[sub_resource type="BoxMesh" id="BoxMesh_76jwc"]
-material = SubResource("StandardMaterial3D_cgt8f")
+[sub_resource type="ArrayMesh" id="ArrayMesh_h1gfa"]
+_surfaces = [{
+"aabb": AABB(-1, -1, -1, 2, 2, 2),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAADAAEAAAACAAMAAgAHAAMAAgAGAAcABgAFAAcABgAEAAUABAABAAUABAAAAAEAAgAEAAYAAgAAAAQABwABAAMABwAFAAEA"),
+"name": "health",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAAAAP//AAAAAP////8AAAAAAAAAAAAAAAD//wAAAAD//wAA//8AAP///////wAA//8AAAAAAAD/////AAAAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_5wmpl"]
+resource_name = "health_Cube_001"
+_surfaces = [{
+"aabb": AABB(-1, -1, -1, 2, 2, 2),
+"attribute_data": PackedByteArray("AAAAAAAAAAAAAP////8AAP//AAD/////AAD//wAA//8AAAAA/////////////wAAAAD/////AAAAAAAA/////wAAAAD//wAAAAAAAP////8AAP////8AAAAA////////"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AgALAAUAAgAIAAsABgAVAAkABgASABUAFAARABcAFAAOABEADAADAA8ADAAAAAMABwANABMABwABAA0AFgAEAAoAFgAQAAQA"),
+"material": SubResource("StandardMaterial3D_wwnmm"),
+"name": "health",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("AAAAAP///78AAAAA////vwAAAAD//1TVAAD//////78AAP///////wAA/////1TVAAAAAAAA//8AAAAAAAD/vwAAAAAAAFTVAAD//wAA//8AAP//AAD//wAA//8AAFTV//8AAP///7///wAA////v///AAD//1TV/////////7///////////////////1TV//8AAAAA/////wAAAAD/v///AAAAAFTV/////wAA////////AAD///////8AAFTV/////wAA/39U1VTV//////9//79U1VTV/7//vwAA/39U1VTV/7//v/9//79U1VTV/////wAA/3+qKqoq//////9//7+qKqoq/7//vwAA/3+qKqoq/7//v/9//7+qKqoq")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_h1gfa")
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_pqeuf"]
+_surfaces = [{
+"aabb": AABB(-0.28, -1.3, -0.75, 0.56, 2.6, 1.5),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAADAAEAAAACAAMAAgAHAAMAAgAGAAcABgAFAAcABgAEAAUABAABAAUABAAAAAEAAgAEAAYAAgAAAAQABwABAAMABwAFAAEA"),
+"name": "health",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAAAAP//AAAAAP////8AAAAAAAAAAAAAAAD//wAAAAD//wAA//8AAP///////wAA//8AAAAAAAD/////AAAAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_s4gv0"]
+resource_name = "health_Cube_002"
+_surfaces = [{
+"aabb": AABB(-0.28, -1.3, -0.75, 0.56, 2.6, 1.5),
+"attribute_data": PackedByteArray("AAAAAAAAAAAAAP////8AAP//AAD/////AAD//wAA//8AAAAA/////////////wAAAAD/////AAAAAAAA/////wAAAAD//wAAAAAAAP////8AAP////8AAAAA////////"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AgALAAUAAgAIAAsABgAVAAkABgASABUAFAARABcAFAAOABEADAADAA8ADAAAAAMABwANABMABwABAA0AFgAEAAoAFgAQAAQA"),
+"material": SubResource("StandardMaterial3D_wwnmm"),
+"name": "health",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("AAAAAP///78AAAAA////vwAAAAD//1TVAAD//////78AAP///////wAA/////1TVAAAAAAAA//8AAAAAAAD/vwAAAAAAAFTVAAD//wAA//8AAP//AAD//wAA//8AAFTV//8AAP///7///wAA////v///AAD//1TV/////////7///////////////////1TV//8AAAAA/////wAAAAD/v///AAAAAFTV/////wAA////////AAD///////8AAFTV/////wAA/39U1VTV//////9//79U1VTV/7//vwAA/39U1VTV/7//v/9//79U1VTV/////wAA/3+qKqoq//////9//7+qKqoq/7//vwAA/3+qKqoq/7//v/9//7+qKqoq")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_pqeuf")
 
 [node name="Health" type="Area3D"]
 script = ExtResource("1_rsylj")
@@ -19,8 +85,15 @@ shape = SubResource("CylinderShape3D_s77bv")
 
 [node name="display" type="Node3D" parent="."]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="display"]
-mesh = SubResource("BoxMesh_76jwc")
-skeleton = NodePath("../..")
+[node name="health" type="Node3D" parent="display"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+
+[node name="health_big" type="MeshInstance3D" parent="display/health"]
+mesh = SubResource("ArrayMesh_5wmpl")
+skeleton = NodePath("")
+
+[node name="health_smal" type="MeshInstance3D" parent="display/health"]
+mesh = SubResource("ArrayMesh_s4gv0")
+skeleton = NodePath("")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
