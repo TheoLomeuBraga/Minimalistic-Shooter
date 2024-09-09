@@ -1,21 +1,26 @@
 extends Area3D
 
 
-
+@export var health : int = 25
 func _ready() -> void:
-	pass # Replace with function body.
+	if health > 25:
+		$display/health/health_smal.visible = false
+		$display/health/health_big.visible = true
 
-@export var health : float = 25
+var utilized : bool = false
 
 func _process(delta: float) -> void:
-	pass
+	$display/health.rotation_degrees.y += delta * 50
+	$display/health.visible = not utilized
 
 
 func _on_body_entered(body: Node3D) -> void:
-	if body == Global.player:
+	if not utilized and body == Global.player:
 		Global.player.health += health
 		if Global.player.health > Global.player.max_health:
 			Global.player.health = Global.player.max_health
 			
 			Global.player.damage_vision_polution = 1.0
 			Global.player.damage_color = Color.GREEN
+			
+			utilized = true

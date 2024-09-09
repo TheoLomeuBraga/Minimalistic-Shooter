@@ -7,6 +7,7 @@ func set_distance(distance : float):
 
 
 func _ready() -> void:
+	$sprite.scale = Vector3.ONE * 0.1
 	set_distance(0)
 
 
@@ -17,14 +18,24 @@ func _ready() -> void:
 
 var first_frame = true
 
+
+
+
+	
+
 var on_frame : int = 0
 func _process(delta: float) -> void:
+	
 	if on_frame > 1:
 		visible = true
 	else:
 		on_frame += 1
 
+
+
 func _physics_process(delta: float) -> void:
+	
+	$sprite.scale = $sprite.scale.lerp(Vector3.ONE, speed * delta)
 	
 	$sprite.position = $sprite.position.lerp(Vector3.ZERO, speed * delta)
 	

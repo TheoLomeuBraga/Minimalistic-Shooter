@@ -399,6 +399,7 @@ gun = 1
 
 [node name="Health" parent="." instance=ExtResource("12_frk3s")]
 transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -21, -1, -21)
+health = 50
 
 [node name="Health2" parent="." instance=ExtResource("12_frk3s")]
 transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 21, -1, -21)

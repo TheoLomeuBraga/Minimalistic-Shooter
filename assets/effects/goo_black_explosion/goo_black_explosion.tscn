@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bqakel4pwykjd"]
+[gd_scene load_steps=11 format=3 uid="uid://bqakel4pwykjd"]
 
 [ext_resource type="Script" path="res://generic scripts/count_down.gd" id="1_4yect"]
 
@@ -20,7 +20,6 @@ spread = 180.0
 initial_velocity_min = 5.0
 initial_velocity_max = 10.0
 scale_min = 0.1
-scale_max = 1.5
 scale_curve = SubResource("CurveTexture_3ygou")
 color = Color(0, 0, 0, 1)
 collision_mode = 1
@@ -31,14 +30,46 @@ collision_bounce = 0.0
 radial_segments = 4
 rings = 1
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dwvpk"]
+emission_shape = 1
+emission_sphere_radius = 1.0
+spread = 180.0
+initial_velocity_min = 5.0
+initial_velocity_max = 10.0
+collision_mode = 1
+collision_friction = 0.0
+collision_bounce = 0.0
+collision_use_scale = true
+
+[sub_resource type="Curve" id="Curve_q7xh3"]
+_data = [Vector2(0, 0.197802), 0.0, 0.0, 0, 0, Vector2(0.0705394, 0.373626), 0.0, 0.0, 0, 0, Vector2(0.257261, 0.186813), 0.0, 0.0, 0, 0, Vector2(0.414938, 0.340659), 0.0, 0.0, 0, 0, Vector2(0.605809, 0.153846), 0.0, 0.0, 0, 0, Vector2(0.80083, 0.307692), 0.0, 0.0, 0, 0, Vector2(1, 0.164835), 0.0, 0.0, 0, 0]
+point_count = 7
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wshcb"]
+albedo_color = Color(0, 0, 0, 1)
+billboard_mode = 1
+use_particle_trails = true
+
+[sub_resource type="TubeTrailMesh" id="TubeTrailMesh_5pc8b"]
+material = SubResource("StandardMaterial3D_wshcb")
+curve = SubResource("Curve_q7xh3")
+
 [node name="SparkExplosion" type="GPUParticles3D"]
 material_override = SubResource("StandardMaterial3D_aq1fk")
-amount = 16
 lifetime = 4.0
 explosiveness = 1.0
+fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_463n8")
 draw_pass_1 = SubResource("SphereMesh_vf6um")
 script = ExtResource("1_4yect")
 life_time = 2.0
+
+[node name="gooTrails" type="GPUParticles3D" parent="."]
+lifetime = 4.0
+explosiveness = 1.0
+fixed_fps = 60
+trail_enabled = true
+process_material = SubResource("ParticleProcessMaterial_dwvpk")
+draw_pass_1 = SubResource("TubeTrailMesh_5pc8b")
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
