@@ -40,5 +40,8 @@ func _on_body_entered(body: Node3D) -> void:
 		if Global.player.guns.count(selected_gun) == 0:
 			Global.player.guns.push_back(selected_gun)
 			Global.player.select_gun(Global.player.guns.size() -1)
+			
+			Global.player.wepon_presentation = 3
+			Global.player.get_node("SubViewportContainer/SubViewport/Camera3D/player_animations/AnimationTree").set("parameters/look/request",AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 		
 		queue_free()

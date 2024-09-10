@@ -9,6 +9,8 @@ var spawners_list : Array[Node3D]
 @export var wave_duration : float = 0.0
 var cooldown : float = 0.0
 
+
+
 var rng : RandomNumberGenerator = RandomNumberGenerator.new()
 func select_random_non_visible_node():
 	
@@ -37,7 +39,7 @@ func spawn_enemy(position : Vector3):
 	get_tree().get_root().add_child(enemy_instance)
 	
 
-func update_wave(delta: float) -> void:
+func update_current_wave(delta: float) -> void:
 	if wave_duration > 0:
 		var random_spawn : Node3D = select_random_non_visible_node()
 		if random_spawn != null and cooldown <= 0:
@@ -51,5 +53,8 @@ func _ready() -> void:
 	start_wave()
 	#pass
 
+var wave_break : bool = false
+
 func _process(delta: float) -> void:
-	update_wave(delta)
+	if not wave_break:
+		update_current_wave(delta)

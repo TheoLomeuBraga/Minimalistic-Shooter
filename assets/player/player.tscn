@@ -1,5 +1,6 @@
-[gd_scene load_steps=25 format=4 uid="uid://dhskpyhdo2ssn"]
+[gd_scene load_steps=26 format=4 uid="uid://dhskpyhdo2ssn"]
 
+[ext_resource type="PackedScene" uid="uid://us7lwhralmg6" path="res://assets/menus/game_over/game_over.tscn" id="1_a6gxt"]
 [ext_resource type="AnimationNodeBlendTree" uid="uid://dy7qx6vcfxkfv" path="res://assets/player/player_animation three.tres" id="2_4nf63"]
 [ext_resource type="Animation" uid="uid://coqwbdy3avbpg" path="res://assets/player/bump shotgum.res" id="2_kpelj"]
 [ext_resource type="Animation" uid="uid://bsjhoq6khqfcw" path="res://assets/player/idle.res" id="3_qb0gm"]
@@ -138,59 +139,69 @@ func update_pause():
 	if Input.is_action_just_pressed(\"pause\"):
 		Global.pause()
 
-
+@export var game_over_scene : PackedScene
 
 func movement_plugin(delta) -> void:
-	update_pause()
 	
-	if damage_vision_polution < 0:
-		damage_vision_polution = 0
+	$health.add_theme_color_override(\"font_color\",lerp(Color.RED,Color.GREEN,health/100.0))
+	$health.text = \"♥ \"+str(health)+\" ♥\"
 	
-	set_border_effect(damage_vision_polution)
-	
-	damage_vision_polution -= delta
-	
-	
-	wepon_presentation -= delta
-	look_around(delta)
-	
-	move_direction = (basis.z.normalized() * Input.get_axis(\"foward\",\"back\")) + (basis.x.normalized() * Input.get_axis(\"left\",\"right\"))
-	
-	
-	if abs(move_direction.x) + abs(move_direction.y) > 1:
-		move_direction = move_direction.normalized()
-	
-	
-	
-	if in_floor:
-		if Input.get_axis(\"foward\",\"back\") != 0 or Input.get_axis(\"left\",\"right\") != 0:
-			$SubViewportContainer/SubViewport/Camera3D/player_animations/AnimationTree.set(\"parameters/Transition/transition_request\",\"walk\")
-		else:
-			$SubViewportContainer/SubViewport/Camera3D/player_animations/AnimationTree.set(\"parameters/Transition/transition_request\",\"idle\")
-	else:
-		$SubViewportContainer/SubViewport/Camera3D/player_animations/AnimationTree.set(\"parameters/Transition/transition_request\",\"jump\")
-	
-	
-	if Input.is_action_just_pressed(\"jump\") and in_floor:
-		jump()
-	
-	if Input.is_action_just_pressed(\"fire\"):
-		$SubViewportContainer/SubViewport/Camera3D/player_animations/AnimationTree.set(\"parameters/look/request\",AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
-	
-	if guns.size() > 0:
-		if Input.is_action_just_pressed(\"next_wepon\"):
-			selected_gun_no += 1
-			if selected_gun_no >= guns.size():
-				selected_gun_no = 0
-			
-			select_gun(selected_gun_no)
+	if health > 0:
+		update_pause()
 		
-		if Input.is_action_just_pressed(\"previous_wepon\"):
-			selected_gun_no -= 1
-			if 0 > selected_gun_no:
-				selected_gun_no = guns.size() - 1
-			select_gun(selected_gun_no)
-	
+		if damage_vision_polution < 0:
+			damage_vision_polution = 0
+		
+		set_border_effect(damage_vision_polution)
+		
+		damage_vision_polution -= delta
+		
+		
+		wepon_presentation -= delta
+		look_around(delta)
+		
+		move_direction = (basis.z.normalized() * Input.get_axis(\"foward\",\"back\")) + (basis.x.normalized() * Input.get_axis(\"left\",\"right\"))
+		
+		
+		if abs(move_direction.x) + abs(move_direction.y) > 1:
+			move_direction = move_direction.normalized()
+		
+		
+		
+		if in_floor:
+			if Input.get_axis(\"foward\",\"back\") != 0 or Input.get_axis(\"left\",\"right\") != 0:
+				$SubViewportContainer/SubViewport/Camera3D/player_animations/AnimationTree.set(\"parameters/Transition/transition_request\",\"walk\")
+			else:
+				$SubViewportContainer/SubViewport/Camera3D/player_animations/AnimationTree.set(\"parameters/Transition/transition_request\",\"idle\")
+		else:
+			$SubViewportContainer/SubViewport/Camera3D/player_animations/AnimationTree.set(\"parameters/Transition/transition_request\",\"jump\")
+		
+		
+		if Input.is_action_just_pressed(\"jump\") and in_floor:
+			jump()
+		
+		if Input.is_action_just_pressed(\"fire\"):
+			$SubViewportContainer/SubViewport/Camera3D/player_animations/AnimationTree.set(\"parameters/look/request\",AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
+		
+		if guns.size() > 0:
+			if Input.is_action_just_pressed(\"next_wepon\"):
+				selected_gun_no += 1
+				if selected_gun_no >= guns.size():
+					selected_gun_no = 0
+				
+				select_gun(selected_gun_no)
+			
+			if Input.is_action_just_pressed(\"previous_wepon\"):
+				selected_gun_no -= 1
+				if 0 > selected_gun_no:
+					selected_gun_no = guns.size() - 1
+				select_gun(selected_gun_no)
+	else:
+		add_child(game_over_scene.instantiate())
+		for n in $\"SubViewportContainer/SubViewport/Camera3D/player_animations/Armature/Skeleton3D/example gun/gun_base\".get_children():
+			n.queue_free()
+		damage_color = Color.RED
+		set_border_effect(1)
 	
 
 
@@ -293,6 +304,7 @@ physics_material_override = SubResource("PhysicsMaterial_57xbc")
 contact_monitor = true
 max_contacts_reported = 5
 script = SubResource("GDScript_l7khq")
+game_over_scene = ExtResource("1_a6gxt")
 speed = 12.0
 jump_power = 7
 
@@ -350,7 +362,7 @@ bones/0/name = "Bone"
 bones/0/parent = -1
 bones/0/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.337554, 0.414343)
 bones/0/enabled = true
-bones/0/position = Vector3(1.49012e-08, 0.412735, 0.414342)
+bones/0/position = Vector3(1.49012e-08, 0.408142, 0.414342)
 bones/0/rotation = Quaternion(0, 0, 0, 1)
 bones/0/scale = Vector3(1, 1, 1)
 bones/1/name = "Bone.002"
@@ -369,7 +381,7 @@ bones/2/rotation = Quaternion(0.707107, 0, 0, 0.707107)
 bones/2/scale = Vector3(1, 1, 1)
 
 [node name="example gun" type="BoneAttachment3D" parent="SubViewportContainer/SubViewport/Camera3D/player_animations/Armature/Skeleton3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.65661e-08, 0.0751804, -3.50177e-07)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.65661e-08, 0.0705877, -3.50177e-07)
 bone_name = "example gun"
 bone_idx = 2
 
@@ -434,6 +446,17 @@ texture = ExtResource("4_1scay")
 material = SubResource("ShaderMaterial_x2nxm")
 offset_right = 1152.0
 offset_bottom = 648.0
+
+[node name="health" type="Label" parent="."]
+offset_top = 529.0
+offset_right = 352.0
+offset_bottom = 648.0
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 15
+theme_override_font_sizes/font_size = 75
+text = "♥ 100 ♥"
+horizontal_alignment = 1
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="tree_exiting" from="." to="." method="_on_tree_exiting"]

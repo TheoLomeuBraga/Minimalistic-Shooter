@@ -1,6 +1,6 @@
 extends ShapeCast3D
 
-@export var damage := 5 
+@export var damage := 10
 
 var death_timer := 0.25
 var death_timer_runing := false

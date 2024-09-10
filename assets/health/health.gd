@@ -8,10 +8,16 @@ func _ready() -> void:
 		$display/health/health_big.visible = true
 
 var utilized : bool = false
+var wave_break_last_frame : bool = DungeonMaster.wave_break
 
 func _process(delta: float) -> void:
 	$display/health.rotation_degrees.y += delta * 50
 	$display/health.visible = not utilized
+	
+	if wave_break_last_frame != DungeonMaster.wave_break and DungeonMaster.wave_break:
+		utilized = false
+	
+	wave_break_last_frame = DungeonMaster.wave_break
 
 
 func _on_body_entered(body: Node3D) -> void:
