@@ -5,6 +5,7 @@
 
 [node name="Bullet" type="Node3D"]
 script = ExtResource("2_q2ixc")
+distance = 20.0
 
 [node name="RayCast3D" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)

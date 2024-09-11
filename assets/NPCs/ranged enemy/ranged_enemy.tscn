@@ -1,12 +1,14 @@
-[gd_scene load_steps=16 format=4 uid="uid://65kctw2m25ij"]
+[gd_scene load_steps=17 format=4 uid="uid://65kctw2m25ij"]
 
 [ext_resource type="Script" path="res://assets/NPCs/ranged enemy/ranged_enemy.gd" id="1_4jl03"]
+[ext_resource type="PackedScene" uid="uid://bqakel4pwykjd" path="res://assets/effects/goo_black_explosion/goo_black_explosion.tscn" id="2_c3arg"]
 [ext_resource type="Material" uid="uid://dmrxyk1ooujlr" path="res://assets/NPCs/ranged enemy/ranged_enemy_material.tres" id="2_kor2d"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_k13dv"]
-radius = 1.0
+[sub_resource type="BoxShape3D" id="BoxShape3D_q6aqu"]
+size = Vector3(3, 2.62622, 4)
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_6spoe"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_l3q5q"]
+size = Vector3(3.575, 1, 4.955)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_73b5h"]
 
@@ -154,15 +156,19 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_tgvq1")
 
-[node name="RangedEnemy" type="CharacterBody3D"]
+[node name="RangedEnemy" type="CharacterBody3D" node_paths=PackedStringArray("meshes")]
 script = ExtResource("1_4jl03")
+health = 60
+explosion_sceane = ExtResource("2_c3arg")
+meshes = [NodePath("ranged_enemy/snail/Cube"), NodePath("ranged_enemy/snail/Cube/Cone"), NodePath("ranged_enemy/snail/Cube/Cone_001"), NodePath("ranged_enemy/snail/Cube/Cone_002"), NodePath("ranged_enemy/snail/Cube/Cone_003"), NodePath("ranged_enemy/snail/Cube/Cone_004"), NodePath("ranged_enemy/snail/Cube/Cone_005"), NodePath("ranged_enemy/snail/Cube/Cone_006"), NodePath("ranged_enemy/snail/Cube/Cone_007"), NodePath("ranged_enemy/snail/Cube/Cone_008"), NodePath("ranged_enemy/snail/Cube/Cone_009"), NodePath("ranged_enemy/snail/Cube/Cone_010"), NodePath("ranged_enemy/snail/Cube/Cone_011"), NodePath("ranged_enemy/snail/Cube/Cone_012"), NodePath("ranged_enemy/snail/Cube/Cone_013"), NodePath("ranged_enemy/snail/Cube/Cone_014"), NodePath("ranged_enemy/snail/Cube_001"), NodePath("ranged_enemy/snail/Cube_002")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("CapsuleShape3D_k13dv")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.18689, 0.5)
+shape = SubResource("BoxShape3D_q6aqu")
 
 [node name="floorCheker" type="ShapeCast3D" parent="."]
-transform = Transform3D(0.8, 0, 0, 0, 0.27, 0, 0, 0, 0.8, 0, -0.57897, 0)
-shape = SubResource("CylinderShape3D_6spoe")
+transform = Transform3D(0.8, 0, 0, 0, 0.27, 0, 0, 0, 0.8, 0, -0.962566, 0.494964)
+shape = SubResource("BoxShape3D_l3q5q")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 visible = false
@@ -282,3 +288,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
 mesh = SubResource("ArrayMesh_pduje")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("2_kor2d")
+
+[node name="muzle" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)

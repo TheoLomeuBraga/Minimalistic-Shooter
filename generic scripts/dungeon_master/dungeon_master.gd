@@ -36,7 +36,7 @@ func spawn_enemy(position : Vector3):
 	var selected_enemy : int = 1
 	var enemy_instance : Node3D = enemy_list[selected_enemy].instantiate()
 	enemy_instance.global_position = position
-	get_tree().get_root().add_child(enemy_instance)
+	get_tree().current_scene.add_child(enemy_instance)
 	
 
 func update_current_wave(delta: float) -> void:

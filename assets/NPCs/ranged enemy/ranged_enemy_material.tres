@@ -4,3 +4,4 @@
 resource_local_to_scene = true
 vertex_color_use_as_albedo = true
 vertex_color_is_srgb = true
+emission_enabled = true

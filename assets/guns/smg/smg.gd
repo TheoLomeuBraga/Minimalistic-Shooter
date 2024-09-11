@@ -25,7 +25,7 @@ func spawn_bullet():
 	var player_raycast : RayCast3D = Global.player.get_node("Camera3D/RayCast3D")
 	var bullet : Node3D = bullet_asset.instantiate()
 	
-	get_tree().get_root().add_child(bullet)
+	get_tree().current_scene.add_child(bullet)
 	bullet.global_transform = player_raycast.global_transform
 	bullet.position -= player_raycast.global_basis.z * 2
 	bullet.damage = damage

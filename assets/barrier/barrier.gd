@@ -20,8 +20,9 @@ func _physics_process(delta: float) -> void:
 	hight = max(0.0,min(1.0,hight))
 	$MeshInstance3D.position.y = (hight * -7.0 ) + 3.0
 	
-	if to_open > 0 and $tutorial.visible and Input.is_action_just_pressed("use"):
+	if to_open > 0 and $tutorial.visible and Input.is_action_just_pressed("use") and Global.player.shards > 0:
 		to_open -= 1
+		Global.player.shards -= 1
 	
 	if to_open == 0:
 		$tutorial.visible = false

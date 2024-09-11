@@ -87,6 +87,7 @@ albedo_color = Color(1, 1, 0.866667, 0.0117647)
 
 [node name="player" parent="." instance=ExtResource("1_suxpv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.6816, 21.9864, 0.052144)
+shards = 3
 
 [node name="GunColectable2" parent="player" instance=ExtResource("11_s514t")]
 gun = 0

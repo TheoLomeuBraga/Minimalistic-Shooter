@@ -21,7 +21,7 @@ func hit_damage(damage : int) -> void:
 	if health < 0:
 		queue_free()
 		var explosion : Node3D = explosion_sceane.instantiate()
-		get_tree().get_root().add_child(explosion)
+		get_tree().current_scene.add_child(explosion)
 		explosion.global_position = global_position
 	
 
@@ -43,7 +43,7 @@ func manage_gum(delta: float) -> void:
 	if gun_cooldown <= 0.0:
 		var p : Node3D = projectile.instantiate()
 		
-		get_tree().get_root().add_child(p)
+		get_tree().current_scene.add_child(p)
 		p.global_position = $muzle.global_position
 		p.global_rotation = $muzle.global_rotation
 		

@@ -13,7 +13,7 @@ func hit_damage(damage : int):
 	if health < 0:
 		queue_free()
 		var explosion : Node3D = explosion_sceane.instantiate()
-		get_tree().get_root().add_child(explosion)
+		get_tree().current_scene.add_child(explosion)
 		explosion.global_position = global_position
 
 func manage_damage(delta: float) -> void:
@@ -55,7 +55,7 @@ func movement_plugin(delta: float) -> void:
 				melee_colldown = 0.5
 				
 				var m = melee_sceane.instantiate()
-				get_tree().get_root().add_child(m)
+				get_tree().current_scene.add_child(m)
 				m.global_transform = $melee_launch_point.global_transform
 				
 		
