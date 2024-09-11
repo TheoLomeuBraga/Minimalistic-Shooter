@@ -33,3 +33,7 @@ func _process(delta: float) -> void:
 	
 	
 	unpause_lock -= 1
+
+func reload():
+	DungeonMaster.spawners_list.clear()
+	get_tree().reload_current_scene()

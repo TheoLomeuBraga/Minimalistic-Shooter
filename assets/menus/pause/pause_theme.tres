@@ -1,4 +1,6 @@
-[gd_resource type="Theme" load_steps=6 format=3 uid="uid://kjjq0xk0r8i5"]
+[gd_resource type="Theme" load_steps=7 format=3 uid="uid://kjjq0xk0r8i5"]
+
+[ext_resource type="FontFile" uid="uid://bi74ubrruvmx8" path="res://fonts/SpaceMono-Bold.ttf" id="1_yskyp"]
 
 [sub_resource type="Gradient" id="Gradient_1dk4a"]
 interpolation_mode = 1
@@ -27,3 +29,4 @@ HSlider/icons/tick = SubResource("GradientTexture2D_r7y1c")
 HSlider/styles/grabber_area = SubResource("StyleBoxFlat_f4g2n")
 HSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_8okij")
 Label/colors/font_color = Color(0.247059, 0.176471, 1, 1)
+Label/fonts/font = ExtResource("1_yskyp")

@@ -19,3 +19,19 @@ func _physics_process(delta: float) -> void:
 	
 	hight = max(0.0,min(1.0,hight))
 	$MeshInstance3D.position.y = (hight * -7.0 ) + 3.0
+	
+	if to_open > 0 and $tutorial.visible and Input.is_action_just_pressed("use"):
+		to_open -= 1
+	
+	if to_open == 0:
+		$tutorial.visible = false
+
+
+func _on_area_3d_body_entered(body: Node3D) -> void:
+	if body == Global.player and to_open > 0:
+		$tutorial.visible = true
+
+
+func _on_area_3d_body_exited(body: Node3D) -> void:
+	if body == Global.player:
+		$tutorial.visible = false

@@ -23,3 +23,9 @@ func _on_button_button_down() -> void:
 
 func _on_visibility_changed() -> void:
 	$CenterContainer/VBoxContainer/volume_slider.grab_focus()
+
+
+func _on_button_2_button_down() -> void:
+	Global.unpause()
+	Global.reload()
+	

@@ -1,9 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://bmcopmnotjx3c"]
+[gd_scene load_steps=4 format=3 uid="uid://bmcopmnotjx3c"]
 
 [ext_resource type="Script" path="res://generic scripts/dungeon_master/dungeon_master.gd" id="1_f2wsh"]
 [ext_resource type="PackedScene" uid="uid://ceqv432c4rn70" path="res://assets/NPCs/melee enemy/melee_enemy.tscn" id="2_oei48"]
+[ext_resource type="PackedScene" uid="uid://65kctw2m25ij" path="res://assets/NPCs/ranged enemy/ranged_enemy.tscn" id="3_t0oh8"]
 
 [node name="DungeonMaster" type="Node"]
 script = ExtResource("1_f2wsh")
-enemy_list = Array[PackedScene]([ExtResource("2_oei48")])
+enemy_list = Array[PackedScene]([ExtResource("2_oei48"), ExtResource("3_t0oh8")])
 wave_dificulty = 1.0

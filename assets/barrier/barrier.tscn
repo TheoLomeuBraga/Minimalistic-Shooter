@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://dom31w3id18px"]
+[gd_scene load_steps=9 format=3 uid="uid://dom31w3id18px"]
 
 [ext_resource type="Script" path="res://assets/barrier/barrier.gd" id="1_qet83"]
+[ext_resource type="FontFile" uid="uid://bi74ubrruvmx8" path="res://fonts/SpaceMono-Bold.ttf" id="2_r4lss"]
 
 [sub_resource type="Gradient" id="Gradient_a03xx"]
 interpolation_mode = 1
@@ -21,6 +22,9 @@ material = SubResource("StandardMaterial3D_ui4xj")
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_gk16s"]
 data = PackedVector3Array(0.5, -0.5, 0, -0.5, -0.5, 0, 0.5, 0.5, 0, -0.5, -0.5, 0, -0.5, 0.5, 0, 0.5, 0.5, 0)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_c6lxw"]
+size = Vector3(7, 8, 5)
+
 [node name="Barrier" type="Node3D"]
 script = ExtResource("1_qet83")
 
@@ -36,5 +40,27 @@ shape = SubResource("ConcavePolygonShape3D_gk16s")
 [node name="Label3D" type="Label3D" parent="MeshInstance3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0862935)
 pixel_size = 0.0045
+texture_filter = 0
 outline_modulate = Color(0, 0, 0, 0)
 text = "shotgum"
+font = ExtResource("2_r4lss")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5, 1)
+shape = SubResource("BoxShape3D_c6lxw")
+
+[node name="tutorial" type="Label" parent="."]
+visible = false
+offset_top = 324.0
+offset_right = 1152.0
+offset_bottom = 648.0
+theme_override_colors/font_color = Color(1, 0.882353, 0, 1)
+theme_override_font_sizes/font_size = 50
+text = "[E]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]

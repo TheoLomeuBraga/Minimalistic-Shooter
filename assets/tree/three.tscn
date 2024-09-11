@@ -1,0 +1,117 @@
+[gd_scene load_steps=9 format=3 uid="uid://dp10222mqnoth"]
+
+[ext_resource type="Shader" path="res://shaders/triplanar_shader.tres.gdshader" id="1_7mh3t"]
+[ext_resource type="Texture2D" uid="uid://ceqinj12m3m3h" path="res://textures/stone_briks.png" id="2_s5mpy"]
+[ext_resource type="Material" uid="uid://dtoj5s5vipwh2" path="res://maps/test map 2/grass.tres" id="3_3d4f5"]
+[ext_resource type="Texture2D" uid="uid://cs2eqtxsw0mhf" path="res://textures/wooden bark.png" id="4_bnvb1"]
+[ext_resource type="Material" uid="uid://cpeltiywm254g" path="res://maps/test map 2/leafs.tres" id="5_rvqy7"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h2dvx"]
+render_priority = 0
+shader = ExtResource("1_7mh3t")
+shader_parameter/albedo_ceiling = Color(1, 1, 1, 1)
+shader_parameter/albedo_wall = Color(0.955963, 0.955963, 0.955963, 1)
+shader_parameter/albedo_floor = Color(1, 1, 1, 1)
+shader_parameter/ground_threshold = 0.8
+shader_parameter/blend_smoothness = 0.1
+shader_parameter/uv1_blend_sharpness = 1.515
+shader_parameter/uv1_scale = Vector3(0.5, 0.5, 0.5)
+shader_parameter/uv1_offset = Vector3(5, 5, 0.1)
+shader_parameter/uv_global = true
+shader_parameter/use_uv_on_wall = false
+shader_parameter/use_uv_on_floor = false
+shader_parameter/use_uv_on_ceiling = false
+shader_parameter/texture_albedo_ceiling = ExtResource("2_s5mpy")
+shader_parameter/texture_albedo_wall = ExtResource("2_s5mpy")
+shader_parameter/texture_albedo_floor = ExtResource("2_s5mpy")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r336a"]
+render_priority = 0
+shader = ExtResource("1_7mh3t")
+shader_parameter/albedo_ceiling = Color(1, 1, 1, 1)
+shader_parameter/albedo_wall = Color(0.955963, 0.955963, 0.955963, 1)
+shader_parameter/albedo_floor = Color(1, 1, 1, 1)
+shader_parameter/ground_threshold = 0.8
+shader_parameter/blend_smoothness = 0.1
+shader_parameter/uv1_blend_sharpness = 1.515
+shader_parameter/uv1_scale = Vector3(0.5, 0.5, 0.5)
+shader_parameter/uv1_offset = Vector3(5, 5, 0.1)
+shader_parameter/uv_global = true
+shader_parameter/use_uv_on_wall = false
+shader_parameter/use_uv_on_floor = false
+shader_parameter/use_uv_on_ceiling = false
+shader_parameter/texture_albedo_ceiling = ExtResource("4_bnvb1")
+shader_parameter/texture_albedo_wall = ExtResource("4_bnvb1")
+shader_parameter/texture_albedo_floor = ExtResource("4_bnvb1")
+
+[sub_resource type="Curve3D" id="Curve3D_b4b1w"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -1.30239, -1.93907, 22.1207, 0, 0, 0, 0, 0, 0, -1.30237, -1.85844, 16.081, 0, 0, 0, 0, 0, 0, 0.301214, -0.0771013, 13.3847, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+"tilts": PackedFloat32Array(0, 0, 0, 0)
+}
+point_count = 4
+
+[node name="three" type="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.69295, 0)
+use_collision = true
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.73255, 0)
+radius = 5.0
+height = 3.19401
+material = SubResource("ShaderMaterial_h2dvx")
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.827596, 0)
+operation = 2
+radius = 4.0
+material = SubResource("ShaderMaterial_h2dvx")
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.14971, 0)
+radius = 4.0
+material = ExtResource("3_3d4f5")
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -2, 2)
+polygon = PackedVector2Array(-0.538749, -0.40683, 0, 1, 1.37699, 1.17173, 1, 0)
+mode = 2
+path_node = NodePath("Path3D")
+path_interval_type = 0
+path_interval = 1.0
+path_simplify_angle = 0.0
+path_rotation = 2
+path_local = false
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = false
+material = SubResource("ShaderMaterial_r336a")
+
+[node name="Path3D" type="Path3D" parent="CSGPolygon3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+curve = SubResource("Curve3D_b4b1w")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 22.9825, 3.58764)
+radius = 7.0
+material = ExtResource("5_rvqy7")
+
+[node name="CSGSphere3D2" type="CSGSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.884573, 19.9329, -3.16911)
+radius = 6.46965
+material = ExtResource("5_rvqy7")
+
+[node name="CSGSphere3D4" type="CSGSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.44186, 21.685, 0.78914)
+radius = 6.46965
+material = ExtResource("5_rvqy7")
+
+[node name="CSGSphere3D5" type="CSGSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.55814, 21.685, 0.78914)
+radius = 6.46965
+material = ExtResource("5_rvqy7")
+
+[node name="CSGSphere3D3" type="CSGSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.884573, 23.6921, -3.16911)
+radius = 7.0
+material = ExtResource("5_rvqy7")

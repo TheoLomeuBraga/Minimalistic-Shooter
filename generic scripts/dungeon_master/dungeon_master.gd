@@ -33,7 +33,7 @@ func start_wave() -> void:
 	wave_duration = 30.0
 
 func spawn_enemy(position : Vector3):
-	var selected_enemy : int = 0
+	var selected_enemy : int = 1
 	var enemy_instance : Node3D = enemy_list[selected_enemy].instantiate()
 	enemy_instance.global_position = position
 	get_tree().get_root().add_child(enemy_instance)
