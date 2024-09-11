@@ -1,11 +1,19 @@
 extends GenericPathFinder
 
+@export var health := 50
 
-# Called when the node enters the scene tree for the first time.
+func hit_damage(damage : int):
+	health -= damage
+	if health < 0:
+		queue_free()
+		
+
 func _ready() -> void:
-	pass # Replace with function body.
+	look_mode = look_modes.look_target
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(delta: float) -> void:
-	pass
+func movement_plugin(delta: float) -> void:
+	
+	if Global.player != null:
+		target_location = Global.player.global_position
+		go = global_position.distance_to(target_location) > 2

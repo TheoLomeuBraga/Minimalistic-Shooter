@@ -34,7 +34,7 @@ func manage_damage(delta: float) -> void:
 
 
 
-func _init() -> void:
+func _ready() -> void:
 	speed = 800.0
 
 @export var melee_sceane : PackedScene

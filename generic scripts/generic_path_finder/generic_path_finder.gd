@@ -6,12 +6,12 @@ class_name GenericPathFinder
 @export var target_position : Vector3
 @export var go : bool = false
 
-enum look_mode_enum {
+enum look_modes {
 	not_look = 0,
 	look_next_point = 1,
 	look_target = 2
 }
-@export var look_mode : look_mode_enum = look_mode_enum.not_look
+@export var look_mode : look_modes = look_modes.not_look
 
 @export var target_location : Vector3
 

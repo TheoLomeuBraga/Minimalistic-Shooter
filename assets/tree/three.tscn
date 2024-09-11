@@ -51,7 +51,7 @@ _data = {
 }
 point_count = 4
 
-[node name="three" type="CSGCombiner3D"]
+[node name="three-col" type="CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.69295, 0)
 use_collision = true
 

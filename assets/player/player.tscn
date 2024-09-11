@@ -23,6 +23,8 @@ script/source = "extends BasicMovement
 
 @export var max_health := 100
 @export var health := 100
+@export var shards := 0
+
 
 @export var guns : Array[PackedScene] 
 var current_gun : Node3D
@@ -147,6 +149,7 @@ func movement_plugin(delta) -> void:
 	
 	$health.add_theme_color_override(\"font_color\",lerp(Color.RED,Color.GREEN,health/100.0))
 	$health.text = \"♥ \"+str(health)+\" ♥\"
+	$shards.text = \"♦ \"+str(shards)+\" ♦\"
 	
 	if health > 0:
 		update_pause()
@@ -364,7 +367,7 @@ bones/0/name = "Bone"
 bones/0/parent = -1
 bones/0/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.337554, 0.414343)
 bones/0/enabled = true
-bones/0/position = Vector3(1.49012e-08, 0.365124, 0.414342)
+bones/0/position = Vector3(1.49012e-08, 0.27827, 0.414342)
 bones/0/rotation = Quaternion(0, 0, 0, 1)
 bones/0/scale = Vector3(1, 1, 1)
 bones/1/name = "Bone.002"
@@ -383,7 +386,7 @@ bones/2/rotation = Quaternion(0.707107, 0, 0, 0.707107)
 bones/2/scale = Vector3(1, 1, 1)
 
 [node name="example gun" type="BoneAttachment3D" parent="SubViewportContainer/SubViewport/Camera3D/player_animations/Armature/Skeleton3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.65661e-08, 0.0275695, -3.50177e-07)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.65661e-08, -0.0592848, -3.50177e-07)
 bone_name = "example gun"
 bone_idx = 2
 
@@ -460,6 +463,21 @@ theme_override_fonts/font = ExtResource("13_j7qo0")
 theme_override_font_sizes/font_size = 75
 text = "♥ 100 ♥"
 horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="shards" type="Label" parent="."]
+offset_left = 799.0
+offset_top = 529.0
+offset_right = 1151.0
+offset_bottom = 648.0
+theme_override_colors/font_color = Color(1.54018e-06, 0.940735, 0.963159, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 15
+theme_override_fonts/font = ExtResource("13_j7qo0")
+theme_override_font_sizes/font_size = 50
+text = "♦ 0 ♦"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="tree_exiting" from="." to="." method="_on_tree_exiting"]

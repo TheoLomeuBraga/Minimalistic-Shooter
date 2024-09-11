@@ -6,7 +6,7 @@ func _ready() -> void:
 	pass
 
 @export var projectile : bool = false
-@export var projectile_speed : float = 20.0
+@export var projectile_speed : float = 50.0
 @export var bullet_asset : PackedScene
 @export var burst_fire_count : int = 3
 @export var range : float = 25.0
