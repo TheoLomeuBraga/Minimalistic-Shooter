@@ -7,6 +7,8 @@ extends GenericPathFinder
 func hit_damage(damage : int):
 	health -= damage
 	
+	$hit.play()
+	
 	for m in meshes:
 		var mat : Material = m.get_surface_override_material(0)
 		mat.emission = Color.WHITE
@@ -38,6 +40,7 @@ func manage_contact_damage(delta: float) -> void:
 func manage_shoot(delta: float) -> void:
 	pass
 
+
 func movement_plugin(delta: float) -> void:
 	
 	update_damage_color(delta)
@@ -45,4 +48,4 @@ func movement_plugin(delta: float) -> void:
 	
 	if Global.player != null:
 		target_location = Global.player.global_position
-		go = global_position.distance_to(target_location) > 20
+		go = global_position.distance_to(target_location) > 10

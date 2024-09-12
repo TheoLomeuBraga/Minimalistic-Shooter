@@ -8,6 +8,7 @@ extends GenericPathFinder
 var damage_color_time := 0.0
 
 func hit_damage(damage : int):
+	$hit.play()
 	health -= damage
 	damage_color_time = 0.25
 	if health < 0:

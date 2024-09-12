@@ -1,8 +1,9 @@
-[gd_scene load_steps=17 format=4 uid="uid://65kctw2m25ij"]
+[gd_scene load_steps=18 format=4 uid="uid://65kctw2m25ij"]
 
 [ext_resource type="Script" path="res://assets/NPCs/ranged enemy/ranged_enemy.gd" id="1_4jl03"]
 [ext_resource type="PackedScene" uid="uid://bqakel4pwykjd" path="res://assets/effects/goo_black_explosion/goo_black_explosion.tscn" id="2_c3arg"]
 [ext_resource type="Material" uid="uid://dmrxyk1ooujlr" path="res://assets/NPCs/ranged enemy/ranged_enemy_material.tres" id="2_kor2d"]
+[ext_resource type="AudioStream" uid="uid://c4j02ytakqyd4" path="res://sfx/hit_enemy.ogg" id="4_5ovln"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_q6aqu"]
 size = Vector3(3, 2.62622, 4)
@@ -291,3 +292,6 @@ surface_material_override/0 = ExtResource("2_kor2d")
 
 [node name="muzle" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
+
+[node name="hit" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_5ovln")

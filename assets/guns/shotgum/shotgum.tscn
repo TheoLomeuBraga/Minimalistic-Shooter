@@ -202,9 +202,12 @@ libraries = {
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Node3D"]
 stream = ExtResource("4_84l3j")
+volume_db = -20.0
 
 [node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="Node3D"]
 stream = ExtResource("4_84l3j")
+volume_db = -20.0
 
 [node name="AudioStreamPlayer3D3" type="AudioStreamPlayer3D" parent="Node3D"]
 stream = ExtResource("4_84l3j")
+volume_db = -35.0

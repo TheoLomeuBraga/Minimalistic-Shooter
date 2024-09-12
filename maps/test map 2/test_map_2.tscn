@@ -121,28 +121,28 @@ height = 20.0
 material = ExtResource("2_210c6")
 
 [node name="CSGPolygon3D" type="CSGPolygon3D" parent="NavigationRegion3D/arena"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, -47)
+transform = Transform3D(1, 0, 0, 0, 1.8, 0, 0, 0, 1, 0, -1.8046, -47)
 flip_faces = true
 polygon = PackedVector2Array(-5, 0, -2, 10, 2, 10, 5, 0)
 depth = 20.0
 material = ExtResource("2_210c6")
 
 [node name="CSGPolygon3D2" type="CSGPolygon3D" parent="NavigationRegion3D/arena"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -47, -2, -1.31134e-07)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1.8, 0, -1, 0, -4.37114e-08, -47, -1.8046, -1.3411e-07)
 flip_faces = true
 polygon = PackedVector2Array(-5, 0, -2, 10, 2, 10, 5, 0)
 depth = 20.0
 material = ExtResource("2_210c6")
 
 [node name="CSGPolygon3D3" type="CSGPolygon3D" parent="NavigationRegion3D/arena"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 47.3718, -2, -4.34368e-06)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1.8, 0, 1, 0, -4.37114e-08, 47.3718, -1.8046, -4.35114e-06)
 flip_faces = true
 polygon = PackedVector2Array(-5, 0, -2, 10, 2, 10, 5, 0)
 depth = 20.0
 material = ExtResource("2_210c6")
 
 [node name="CSGPolygon3D4" type="CSGPolygon3D" parent="NavigationRegion3D/arena"]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0.371807, -2, 48)
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1.8, 0, -8.74228e-08, 0, -1, 0.371807, -1.8046, 48)
 flip_faces = true
 polygon = PackedVector2Array(-5, 0, -2, 10, 2, 10, 5, 0)
 depth = 20.0

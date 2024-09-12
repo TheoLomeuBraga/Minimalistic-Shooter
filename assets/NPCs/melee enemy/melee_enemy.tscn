@@ -1,9 +1,10 @@
-[gd_scene load_steps=22 format=4 uid="uid://ceqv432c4rn70"]
+[gd_scene load_steps=23 format=4 uid="uid://ceqv432c4rn70"]
 
 [ext_resource type="Script" path="res://assets/NPCs/melee enemy/melee_enemy.gd" id="1_crafw"]
 [ext_resource type="PackedScene" uid="uid://bqakel4pwykjd" path="res://assets/effects/goo_black_explosion/goo_black_explosion.tscn" id="2_1176y"]
 [ext_resource type="Texture2D" uid="uid://cu8f2n0xsnnuh" path="res://assets/NPCs/melee enemy/melee_enemy_humanoid enemt.png" id="2_pn4mw"]
 [ext_resource type="PackedScene" uid="uid://crd4s0ph63i03" path="res://assets/guns/bullet/melee.tscn" id="4_ou2o2"]
+[ext_resource type="AudioStream" uid="uid://c4j02ytakqyd4" path="res://sfx/hit_enemy.ogg" id="5_t3c8b"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_iq5sp"]
 radius = 1.0
@@ -1461,3 +1462,6 @@ speed_scale = 2.0
 
 [node name="melee_launch_point" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.62817)
+
+[node name="hit" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_t3c8b")
