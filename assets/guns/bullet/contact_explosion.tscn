@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://cnmg6lh1naet2"]
+
+[ext_resource type="Script" path="res://assets/guns/bullet/contact_explosion.gd" id="1_va8k8"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_owdnh"]
+radius = 6.0
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hn2kk"]
+emission_shape = 1
+emission_sphere_radius = 1.0
+spread = 180.0
+initial_velocity_min = 10.0
+initial_velocity_max = 25.0
+
+[sub_resource type="Curve" id="Curve_gl1dt"]
+_data = [Vector2(0, 0.351648), 0.0, 0.0, 0, 0, Vector2(0.240664, 0.10989), 0.0, 0.0, 0, 0, Vector2(0.514523, 0.461538), 0.0, 0.0, 0, 0, Vector2(0.759336, 0.098901), 0.0, 0.0, 0, 0, Vector2(1, 0.296703), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ny67d"]
+cull_mode = 2
+albedo_color = Color(0, 1, 0, 1)
+use_particle_trails = true
+
+[sub_resource type="RibbonTrailMesh" id="RibbonTrailMesh_ejjq5"]
+material = SubResource("StandardMaterial3D_ny67d")
+curve = SubResource("Curve_gl1dt")
+
+[node name="ContactExplosion" type="Node3D"]
+script = ExtResource("1_va8k8")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_owdnh")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+amount = 64
+explosiveness = 1.0
+trail_enabled = true
+trail_lifetime = 0.5
+process_material = SubResource("ParticleProcessMaterial_hn2kk")
+draw_pass_1 = SubResource("RibbonTrailMesh_ejjq5")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
