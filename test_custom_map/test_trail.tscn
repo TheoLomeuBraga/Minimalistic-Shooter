@@ -1,0 +1,39 @@
+[gd_scene load_steps=8 format=3 uid="uid://3jplbxx6owox"]
+
+[sub_resource type="Curve" id="Curve_pbo70"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_tk37t"]
+curve = SubResource("Curve_pbo70")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8vuxu"]
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_tk37t")
+
+[sub_resource type="Gradient" id="Gradient_6qo3w"]
+offsets = PackedFloat32Array(0, 0.4, 0.740541, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_cy837"]
+gradient = SubResource("Gradient_6qo3w")
+fill_from = Vector2(0.628205, 0.683761)
+fill_to = Vector2(0.358974, 0.448718)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iya45"]
+transparency = 1
+albedo_texture = SubResource("GradientTexture2D_cy837")
+texture_filter = 0
+billboard_mode = 1
+billboard_keep_scale = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_0o5dw"]
+material = SubResource("StandardMaterial3D_iya45")
+
+[node name="TestTrail" type="GPUParticles3D"]
+amount = 64
+fixed_fps = 60
+trail_enabled = true
+trail_lifetime = 0.5
+process_material = SubResource("ParticleProcessMaterial_8vuxu")
+draw_pass_1 = SubResource("QuadMesh_0o5dw")

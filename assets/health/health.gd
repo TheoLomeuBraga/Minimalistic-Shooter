@@ -3,9 +3,11 @@ extends Area3D
 
 @export var health : int = 25
 func _ready() -> void:
+	DungeonMaster.healt_pack_list.append(self)
 	if health > 25:
 		$display/health/health_smal.visible = false
 		$display/health/health_big.visible = true
+	
 
 var utilized : bool = false
 var wave_break_last_frame : bool = DungeonMaster.wave_break

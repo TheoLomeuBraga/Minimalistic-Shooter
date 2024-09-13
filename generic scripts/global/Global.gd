@@ -36,4 +36,5 @@ func _process(delta: float) -> void:
 
 func reload():
 	DungeonMaster.spawners_list.clear()
+	DungeonMaster.healt_pack_list.clear()
 	get_tree().reload_current_scene()

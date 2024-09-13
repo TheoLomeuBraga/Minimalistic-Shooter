@@ -1,10 +1,28 @@
-[gd_scene load_steps=4 format=3 uid="uid://bmcopmnotjx3c"]
+[gd_scene load_steps=6 format=3 uid="uid://bmcopmnotjx3c"]
 
 [ext_resource type="Script" path="res://generic scripts/dungeon_master/dungeon_master.gd" id="1_f2wsh"]
 [ext_resource type="PackedScene" uid="uid://ceqv432c4rn70" path="res://assets/NPCs/melee enemy/melee_enemy.tscn" id="2_oei48"]
 [ext_resource type="PackedScene" uid="uid://65kctw2m25ij" path="res://assets/NPCs/ranged enemy/ranged_enemy.tscn" id="3_t0oh8"]
+[ext_resource type="AudioStream" uid="uid://bdj7l216ohk6f" path="res://ost/intro_theme.ogg" id="4_ioxhs"]
+[ext_resource type="FontFile" uid="uid://bi74ubrruvmx8" path="res://fonts/SpaceMono-Bold.ttf" id="5_sntwg"]
 
 [node name="DungeonMaster" type="Node"]
 script = ExtResource("1_f2wsh")
 enemy_list = Array[PackedScene]([ExtResource("2_oei48"), ExtResource("3_t0oh8")])
 wave_dificulty = 1.0
+
+[node name="intro_song" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_ioxhs")
+volume_db = -20.0
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+offset_right = 1152.0
+offset_bottom = 83.0
+
+[node name="display" type="Label" parent="CenterContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_sntwg")
+theme_override_font_sizes/font_size = 50
+text = "TIME UNTIL WAVE END: 30"
+horizontal_alignment = 1
+vertical_alignment = 1

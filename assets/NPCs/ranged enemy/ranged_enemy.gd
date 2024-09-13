@@ -44,8 +44,15 @@ func manage_contact_damage(delta: float) -> void:
 		explosion.global_position = global_position
 		cool_down = 1.0
 
+@export var projectile_sceane : PackedScene
+
 func manage_shoot(delta: float) -> void:
-	pass
+	if cool_down <= 0:
+		$muzle.look_at(Global.player.global_position)
+		var projectile : Node3D = projectile_sceane.instantiate()
+		get_tree().current_scene.add_child(projectile)
+		projectile.global_transform = $muzle.global_transform
+		cool_down = 1.0
 
 
 func movement_plugin(delta: float) -> void:

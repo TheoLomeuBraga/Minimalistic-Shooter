@@ -18,7 +18,7 @@ enum look_modes {
 @export var turn_speed : float = 10.0
 
 var rng : RandomNumberGenerator = RandomNumberGenerator.new()
-var random_countdown : int = 0
+var countdown_path : int = 0
 
 
 
@@ -32,10 +32,10 @@ func _physics_process(delta: float) -> void:
 	movement_plugin(delta)
 	
 	var distance_next_point : Vector3 = (target_position - global_position)
-	if random_countdown <= 0 or distance_next_point.x == 0 and distance_next_point.z == 0:
+	if countdown_path <= 0 or distance_next_point.x == 0 and distance_next_point.z == 0:
 		target_position = $NavigationAgent3D.get_next_path_position()
 		$NavigationAgent3D.target_position = target_location 
-		random_countdown = rng.randi_range(5,10)
+		countdown_path = rng.randi_range(5,30)
 	
 	if go:
 		velocity = (target_position - global_position).normalized() * speed * delta
@@ -62,7 +62,7 @@ func _physics_process(delta: float) -> void:
 		
 		rotation.y = new_rotation
 	
-	random_countdown -= 1
+	countdown_path -= 1
 	
 	
 	

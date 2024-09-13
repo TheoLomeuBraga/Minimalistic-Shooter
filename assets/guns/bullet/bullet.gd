@@ -17,10 +17,6 @@ func _ready() -> void:
 @export var damage : int = 5
 
 var first_frame = true
-
-
-
-
 	
 
 var on_frame : int = 0
