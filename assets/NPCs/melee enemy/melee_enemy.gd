@@ -12,10 +12,13 @@ func hit_damage(damage : int):
 	health -= damage
 	damage_color_time = 0.25
 	if health < 0:
-		queue_free()
+		DungeonMaster.current_enemy_count-=1
 		var explosion : Node3D = explosion_sceane.instantiate()
 		get_tree().current_scene.add_child(explosion)
 		explosion.global_position = global_position
+		
+		queue_free()
+		
 
 func manage_damage(delta: float) -> void:
 	
@@ -37,6 +40,7 @@ func manage_damage(delta: float) -> void:
 
 func _ready() -> void:
 	speed = 800.0
+	DungeonMaster.current_enemy_count+=1
 
 @export var melee_sceane : PackedScene
 var melee_colldown := 0.0

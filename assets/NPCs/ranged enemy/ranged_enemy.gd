@@ -15,17 +15,22 @@ func hit_damage(damage : int):
 		m.set_surface_override_material(0,mat)
 	
 	if health < 0:
-		queue_free()
 		
 		for i in range(0,10):
 			var explosion : Node3D = explosion_sceane.instantiate()
 			get_tree().current_scene.add_child(explosion)
 			explosion.global_position = global_position
 		
+		DungeonMaster.current_enemy_count-=1
+		
+		queue_free()
+		
+		
 		
 
 func _ready() -> void:
 	look_mode = look_modes.look_target
+	DungeonMaster.current_enemy_count+=1
 
 @export var meshes : Array[MeshInstance3D] 
 func update_damage_color(delta: float) -> void:

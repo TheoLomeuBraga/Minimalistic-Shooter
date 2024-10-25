@@ -4,6 +4,7 @@ extends Node
 var spawners_list : Array[Node3D]
 var healt_pack_list : Array[Node3D]
 
+var current_enemy_count := 0
 @export var wave_number : int = 0
 @export var wave_dificulty : float = 0.0
 @export var wave_max_dificulty : float = 10.0
@@ -74,3 +75,4 @@ func update_wave(delta: float) -> void:
 
 func _process(delta: float) -> void:
 	update_wave(delta)
+	print(current_enemy_count)
